@@ -715,6 +715,32 @@ body.arabic .switch input:checked+span::after{transform:translateX(-19px)}
 
 .link-btn{background:none;border:0;padding:0;color:var(--primary);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
 
+/* Prayer times */
+.prayer-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-bottom:18px;text-align:start;border:1px solid var(--border);cursor:pointer;font:inherit;color:var(--text)}
+.prayer-strip>div{display:grid;gap:3px;min-width:0}.prayer-strip small{color:var(--muted);font-size:12px}.prayer-strip strong{font-size:16px}
+.prayer-strip-count{justify-items:end}.prayer-strip-count b{font-size:20px;font-variant-numeric:tabular-nums;color:var(--primary);direction:ltr}
+.prayer-hero{background:linear-gradient(135deg,var(--neon-hero-a,#1d4ed8),var(--neon-hero-b,#7c3aed));color:#fff;border-radius:22px;padding:22px;margin-bottom:18px}
+.prayer-hero-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;opacity:.9}
+.prayer-hero-main{text-align:center;margin-top:14px}.prayer-hero-main small{opacity:.85}.prayer-hero-main h3{font-size:34px;margin:4px 0 2px}
+.prayer-hero-time{font-size:20px;font-weight:700;opacity:.95}.prayer-hero-count{margin-top:10px;font-size:15px}.prayer-hero-count b{font-size:26px;font-variant-numeric:tabular-nums;direction:ltr;display:inline-block}
+.prayer-warn{margin-bottom:18px;border-color:#f59e0b;font-size:14px}
+.prayer-row{display:grid;grid-template-columns:30px 1fr auto auto 42px;align-items:center;gap:10px;padding:12px 6px;border-top:1px solid var(--border)}
+.prayer-row:first-of-type{border-top:0}
+.prayer-ic{font-size:20px;text-align:center}.prayer-nm{font-weight:700}.prayer-tm{font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.prayer-iq{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:84px;text-align:end}.prayer-iq small{font-size:11px}
+.prayer-row.next{background:color-mix(in srgb,var(--primary) 12%,transparent);border-radius:14px;border-top-color:transparent}
+.prayer-row.next .prayer-nm,.prayer-row.next .prayer-tm{color:var(--primary)}
+.prayer-row.past{opacity:.55}
+.prayer-bell{width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-size:16px;cursor:pointer}
+.prayer-bell.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--surface))}
+.prayer-audio{margin-top:14px;display:flex;justify-content:center}
+.prayer-setup{text-align:center;max-width:520px;margin:0 auto}.prayer-setup-icon{font-size:46px}.prayer-setup .form-row{text-align:start}
+.iqama-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:10px}
+.iqama-grid label{display:grid;gap:6px;font-size:13px;font-weight:700}.iqama-grid span{display:flex;align-items:center;gap:6px;color:var(--muted);font-weight:500}
+.iqama-grid input{width:72px;text-align:center}
+.prayer-adjust summary{cursor:pointer;font-weight:700}
+@media(max-width:520px){.prayer-row{grid-template-columns:26px 1fr auto 38px;gap:8px}.prayer-iq{grid-column:2/4;grid-row:2;text-align:start;min-width:0;margin-top:-6px}.prayer-hero-main h3{font-size:30px}}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -746,6 +772,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item" data-view="education">📚 <span class="nav-text">Education</span></button>
         <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
         <button class="nav-item" data-view="goals">🎯 <span class="nav-text">Goals</span></button>
+        <button class="nav-item" data-view="prayer">🕌 <span class="nav-text">Prayer</span></button>
         <button class="nav-item" data-view="notes">📝 <span class="nav-text">Notes</span></button>
         <button class="nav-item" data-view="reports">📊 <span class="nav-text">Reports</span></button>
         <button class="nav-item" data-view="settings">⚙️ <span class="nav-text">Settings</span></button>
@@ -780,6 +807,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view" id="educationView"></section>
       <section class="view" id="financeView"></section>
       <section class="view" id="goalsView"></section>
+      <section class="view" id="prayerView"></section>
       <section class="view" id="notesView"></section>
       <section class="view" id="reportsView"></section>
       <section class="view" id="settingsView"></section>
@@ -853,7 +881,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -962,7 +990,7 @@ function renderDashboard(){
  const goalsActive=state.goals.filter(x=>progress(x.progress)<100).length;
  const priority=[...workOpen].sort((a,b)=>Number(isOverdue(b.due,false))-Number(isOverdue(a.due,false))||Number(b.priority==='High')-Number(a.priority==='High')||(a.due||'9999').localeCompare(b.due||'9999'));
  $('#dashboardView').innerHTML=`<div class="hero"><div class="hero-content"><div><div class="hero-kicker">DAILY LIFE OS</div><h3>${tr('أهلًا','Hello')}, ${safe(state.profile.name||tr('صديقي','there'))} 👋</h3><p>${tr('خلّ يومك أبسط. ركّز على اللي يهمك الآن.','Make today simpler. Focus on what matters now.')}</p></div></div><div class="quick-grid"><div class="quick-card"><strong>${daily.filter(x=>x.done).length}/${daily.length}</strong><span>${tr('مهام اليوم المكتملة','Today completed')}</span></div><div class="quick-card"><strong>${workOpen.length}</strong><span>${tr('مهام عمل مفتوحة','Open work tasks')}</span></div><div class="quick-card"><strong>${edu}%</strong><span>${tr('متوسط الدراسة','Learning progress')}</span></div><div class="quick-card"><strong class="hero-money"><bdi dir="ltr">${money(expenses)}</bdi></strong><span>${tr('مصروف هذا الشهر','Month spending')}</span></div></div></div>
- <div class="grid kpis">${kpi(tr('المتبقي اليوم','To do today'),pending.length,tr('مهمة تحتاج اهتمامك','Items need attention'))}${kpi(tr('عمل مهم','Priority work'),urgent.length,tr('عالية الأولوية أو متأخرة','High priority / overdue'))}${kpi(tr('الأهداف النشطة','Active goals'),goalsActive,tr('أهداف قيد التقدم','Goals in progress'))}${kpi(tr('المصروف الشهري','Monthly expenses'),money(expenses),tr('حسب العمليات المسجلة','Based on entries'),'money-kpi')}</div>
+ ${prayerStrip()}<div class="grid kpis">${kpi(tr('المتبقي اليوم','To do today'),pending.length,tr('مهمة تحتاج اهتمامك','Items need attention'))}${kpi(tr('عمل مهم','Priority work'),urgent.length,tr('عالية الأولوية أو متأخرة','High priority / overdue'))}${kpi(tr('الأهداف النشطة','Active goals'),goalsActive,tr('أهداف قيد التقدم','Goals in progress'))}${kpi(tr('المصروف الشهري','Monthly expenses'),money(expenses),tr('حسب العمليات المسجلة','Based on entries'),'money-kpi')}</div>
  <div class="grid two" style="margin-top:18px"><div class="card"> <div class="section-head"><h3>${tr('مهام اليوم','Today’s tasks')}</h3>${btn(tr('عرض الكل','View all'),'go','today','','secondary-btn')}</div>${pending.length?`<div class="list">${pending.slice(0,4).map(cardRoutine).join('')}</div>`:`<div class="mini-empty">✅ ${tr('ما عندك مهام غير مكتملة لليوم.','Nothing left to do today.')}</div>`}${btn('＋ '+tr('مهمة جديدة','New task'),'add','routine','','text-btn')}</div>
  <div class="card"><div class="section-head"><h3>${tr('أولوية العمل','Work priorities')}</h3>${btn(tr('عرض الكل','View all'),'go','work','','secondary-btn')}</div>${priority.length?`<div class="list">${priority.slice(0,4).map(cardWork).join('')}</div>`:`<div class="mini-empty">✨ ${tr('ما عندك مهام عمل مفتوحة.','No open work tasks.')}</div>`}${btn('＋ '+tr('مهمة عمل','Work task'),'add','work','','text-btn')}</div></div><div style="margin-top:18px">${biMiniPreview()}</div>`;
 }
@@ -1084,10 +1112,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v2.8.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v2.9.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1224,7 +1252,8 @@ function buildReminders(){
    push('s'+day+s.summaryTime,{at:localMs(day,s.summaryTime),kind:'summary',view:'today',title:`${greet}${name?' '+name:''} ☀️`,
     body:items.length?tr(`عندك ${taskCount(items.length)} اليوم`,`You have ${taskCount(items.length)} today`)+` · ${names}${items.length>2?'…':''}`:tr('يومك فاضي — خطط لشي جميل اليوم ✨','Your day is open — plan something great ✨')});}
  }
- return list.sort((a,b)=>a.at-b.at).slice(0,150);
+ for(const it of prayerReminderItems(now)){const {key,...rest}=it;push(key,rest);}
+ return list.sort((a,b)=>a.at-b.at).slice(0,400);
 }
 function syncRemindersNow(){const a=androidNotify();if(!a)return;const s=notifySettings();try{reminderCount=a.syncReminders(JSON.stringify(s.enabled?buildReminders():[]));}catch{reminderCount=null;}const el=document.getElementById('notifyCount');if(el)el.textContent=reminderCountText();}
 function scheduleReminderSync(){if(!androidNotify()){schedulePushSync();return;}clearTimeout(reminderTimer);reminderTimer=setTimeout(syncRemindersNow,400);}
@@ -1387,6 +1416,164 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.type==='open-view'&&viewNames[e.data.view])navigate(e.data.view);});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')schedulePushSync();});
 document.addEventListener('DOMContentLoaded',()=>{if(webPushSupported())setTimeout(()=>syncPush(false),800);});
+
+// ---- Prayer times (offline; PrayTimes.org algorithm) ----
+const PRAYERS=[['fajr','الفجر','Fajr','🌙'],['sunrise','الشروق','Sunrise','🌅'],['dhuhr','الظهر','Dhuhr','☀️'],['asr','العصر','Asr','🌤️'],['maghrib','المغرب','Maghrib','🌇'],['isha','العشاء','Isha','🌌']];
+const SALAH=['fajr','dhuhr','asr','maghrib','isha'];
+const PRAYER_METHODS={
+ makkah:{ar:'أم القرى — مكة المكرمة',en:'Umm Al-Qura, Makkah',fajr:18.5,ishaMin:90,ramadanIshaMin:120},
+ mwl:{ar:'رابطة العالم الإسلامي',en:'Muslim World League',fajr:18,isha:17},
+ egypt:{ar:'الهيئة المصرية العامة للمساحة',en:'Egyptian General Authority',fajr:19.5,isha:17.5},
+ kuwait:{ar:'الكويت',en:'Kuwait',fajr:18,isha:17.5},
+ qatar:{ar:'قطر',en:'Qatar',fajr:18,ishaMin:90},
+ dubai:{ar:'دبي — الإمارات',en:'Dubai, UAE',fajr:18.2,isha:18.2},
+ gulf:{ar:'منطقة الخليج',en:'Gulf region',fajr:19.5,ishaMin:90},
+ karachi:{ar:'جامعة العلوم الإسلامية — كراتشي',en:'Univ. of Islamic Sciences, Karachi',fajr:18,isha:18},
+ isna:{ar:'أمريكا الشمالية (ISNA)',en:'ISNA, North America',fajr:15,isha:15},
+ turkey:{ar:'تركيا (ديانت)',en:'Turkey (Diyanet)',fajr:18,isha:17},
+ singapore:{ar:'سنغافورة / ماليزيا',en:'Singapore / Malaysia',fajr:20,isha:18},
+ morocco:{ar:'المغرب',en:'Morocco',fajr:19,isha:17},
+};
+// [id, arabic, english, lat, lng, method]
+const PRAYER_CITIES=[
+ ['riyadh','الرياض','Riyadh',24.7136,46.6753,'makkah'],['makkah','مكة المكرمة','Makkah',21.4225,39.8262,'makkah'],['madinah','المدينة المنورة','Madinah',24.4672,39.6024,'makkah'],
+ ['jeddah','جدة','Jeddah',21.4858,39.1925,'makkah'],['dammam','الدمام','Dammam',26.4207,50.0888,'makkah'],['khobar','الخبر','Al Khobar',26.2172,50.1971,'makkah'],
+ ['hofuf','الأحساء','Al Ahsa',25.3833,49.5867,'makkah'],['jubail','الجبيل','Jubail',27.0046,49.646,'makkah'],['taif','الطائف','Taif',21.2703,40.4158,'makkah'],
+ ['buraidah','بريدة','Buraidah',26.326,43.975,'makkah'],['unaizah','عنيزة','Unaizah',26.084,43.994,'makkah'],['hail','حائل','Hail',27.5114,41.7208,'makkah'],
+ ['tabuk','تبوك','Tabuk',28.3835,36.5662,'makkah'],['abha','أبها','Abha',18.2164,42.5053,'makkah'],['khamis','خميس مشيط','Khamis Mushait',18.3,42.7333,'makkah'],
+ ['jazan','جازان','Jazan',16.8892,42.5511,'makkah'],['najran','نجران','Najran',17.5656,44.2289,'makkah'],['baha','الباحة','Al Baha',20.0129,41.4677,'makkah'],
+ ['yanbu','ينبع','Yanbu',24.0895,38.0618,'makkah'],['sakaka','سكاكا','Sakaka',29.9697,40.2064,'makkah'],['arar','عرعر','Arar',30.9753,41.0381,'makkah'],
+ ['kuwait','الكويت','Kuwait City',29.3759,47.9774,'kuwait'],['doha','الدوحة','Doha',25.2854,51.531,'qatar'],['manama','المنامة','Manama',26.2285,50.586,'gulf'],
+ ['abudhabi','أبوظبي','Abu Dhabi',24.4539,54.3773,'dubai'],['dubai','دبي','Dubai',25.2048,55.2708,'dubai'],['sharjah','الشارقة','Sharjah',25.3463,55.4209,'dubai'],
+ ['muscat','مسقط','Muscat',23.588,58.3829,'gulf'],['cairo','القاهرة','Cairo',30.0444,31.2357,'egypt'],['alexandria','الإسكندرية','Alexandria',31.2001,29.9187,'egypt'],
+ ['amman','عمّان','Amman',31.9454,35.9284,'mwl'],['quds','القدس','Al-Quds',31.7683,35.2137,'mwl'],['gaza','غزة','Gaza',31.5017,34.4668,'mwl'],
+ ['beirut','بيروت','Beirut',33.8938,35.5018,'mwl'],['damascus','دمشق','Damascus',33.5138,36.2765,'mwl'],['baghdad','بغداد','Baghdad',33.3152,44.3661,'mwl'],
+ ['sanaa','صنعاء','Sanaa',15.3694,44.191,'mwl'],['aden','عدن','Aden',12.7855,45.0187,'mwl'],['khartoum','الخرطوم','Khartoum',15.5007,32.5599,'egypt'],
+ ['tripoli','طرابلس','Tripoli',32.8872,13.1913,'mwl'],['tunis','تونس','Tunis',36.8065,10.1815,'mwl'],['algiers','الجزائر','Algiers',36.7538,3.0588,'mwl'],
+ ['rabat','الرباط','Rabat',34.0209,-6.8416,'morocco'],['casablanca','الدار البيضاء','Casablanca',33.5731,-7.5898,'morocco'],['nouakchott','نواكشوط','Nouakchott',18.0735,-15.9582,'mwl'],
+ ['mogadishu','مقديشو','Mogadishu',2.0469,45.3182,'mwl'],['djibouti','جيبوتي','Djibouti',11.5721,43.1456,'mwl'],['istanbul','إسطنبول','Istanbul',41.0082,28.9784,'turkey'],
+ ['karachi','كراتشي','Karachi',24.8607,67.0011,'karachi'],['islamabad','إسلام آباد','Islamabad',33.6844,73.0479,'karachi'],['lahore','لاهور','Lahore',31.5204,74.3587,'karachi'],
+ ['delhi','دلهي','Delhi',28.6139,77.209,'karachi'],['dhaka','دكا','Dhaka',23.8103,90.4125,'karachi'],['jakarta','جاكرتا','Jakarta',-6.2088,106.8456,'singapore'],
+ ['kualalumpur','كوالالمبور','Kuala Lumpur',3.139,101.6869,'singapore'],['singapore','سنغافورة','Singapore',1.3521,103.8198,'singapore'],['london','لندن','London',51.5074,-0.1278,'mwl'],
+ ['paris','باريس','Paris',48.8566,2.3522,'mwl'],['berlin','برلين','Berlin',52.52,13.405,'mwl'],['newyork','نيويورك','New York',40.7128,-74.006,'isna'],
+ ['toronto','تورونتو','Toronto',43.6532,-79.3832,'isna'],['losangeles','لوس أنجلوس','Los Angeles',34.0522,-118.2437,'isna'],['sydney','سيدني','Sydney',-33.8688,151.2093,'mwl']];
+const PRAYER_DEFAULTS={lat:null,lng:null,city:'',method:'makkah',methodManual:false,asr:'standard',pre:0,sound:'adhan',
+ iqama:{fajr:25,dhuhr:20,asr:20,maghrib:10,isha:20},adjust:{fajr:0,sunrise:0,dhuhr:0,asr:0,maghrib:0,isha:0},
+ alerts:{fajr:{adhan:true,iqama:true},dhuhr:{adhan:true,iqama:true},asr:{adhan:true,iqama:true},maghrib:{adhan:true,iqama:true},isha:{adhan:true,iqama:true}}};
+function prayerSettings(){const s=state.prayer&&typeof state.prayer==='object'?state.prayer:{};return {...PRAYER_DEFAULTS,...s,iqama:{...PRAYER_DEFAULTS.iqama,...(s.iqama||{})},adjust:{...PRAYER_DEFAULTS.adjust,...(s.adjust||{})},alerts:Object.fromEntries(SALAH.map(k=>[k,{...PRAYER_DEFAULTS.alerts[k],...((s.alerts||{})[k]||{})}]))};}
+const prayerReady=()=>{const s=prayerSettings();return Number.isFinite(s.lat)&&Number.isFinite(s.lng);};
+function setPrayer(ch){state.prayer={...prayerSettings(),...ch};prayerCache.clear();save();if(currentView==='prayer'||currentView==='dashboard')renderView();}
+
+const PT={rad:d=>d*Math.PI/180,deg:r=>r*180/Math.PI,
+ sin(d){return Math.sin(this.rad(d))},cos(d){return Math.cos(this.rad(d))},tan(d){return Math.tan(this.rad(d))},
+ asin(x){return this.deg(Math.asin(x))},acos(x){return this.deg(Math.acos(x))},atan2(y,x){return this.deg(Math.atan2(y,x))},acot(x){return this.deg(Math.atan(1/x))},
+ fixA(a){a-=360*Math.floor(a/360);return a<0?a+360:a},fixH(x){x-=24*Math.floor(x/24);return x<0?x+24:x},
+ julian(y,m,d){if(m<=2){y-=1;m+=12;}const A=Math.floor(y/100),B=2-A+Math.floor(A/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;},
+ sun(jd){const D=jd-2451545,g=this.fixA(357.529+0.98560028*D),q=this.fixA(280.459+0.98564736*D),L=this.fixA(q+1.915*this.sin(g)+0.02*this.sin(2*g)),e=23.439-0.00000036*D;
+  const RA=this.atan2(this.cos(e)*this.sin(L),this.cos(L))/15;return {decl:this.asin(this.sin(e)*this.sin(L)),eqt:q/15-this.fixH(RA)};}};
+function hijriMonth(date){try{return Number(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{month:'numeric'}).format(date));}catch{return 0;}}
+/** Prayer times for a local calendar day as epoch ms: {fajr, sunrise, dhuhr, asr, maghrib, isha}. */
+function computePrayerTimes(y,m,d,lat,lng,s){
+ const meth=PRAYER_METHODS[s.method]||PRAYER_METHODS.makkah,asrF=s.asr==='hanafi'?2:1;
+ const tz=-new Date(y,m-1,d,12).getTimezoneOffset()/60,jd=PT.julian(y,m,d)-lng/(15*24);
+ const mid=t=>PT.fixH(12-PT.sun(jd+t).eqt);
+ const ang=(a,t,ccw)=>{const decl=PT.sun(jd+t).decl,v=(-PT.sin(a)-PT.sin(decl)*PT.sin(lat))/(PT.cos(decl)*PT.cos(lat));if(v<-1||v>1)return NaN;const T=PT.acos(v)/15;return mid(t)+(ccw?-T:T);};
+ const asrT=t=>{const decl=PT.sun(jd+t).decl;return ang(-PT.acot(asrF+PT.tan(Math.abs(lat-decl))),t);};
+ const r={fajr:ang(meth.fajr,5/24,true),sunrise:ang(0.833,6/24,true),dhuhr:mid(12/24),asr:asrT(13/24),sunset:ang(0.833,18/24),isha:meth.isha?ang(meth.isha,18/24):NaN};
+ for(const k in r)r[k]+=tz-lng/15;
+ const night=PT.fixH(r.sunrise-r.sunset);
+ const hl=(time,base,a,ccw)=>{const portion=a/60*night,diff=ccw?PT.fixH(base-time):PT.fixH(time-base);return isNaN(time)||diff>portion?base+(ccw?-portion:portion):time;};
+ r.fajr=hl(r.fajr,r.sunrise,meth.fajr,true);
+ r.maghrib=r.sunset;
+ if(meth.isha)r.isha=hl(r.isha,r.sunset,meth.isha,false);
+ else{const ram=meth.ramadanIshaMin&&hijriMonth(new Date(y,m-1,d,12))===9;r.isha=r.maghrib+(ram?meth.ramadanIshaMin:meth.ishaMin)/60;}
+ const base=new Date(y,m-1,d).getTime(),out={};
+ for(const [k] of PRAYERS)out[k]=Math.round((base+r[k]*3600e3+(Number(s.adjust[k])||0)*60e3)/60e3)*60e3;
+ return out;
+}
+const prayerCache=new Map();
+function prayerDay(date){const s=prayerSettings();if(!prayerReady())return null;const key=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+ if(!prayerCache.has(key))prayerCache.set(key,computePrayerTimes(date.getFullYear(),date.getMonth()+1,date.getDate(),s.lat,s.lng,s));return prayerCache.get(key);}
+function prayerName(k,date){if(k==='dhuhr'&&date&&new Date(date).getDay()===5)return tr('الجمعة','Jumuah');const p=PRAYERS.find(x=>x[0]===k);return p?tr(p[1],p[2]):k;}
+function nextPrayer(now=Date.now()){for(let i=0;i<2;i++){const d=new Date();d.setDate(d.getDate()+i);const t=prayerDay(d);if(!t)return null;for(const k of SALAH)if(t[k]>now)return {key:k,at:t[k],iqama:t[k]+(Number(prayerSettings().iqama[k])||0)*60e3};}return null;}
+function timeOf(ms){return new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-US',{hour:'numeric',minute:'2-digit'}).format(new Date(ms));}
+function countdown(ms){const s=Math.max(0,Math.floor(ms/1000)),hh=Math.floor(s/3600),mm=Math.floor(s%3600/60),ss=s%60;return `${hh}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;}
+function hijriLabel(date){try{return new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-ca-islamic-umalqura-nu-latn':'en-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(date);}catch{return '';}}
+function placeLabel(){const s=prayerSettings();const c=PRAYER_CITIES.find(x=>x[0]===s.city);if(c)return tr(c[1],c[2]);
+ let best=null,bd=1e9;for(const x of PRAYER_CITIES){const dd=Math.hypot(x[3]-s.lat,(x[4]-s.lng)*Math.cos(PT.rad(s.lat)));if(dd<bd){bd=dd;best=x;}}
+ return best&&bd<1.2?tr(`موقعي — قرب ${best[1]}`,`My location — near ${best[2]}`):tr('موقعي الحالي','My location');}
+/** Prayer alerts for the next 10 days, in the same shape as buildReminders() items. */
+function prayerReminderItems(now){
+ if(!prayerReady())return [];const s=prayerSettings(),out=[],place=placeLabel();
+ for(let i=0;i<10;i++){const d=new Date();d.setDate(d.getDate()+i);const t=prayerDay(d);const day=ymd(d);
+  for(const k of SALAH){const a=s.alerts[k],nm=prayerName(k,d),iq=t[k]+(Number(s.iqama[k])||0)*60e3,friday=k==='dhuhr'&&d.getDay()===5;
+   if(s.pre>0&&a.adhan)out.push({key:`pp${k}${day}${s.pre}`,at:t[k]-s.pre*60e3,kind:'pre',view:'prayer',title:`⏳ ${tr(`باقي ${s.pre} دقيقة على أذان ${nm}`,`${s.pre} min until ${nm}`)}`,body:`${place} · ${timeOf(t[k])}`});
+   if(a.adhan)out.push({key:`pa${k}${day}`,at:t[k],kind:'adhan',sound:s.sound,view:'prayer',title:`🕌 ${tr(`حان الآن موعد أذان ${nm}`,`It's time for ${nm}`)}`,body:friday?tr(`${place} · صلاة الجمعة`,`${place} · Jumuah prayer`):tr(`${place} · الإقامة ${timeOf(iq)}`,`${place} · Iqama ${timeOf(iq)}`)});
+   if(a.iqama&&!friday&&s.iqama[k]>0)out.push({key:`pi${k}${day}`,at:iq,kind:'iqama',view:'prayer',title:`🕌 ${tr(`إقامة صلاة ${nm}`,`Iqama — ${nm}`)}`,body:tr('حان وقت إقامة الصلاة','Time for the iqama')});}}
+ return out.filter(x=>x.at>now);
+}
+function cityOptions(sel){return `<option value="">${tr('— اختر مدينة —','— Choose a city —')}</option>`+PRAYER_CITIES.map(c=>`<option value="${c[0]}" ${c[0]===sel?'selected':''}>${safe(tr(c[1],c[2]))}</option>`).join('');}
+function locatePrayer(){if(!navigator.geolocation)return message(tr('تحديد الموقع غير مدعوم هنا — اختر مدينتك','Location is not available — choose your city'),true);
+ message(tr('جاري تحديد موقعك…','Finding your location…'));
+ navigator.geolocation.getCurrentPosition(pos=>{setPrayer({lat:+pos.coords.latitude.toFixed(4),lng:+pos.coords.longitude.toFixed(4),city:''});message(tr('تم تحديد موقعك ✓','Location set ✓'));},
+  ()=>message(tr('ما قدرنا نحدد موقعك. فعّل الموقع أو اختر مدينتك من القائمة.','Could not get your location. Turn on location or choose your city.'),true),{enableHighAccuracy:false,timeout:15000,maximumAge:3600e3});}
+function prayerStrip(){
+ if(!prayerReady())return `<div class="card prayer-strip"><div><strong>🕌 ${tr('أوقات الصلاة','Prayer times')}</strong><small>${tr('حدد موقعك وتوصلك تنبيهات الأذان والإقامة','Set your location to get adhan & iqama alerts')}</small></div><button type="button" class="secondary-btn" data-prayer-action="open">${tr('ابدأ','Start')}</button></div>`;
+ const n=nextPrayer();if(!n)return '';
+ return `<button type="button" class="card prayer-strip" data-prayer-action="open"><div><small>${tr('الصلاة القادمة','Next prayer')}</small><strong>🕌 ${prayerName(n.key,n.at)} · ${timeOf(n.at)}</strong></div><div class="prayer-strip-count"><small>${tr('بعد','in')}</small><b data-countdown="${n.at}">${countdown(n.at-Date.now())}</b></div></button>`;
+}
+function renderPrayer(){
+ const el=$('#prayerView'),s=prayerSettings();
+ if(!prayerReady()){el.innerHTML=`<div class="card prayer-setup"><div class="prayer-setup-icon">🕌</div><h3>${tr('أوقات الصلاة','Prayer times')}</h3>
+  <p class="muted">${tr('حدد موقعك عشان نحسب أوقات الأذان والإقامة بدقة — الحساب يتم على جوالك بدون إنترنت.','Set your location to calculate adhan and iqama times — computed on your phone, no internet needed.')}</p>
+  <button type="button" class="primary-btn" data-prayer-action="locate">📍 ${tr('تحديد موقعي تلقائيًا','Use my location')}</button>
+  <div class="form-row" style="margin-top:16px"><label for="prayerCity">${tr('أو اختر مدينتك','Or choose your city')}</label><select id="prayerCity" data-prayer="city">${cityOptions('')}</select></div></div>`;return;}
+ const now=Date.now(),today=new Date(),t=prayerDay(today),n=nextPrayer(now),notifOn=notifySettings().enabled;
+ const isAndroid=!!androidNotify();
+ const rows=PRAYERS.map(([k,ar,en,ic])=>{const isSalah=SALAH.includes(k),at=t[k],iq=isSalah?at+(Number(s.iqama[k])||0)*60e3:null,a=isSalah?s.alerts[k]:null,on=a&&(a.adhan||a.iqama);
+  const cls=n&&n.key===k&&new Date(n.at).toDateString()===today.toDateString()?'next':at<now?'past':'';
+  return `<div class="prayer-row ${cls}"><span class="prayer-ic">${ic}</span><span class="prayer-nm">${prayerName(k,today)}</span><span class="prayer-tm">${timeOf(at)}</span><span class="prayer-iq">${isSalah&&!(k==='dhuhr'&&today.getDay()===5)&&s.iqama[k]>0?`<small>${tr('الإقامة','Iqama')}</small> ${timeOf(iq)}`:''}</span>${isSalah?`<button type="button" class="prayer-bell ${on?'on':''}" data-prayer-action="bell" data-k="${k}" aria-label="${tr('تنبيهات','Alerts')} ${prayerName(k,today)}" aria-pressed="${on}">${on?'🔔':'🔕'}</button>`:'<span></span>'}</div>`;}).join('');
+ const meth=Object.entries(PRAYER_METHODS).map(([k,v])=>`<option value="${k}" ${s.method===k?'selected':''}>${safe(tr(v.ar,v.en))}</option>`).join('');
+ const pres=[[0,'بدون','Off'],[5,'قبل 5 دقائق','5 min before'],[10,'قبل 10 دقائق','10 min before'],[15,'قبل 15 دقيقة','15 min before'],[20,'قبل 20 دقيقة','20 min before'],[30,'قبل 30 دقيقة','30 min before']];
+ el.innerHTML=`<div class="prayer-hero">
+  <div class="prayer-hero-top"><span>📍 ${safe(placeLabel())}</span><span>${hijriLabel(today)}</span></div>
+  ${n?`<div class="prayer-hero-main"><small>${tr('الصلاة القادمة','Next prayer')}</small><h3>${prayerName(n.key,n.at)}</h3><div class="prayer-hero-time">${timeOf(n.at)}</div>
+  <div class="prayer-hero-count">${tr('بعد','in')} <b data-countdown="${n.at}">${countdown(n.at-now)}</b></div></div>`:''}
+ </div>
+ ${notifOn?'':`<div class="card prayer-warn">🔕 ${tr('التنبيهات متوقفة. فعّلها من الإعدادات ← التنبيهات والإشعارات.','Alerts are off. Turn them on in Settings → Reminders & notifications.')} <button type="button" class="link-btn" data-prayer-action="settings">${tr('فتح الإعدادات','Open settings')}</button></div>`}
+ <div class="card prayer-list"><div class="section-head"><h3>${tr('أوقات اليوم','Today')}</h3><small class="muted">${new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-GB',{weekday:'long',day:'numeric',month:'long'}).format(today)}</small></div>${rows}
+  <div class="prayer-audio"><button type="button" class="secondary-btn" data-prayer-action="play" id="adhanPlayBtn">▶️ ${tr('استماع للأذان','Play the adhan')}</button><audio id="adhanAudio" src="adhan.m4a" preload="none"></audio></div></div>
+ <div class="grid two" style="margin-top:18px">
+  <div class="card"><h3>${tr('الموقع وطريقة الحساب','Location & method')}</h3>
+   <div class="form-row"><label for="pCity">${tr('المدينة','City')}</label><select id="pCity" data-prayer="city">${cityOptions(s.city)}</select></div>
+   <button type="button" class="secondary-btn" data-prayer-action="locate" style="margin-top:10px">📍 ${tr('استخدم موقعي الحالي','Use my current location')}</button>
+   <div class="form-row" style="margin-top:14px"><label for="pMethod">${tr('طريقة الحساب','Calculation method')}</label><select id="pMethod" data-prayer="method">${meth}</select></div>
+   <div class="form-row"><label for="pAsr">${tr('حساب العصر','Asr calculation')}</label><select id="pAsr" data-prayer="asr"><option value="standard" ${s.asr!=='hanafi'?'selected':''}>${tr('الجمهور (الشافعي، المالكي، الحنبلي)','Standard (Shafi, Maliki, Hanbali)')}</option><option value="hanafi" ${s.asr==='hanafi'?'selected':''}>${tr('الحنفي','Hanafi')}</option></select></div>
+  </div>
+  <div class="card"><h3>${tr('الإقامة والتنبيهات','Iqama & alerts')}</h3>
+   <div class="iqama-grid">${SALAH.map(k=>`<label>${prayerName(k)}<span><input type="number" min="0" max="60" inputmode="numeric" data-prayer="iqama" data-k="${k}" value="${Number(s.iqama[k])||0}"> ${tr('د','min')}</span></label>`).join('')}</div>
+   <small class="hint">${tr('دقائق الإقامة بعد الأذان. صلاة الجمعة بدون تنبيه إقامة.','Minutes from adhan to iqama. No iqama alert for Jumuah.')}</small>
+   <div class="form-row" style="margin-top:12px"><label for="pPre">${tr('تذكير قبل الأذان','Reminder before adhan')}</label><select id="pPre" data-prayer="pre">${pres.map(([v,ar,en])=>`<option value="${v}" ${Number(s.pre)===v?'selected':''}>${tr(ar,en)}</option>`).join('')}</select></div>
+   ${isAndroid?`<div class="form-row"><label for="pSound">${tr('صوت تنبيه الأذان','Adhan alert sound')}</label><select id="pSound" data-prayer="sound"><option value="adhan" ${s.sound!=='default'?'selected':''}>${tr('صوت الأذان','Adhan')}</option><option value="default" ${s.sound==='default'?'selected':''}>${tr('صوت التنبيه العادي','Normal notification sound')}</option></select></div>`:`<small class="hint">${tr('على الآيفون يستخدم التنبيه صوت الإشعارات الافتراضي.','On iPhone, alerts use the default notification sound.')}</small>`}
+  </div></div>
+ <details class="card prayer-adjust" style="margin-top:18px"><summary>${tr('تعديل يدوي للأوقات (± دقائق)','Manual time adjustments (± minutes)')}</summary>
+  <div class="iqama-grid">${PRAYERS.map(([k])=>`<label>${prayerName(k)}<span><input type="number" min="-30" max="30" inputmode="numeric" data-prayer="adjust" data-k="${k}" value="${Number(s.adjust[k])||0}"> ${tr('د','min')}</span></label>`).join('')}</div>
+  <small class="hint">${tr('استخدمه لو مسجدك يختلف بدقيقة أو دقيقتين عن الحساب.','Use this if your mosque differs by a minute or two.')}</small></details>
+ <p class="hint" style="text-align:center">${tr('الأذان: Wikimedia Commons (CC0) · الحساب فلكي على جهازك','Adhan audio: Wikimedia Commons (CC0) · Times computed on your device')}</p>`;
+}
+document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('[data-prayer]'))return;const f=el.dataset.prayer,s=prayerSettings();
+ if(f==='city'){const c=PRAYER_CITIES.find(x=>x[0]===el.value);if(c)setPrayer({city:c[0],lat:c[3],lng:c[4],...(s.methodManual?{}:{method:c[5]})});}
+ else if(f==='method')setPrayer({method:el.value,methodManual:true});
+ else if(f==='asr'||f==='sound')setPrayer({[f]:el.value});
+ else if(f==='pre')setPrayer({pre:Number(el.value)||0});
+ else if(f==='iqama'||f==='adjust'){const lim=f==='iqama'?[0,60]:[-30,30];const v=Math.max(lim[0],Math.min(lim[1],Math.round(Number(el.value)||0)));setPrayer({[f]:{...s[f],[el.dataset.k]:v}});}});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-prayer-action]');if(!b)return;const a=b.dataset.prayerAction,s=prayerSettings();
+ if(a==='open')navigate('prayer');else if(a==='settings')navigate('settings');else if(a==='locate')locatePrayer();
+ else if(a==='bell'){const k=b.dataset.k,cur=s.alerts[k],on=!(cur.adhan||cur.iqama);setPrayer({alerts:{...s.alerts,[k]:{adhan:on,iqama:on}}});message(on?tr(`تم تفعيل تنبيهات ${prayerName(k)}`,`${prayerName(k)} alerts on`):tr(`تم إيقاف تنبيهات ${prayerName(k)}`,`${prayerName(k)} alerts off`));}
+ else if(a==='play'){const au=$('#adhanAudio');if(!au)return;if(au.paused){au.play().catch(()=>{});b.textContent='⏹ '+tr('إيقاف','Stop');au.onended=()=>{b.textContent='▶️ '+tr('استماع للأذان','Play the adhan');};}else{au.pause();au.currentTime=0;b.textContent='▶️ '+tr('استماع للأذان','Play the adhan');}}});
+setInterval(()=>{const els=document.querySelectorAll('[data-countdown]');if(!els.length)return;const now=Date.now();let expired=false;
+ els.forEach(x=>{const left=Number(x.dataset.countdown)-now;if(left<=0)expired=true;else x.textContent=countdown(left);});
+ if(expired&&(currentView==='prayer'||currentView==='dashboard'))renderView();},1000);
 
 document.addEventListener('DOMContentLoaded',init);
 document.addEventListener('DOMContentLoaded',initNotifications);
