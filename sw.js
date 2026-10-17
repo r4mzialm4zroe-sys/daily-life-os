@@ -1,5 +1,5 @@
 // Daily Life OS offline worker. Bump CACHE on every release so phones pick up the update.
-const CACHE = 'dlos-2.7.4';
+const CACHE = 'dlos-2.7.5';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png'];
 self.addEventListener('install', e => {
