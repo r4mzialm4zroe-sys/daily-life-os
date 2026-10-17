@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Daily Life OS" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="description" content="Daily Life OS - Your simple, personal offline-first life dashboard." />
+  <title>Daily Life OS — BI Pro v2.5</title>
+    <style>
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --text: #182230;
+  --muted: #6b7280;
+  --border: #dfe5ee;
+  --primary: #2563eb;
+  --primary-soft: #dbeafe;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --shadow: 0 12px 30px rgba(15, 23, 42, .08);
+  --radius: 18px;
+}
+body.dark {
+  --bg: #0b1220;
+  --surface: #121b2b;
+  --surface-2: #1a2639;
+  --text: #f5f7fb;
+  --muted: #a9b4c3;
+  --border: #26364d;
+  --primary: #60a5fa;
+  --primary-soft: #19345e;
+  --shadow: 0 12px 30px rgba(0,0,0,.28);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.app-shell { min-height: 100vh; display: grid; grid-template-columns: 270px 1fr; }
+.sidebar {
+  position: sticky; top: 0; height: 100vh; background: #0f172a; color: #fff;
+  padding: 24px 18px; display: flex; flex-direction: column; z-index: 20;
+}
+.brand { display: flex; gap: 12px; align-items: center; margin-bottom: 28px; }
+.brand-mark {
+  width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
+  font-weight: 800; font-size: 22px; background: linear-gradient(135deg,#3b82f6,#8b5cf6);
+}
+.brand h1 { font-size: 18px; margin: 0; }
+.brand span { color: #9ca3af; font-size: 12px; }
+.nav-list { display: grid; gap: 7px; }
+.nav-item {
+  border: 0; background: transparent; color: #cbd5e1; border-radius: 12px;
+  padding: 12px 14px; text-align: left; display: flex; gap: 12px; align-items: center;
+}
+.nav-item:hover, .nav-item.active { background: rgba(255,255,255,.1); color: #fff; }
+.sidebar-footer { margin-top: auto; }
+.storage-status { padding: 14px; border-radius: 14px; background: rgba(255,255,255,.08); display: grid; gap: 4px; }
+.storage-status span { color: #94a3b8; font-size: 12px; }
+.main { min-width: 0; }
+.topbar {
+  min-height: 84px; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(14px); z-index: 15; border-bottom: 1px solid var(--border);
+}
+.topbar h2 { margin: 2px 0 0; font-size: 25px; }
+.eyebrow { margin: 0; color: var(--muted); font-size: 13px; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.icon-btn, .primary-btn, .secondary-btn, .danger-btn {
+  border: 0; border-radius: 12px; min-height: 42px; padding: 0 15px;
+}
+.icon-btn { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.primary-btn { background: var(--primary); color: white; font-weight: 700; }
+.secondary-btn { background: var(--surface-2); color: var(--text); }
+.danger-btn { background: #fee2e2; color: #991b1b; }
+.view { display: none; padding: 28px; }
+.view.active { display: block; }
+.grid { display: grid; gap: 18px; }
+.grid.kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow);
+}
+.card h3 { margin: 0 0 14px; }
+.kpi-card .kpi-label { color: var(--muted); font-size: 13px; }
+.kpi-card .kpi-value { font-size: 30px; font-weight: 800; margin: 10px 0 4px; }
+.kpi-card .kpi-foot { font-size: 12px; color: var(--muted); }
+.section-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px; }
+.section-head h3 { margin: 0; }
+.empty { text-align: center; color: var(--muted); padding: 30px 10px; }
+.list { display: grid; gap: 10px; }
+.list-item {
+  border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+}
+.list-item-main { min-width: 0; }
+.list-item h4 { margin: 0 0 5px; font-size: 15px; }
+.list-item p { margin: 0; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.badge { display: inline-flex; align-items: center; border-radius: 999px; padding: 5px 9px; font-size: 11px; font-weight: 700; }
+.badge.open { background: #dbeafe; color: #1d4ed8; }
+.badge.done { background: #d1fae5; color: #047857; }
+.badge.pending { background: #fef3c7; color: #92400e; }
+.badge.high { background: #fee2e2; color: #991b1b; }
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.action-btn { border: 0; border-radius: 9px; padding: 7px 9px; background: var(--surface-2); color: var(--text); }
+.progress { height: 9px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.progress > span { display: block; height: 100%; background: var(--primary); border-radius: inherit; }
+.form-grid { display: grid; gap: 14px; }
+.form-row { display: grid; gap: 6px; }
+.form-row label { font-size: 13px; font-weight: 700; }
+input, select, textarea {
+  width: 100%; border: 1px solid var(--border); border-radius: 11px;
+  background: var(--surface); color: var(--text); padding: 11px 12px;
+}
+textarea { min-height: 110px; resize: vertical; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border-bottom: 1px solid var(--border); text-align: left; font-size: 13px; }
+th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.table-wrap { overflow-x: auto; }
+.chart {
+  height: 220px; display: flex; align-items: end; gap: 12px; padding-top: 20px;
+}
+.bar-wrap { flex: 1; display: grid; gap: 8px; align-items: end; height: 100%; }
+.bar { background: var(--primary); border-radius: 8px 8px 3px 3px; min-height: 4px; }
+.bar-label { text-align: center; color: var(--muted); font-size: 11px; }
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(2,6,23,.62); display: grid; place-items: center;
+  padding: 20px; z-index: 100;
+}
+.hidden { display: none !important; }
+.modal {
+  width: min(680px, 100%); max-height: 92vh; overflow: auto;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow);
+}
+.modal-header { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.modal-header h3 { margin: 0; }
+.modal-body { padding: 20px; display: grid; gap: 14px; }
+.toast {
+  position: fixed; right: 22px; bottom: 22px; background: #111827; color: white;
+  padding: 13px 16px; border-radius: 12px; z-index: 200; box-shadow: var(--shadow);
+}
+.mobile-only { display: none; }
+.hero {
+  background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+  color: white; border-radius: 22px; padding: 26px; margin-bottom: 18px;
+}
+.hero h3 { font-size: 28px; margin: 0 0 8px; }
+.hero p { margin: 0; color: rgba(255,255,255,.82); }
+.quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 18px; }
+.quick-card { background: rgba(255,255,255,.14); padding: 14px; border-radius: 14px; }
+.quick-card strong { display: block; font-size: 22px; }
+.settings-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 1050px) {
+  .grid.kpis { grid-template-columns: repeat(2,1fr); }
+  .grid.three { grid-template-columns: 1fr 1fr; }
+  .quick-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 780px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed; left: -290px; width: 270px; transition: .25s ease; box-shadow: 18px 0 40px rgba(0,0,0,.3);
+  }
+  .sidebar.open { left: 0; }
+  .mobile-only { display: inline-flex; align-items: center; justify-content: center; }
+  .topbar { padding: 14px 16px; }
+  .view { padding: 16px; }
+  .grid.two, .grid.three { grid-template-columns: 1fr; }
+  .primary-btn { padding: 0 11px; }
+}
+@media (max-width: 520px) {
+  .grid.kpis { grid-template-columns: 1fr; }
+  .quick-grid { grid-template-columns: 1fr 1fr; }
+  .topbar h2 { font-size: 20px; }
+  .topbar-actions .primary-btn { font-size: 0; width: 44px; padding: 0; }
+  .topbar-actions .primary-btn::after { content: "＋"; font-size: 22px; }
+  .list-item { align-items: flex-start; flex-direction: column; }
+}
+
+.mobile-bottom-nav { display:none; }
+@media (max-width: 780px) {
+  body { padding-bottom: 78px; }
+  .mobile-bottom-nav {
+    position: fixed; z-index: 60; left: 10px; right: 10px; bottom: 10px;
+    height: 66px; display: grid; grid-template-columns: repeat(5, 1fr);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow);
+    backdrop-filter: blur(18px); padding: 6px;
+  }
+  .mobile-nav {
+    border: 0; background: transparent; color: var(--muted);
+    display: grid; place-items: center; align-content: center; gap: 2px;
+    border-radius: 14px; min-width: 0;
+  }
+  .mobile-nav span { font-size: 20px; line-height: 1; }
+  .mobile-nav small { font-size: 10px; font-weight: 700; }
+  .mobile-nav.active { color: var(--primary); background: var(--primary-soft); }
+  .topbar { min-height: 74px; }
+  .hero { padding: 22px; border-radius: 20px; }
+  .hero h3 { font-size: 24px; }
+  .card { border-radius: 16px; padding: 16px; }
+}
+
+/* Usability improvements — original layout and palette remain intact. */
+[hidden]{display:none!important;}
+html,body{max-width:100%;overflow-x:clip;}
+.app-shell { direction:ltr; }
+.main { direction:ltr; }
+body.arabic .main { direction:rtl; }
+body.arabic .sidebar { direction:rtl; }
+/* Keep the sidebar next to the reading edge for each language. */
+body.arabic .app-shell { direction:rtl; }
+body.arabic .nav-item { text-align:right; }
+body.arabic .topbar { direction:rtl; }
+body.arabic .mobile-bottom-nav { direction:rtl; }
+body.arabic th,body.arabic td { text-align:right; }
+body.arabic .modal { direction:rtl; }
+body.arabic input,body.arabic textarea { text-align:start; }
+button { transition:background .17s ease, transform .12s ease, box-shadow .17s ease; }
+button:active { transform:scale(.985); }
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:3px solid var(--primary); outline-offset:2px; }
+input:focus,select:focus,textarea:focus { border-color:var(--primary); }
+input[type=checkbox] { width:auto; accent-color:var(--primary); }
+input[type=search] { min-width:0; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+.hidden {display:none!important;}
+.muted{color:var(--muted)}
+.subheading{margin:6px 0 14px;line-height:1.6;font-size:13px}
+.nav-item { font-size:14px; font-weight:600; }
+.nav-item.active { background:rgba(255,255,255,.16); }
+.brand-mark {flex-shrink:0}
+.sidebar { gap:0; }
+.nav-list { overflow-y:auto; scrollbar-width:thin; }
+.topbar { gap:10px; }
+.topbar-actions { flex-wrap:nowrap; }
+.lang-btn { background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:12px;font-weight:750; min-width:48px;height:42px; }
+.topbar-actions .icon-btn {box-shadow:none;border:1px solid var(--border);}
+.card {min-width:0}
+.card .section-head { flex-wrap:wrap; }
+.section-head h3 {line-height:1.3}
+.list-item {flex-wrap:wrap; padding:13px 14px;}
+.list-item .grow { flex:1 1 190px; }
+.list-item h4 {line-height:1.4; overflow-wrap:anywhere}
+.list-item p {line-height:1.45}
+.list-item.completed h4 { opacity:.68; text-decoration:line-through; }
+.list-item .actions { margin-inline-start:auto; }
+.list-item .actions .action-btn {border:1px solid var(--border); background:var(--surface);font-size:12px;min-height:34px;}
+.danger-inline:hover{color:var(--danger);border-color:var(--danger)!important;}
+.secondary-btn {font-weight:600}
+.primary-btn:hover{filter:brightness(1.06)}
+.secondary-btn:hover,.action-btn:hover{background:var(--primary-soft)}
+.primary-btn,.secondary-btn,.danger-btn,.icon-btn { display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap; }
+.check-toggle { width:30px;height:30px; flex:0 0 30px;border-radius:10px;background:var(--surface);border:2px solid var(--border);color:#fff;font-size:20px;font-weight:800;padding:0; }
+.check-toggle.checked { background:var(--success);border-color:var(--success); }
+.check-toggle:not(.checked):hover { border-color:var(--primary); }
+.tags {display:flex;gap:4px;flex-wrap:wrap;}
+.badge.neutral {background:var(--surface-2);color:var(--muted)}
+.stepper {display:flex;gap:5px;white-space:nowrap;}
+.stepper .action-btn {border:1px solid var(--border);min-height:34px;font-weight:750}
+.amount {font-variant-numeric:tabular-nums;white-space:nowrap;font-size:15px}
+.amount.expense {color:var(--danger)}.amount.income {color:var(--success)}
+.pin-btn {font-size:21px;color:var(--muted);border:none;background:none;padding:4px}.pin-btn.active{color:var(--primary)}
+.next-step{padding-top:7px}
+.filterbar{display:flex;gap:10px;align-items:center;margin:16px 0 10px}
+.search-input{flex:1 1 240px;background:var(--bg)}
+.compact-select {max-width:190px;flex:0 1 190px;background:var(--bg)}
+.result-count{font-size:12px;color:var(--muted);margin:5px 0 12px}
+.empty-state {min-height:210px;padding:30px 12px;text-align:center;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px}
+.empty-state p{color:var(--muted);font-size:13px;margin:0 0 9px}
+.empty-icon{font-size:36px}
+.empty-state strong{font-size:16px}
+.mini-empty {padding:20px 6px;color:var(--muted);text-align:center;font-size:14px;}
+.hero { overflow:hidden; }
+.hero-content { display:flex;justify-content:space-between;align-items:flex-start;gap:14px; }
+.hero-kicker{font-size:11px;font-weight:800;letter-spacing:1.6px;opacity:.8;margin-bottom:8px}
+.hero-action {border:1px solid rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.16);border-radius:11px;padding:11px 14px;white-space:nowrap;font-weight:750;cursor:pointer}
+.hero-action:hover{background:rgba(255,255,255,.24)}
+.quick-card {min-width:0;overflow-wrap:anywhere}.quick-card strong {font-size:clamp(17px,2vw,22px)}
+.text-btn {border:0;background:transparent;color:var(--primary);font-weight:750;padding:12px 0 0}
+.page-controls {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;font-size:13px;}
+.period-select {display:flex;align-items:center;gap:10px}.period-select select {width:auto;min-width:135px;background:var(--surface)}
+.chart {padding-bottom:0;height:230px;gap:8px}.bar-wrap{min-width:0;grid-template-rows:25px 1fr 22px}.bar {width:100%;align-self:end}.bar-num{text-align:center;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}.bar-label{font-size:11px}
+.report-progress{margin-top:22px}.report-progress .progress{margin-top:9px}.between{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}.between strong{font-variant-numeric:tabular-nums}
+.setting-line{display:flex;align-items:center;justify-content:space-between;margin-top:19px;gap:12px}
+.hint,.version,.form-row small {display:block;font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px}
+.modal-backdrop { backdrop-filter:blur(3px);}
+.modal { max-width:570px; }
+.modal-header {position:sticky;top:0;background:var(--surface);z-index:2;gap:15px}
+.modal-body {gap:14px;}
+.modal-actions {display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:-20px;background:var(--surface);padding:16px 0 0;border-top:1px solid var(--border);margin-top:8px}
+.modal-actions .primary-btn { min-width:130px; }
+.checkbox-field {display:flex;gap:10px;align-items:center;padding:10px 0;font-weight:700;}
+.picker-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.picker-tile{display:flex;min-height:105px;align-items:center;justify-content:center;flex-direction:column;gap:10px;border:1px solid var(--border);border-radius:15px;background:var(--surface-2);color:var(--text);font-size:13px;padding:15px;text-align:center}
+.picker-tile:hover{border-color:var(--primary);background:var(--primary-soft)}.picker-tile span{font-size:28px}
+.toast {max-width:min(400px,calc(100vw - 30px));line-height:1.5}.toast.error{background:var(--danger)}
+.nav-shade {display:none}
+body.modal-open {overflow:hidden}
+body.arabic .toast {right:auto;left:22px;}
+@media(max-width:1050px){.list-item .grow{flex-basis:165px}}
+@media(max-width:780px){
+ .nav-shade:not(.hidden) {display:block;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:19;}
+ .topbar-actions {gap:6px}.topbar-actions .icon-btn{min-width:39px;padding:0 10px}.lang-btn{min-width:44px}
+ .topbar .eyebrow{font-size:11px}.topbar h2{font-size:20px}.sidebar{overflow-y:auto}
+ .view{padding:16px}.topbar{padding:11px 14px}
+ .toast{bottom:90px;right:10px}body.arabic .toast{left:10px}
+ .list-item { align-items:flex-start; }
+}
+@media(max-width:520px){
+ .grid.kpis {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .kpi-card{padding:13px}.kpi-card .kpi-value{font-size:clamp(16px,4.6vw,24px);overflow-wrap:anywhere}
+ .kpi-card .kpi-label{font-size:12px}.kpi-card .kpi-foot{font-size:11px}
+ .hero-content{flex-wrap:wrap}.hero-action{font-size:12px}
+ .hero h3{font-size:23px}.hero{padding:19px}
+ .quick-grid{gap:8px}.quick-card{padding:11px}.quick-card strong{font-size:17px}
+ .topbar h2{font-size:18px}
+ .topbar-actions .primary-btn {font-size:12px;width:auto;padding:0 11px;}
+ .topbar-actions .primary-btn::after{content:none}
+ .topbar-actions .primary-btn .add-label {display:none}
+ .topbar-actions .primary-btn .add-plus {font-size:21px}
+ .topbar .eyebrow{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .list-item { flex-direction:row; align-items:center;gap:10px; }
+ .list-item .grow { flex-basis:calc(100% - 54px); }
+ .list-item .actions { width:100%;justify-content:flex-end; }
+ .list-item .actions .action-btn {flex:0 0 auto}
+ .filterbar{flex-wrap:wrap}.filterbar .compact-select{max-width:none;flex:1 1 100%}
+ .modal-backdrop{padding:8px;align-items:end}.modal{max-height:94dvh;border-radius:20px 20px 8px 8px}.modal-body{padding:16px}
+ .page-controls{align-items:flex-start}.period-select{width:100%}.period-select select{flex:1}
+ .section-head{align-items:flex-start}.section-head .primary-btn{min-height:38px}
+}
+/* On narrow screens the off-canvas sidebar must enter from the right in Arabic. */
+@media(max-width:780px){
+  body.arabic .sidebar{left:auto;right:-290px;box-shadow:-18px 0 40px rgba(0,0,0,.3);}
+  body.arabic .sidebar.open{left:auto;right:0;}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+
+/* Accent-only color themes. Neutral colors, text, semantic statuses and layout are unchanged. */
+:root{
+ --accent-button:#2563eb; --accent-glow:rgba(37,99,235,.12);
+ --neon-brand-a:#5573F2; --neon-brand-b:#6F65EF;
+ --neon-hero-a:#1d4ed8; --neon-hero-b:#7c3aed;
+}
+.brand-mark{background:linear-gradient(135deg,var(--neon-brand-a),var(--neon-brand-b));box-shadow:0 6px 18px rgba(0,0,0,.16);}
+.hero{background:linear-gradient(135deg,var(--neon-hero-a),var(--neon-hero-b));}
+.primary-btn{background:var(--accent-button);}
+.mobile-nav.active{box-shadow:inset 0 0 0 1px var(--accent-glow);}
+.theme-controls{display:grid;gap:18px;margin-top:15px;}
+.theme-control-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px;}
+.theme-control-head strong{font-size:13px;}
+.theme-control-head small{font-size:12px;color:var(--muted);}
+.theme-colors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;}
+.theme-color-option{
+ border:1px solid var(--border);border-radius:13px;min-width:0;min-height:80px;
+ background:var(--surface);color:var(--text);display:grid;align-content:center;
+ justify-items:center;gap:8px;font-size:12px;font-weight:650;padding:11px 7px;
+}
+.theme-color-option:hover,.theme-mode-option:hover{border-color:var(--primary);}
+.theme-color-option[aria-pressed="true"],.theme-mode-option[aria-pressed="true"]{
+ border:2px solid var(--primary);box-shadow:0 0 0 3px var(--accent-glow);}
+.theme-color-circle{display:block;width:34px;height:34px;border-radius:999px;
+ background:linear-gradient(135deg,var(--swatch-a),var(--swatch-b));
+ border:1px solid rgba(255,255,255,.18);
+ box-shadow:0 0 14px color-mix(in srgb,var(--swatch-b) 30%,transparent), inset 0 1px 2px rgba(255,255,255,.16);}
+.theme-color-option[aria-pressed="true"] .theme-color-circle{outline:2px solid var(--surface);outline-offset:2px;}
+.theme-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.theme-mode-option{background:var(--surface);border:1px solid var(--border);border-radius:13px;
+ color:var(--text);padding:12px;display:flex;gap:11px;align-items:center;text-align:start;
+ font-size:13px;font-weight:700;min-height:60px;}
+.theme-mode-preview{width:42px;height:35px;flex:0 0 42px;border-radius:9px;border:1px solid var(--border);
+ background:var(--mode-bg);position:relative;overflow:hidden;}
+.theme-mode-preview::before{content:"";position:absolute;inset:7px 9px 14px;border-radius:4px;background:linear-gradient(135deg,var(--mode-start),var(--mode-end));}
+.theme-mode-preview::after{content:"";position:absolute;inset:24px 9px 5px;border-radius:3px;background:var(--mode-text);opacity:.7;}
+.theme-selection-summary{border:1px solid var(--border);border-radius:12px;background:var(--surface-2);
+ padding:12px 14px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:9px;}
+.theme-selection-summary .theme-color-circle{width:18px;height:18px;flex:0 0 18px;box-shadow:none;border-radius:999px;}
+@media(max-width:520px){.theme-colors{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;}
+ .theme-color-option{font-size:11px;padding:9px 3px;min-height:72px;}
+ .theme-modes{grid-template-columns:1fr 1fr;}}
+@media(max-width:380px){.theme-colors{grid-template-columns:repeat(3,minmax(0,1fr));}}
+
+/* Daily Life OS Insights — offline native HTML/SVG visualizations, no network. */
+.bi-intro{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.bi-intro h3{margin:0;font-size:21px;font-weight:800;letter-spacing:-.02em}
+.bi-intro p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
+.bi-pill{border:1px solid var(--border);border-radius:999px;color:var(--muted);padding:7px 11px;font-size:12px;font-weight:650;background:var(--surface)}
+.bi-period{display:flex;flex-wrap:wrap;gap:6px;border:1px solid var(--border);padding:5px;border-radius:14px;background:var(--surface)}
+.bi-period button,.bi-switch button{border:0;padding:9px 13px;background:transparent;color:var(--muted);font-weight:700;border-radius:10px;font-size:12px;min-height:36px;white-space:nowrap}
+.bi-period button.active,.bi-switch button.active{background:var(--primary-soft);color:var(--primary)}
+.bi-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.bi-stat{background:var(--surface);border:1px solid var(--border);border-radius:17px;padding:17px;min-width:0;box-shadow:var(--shadow)}
+.bi-stat-head{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;font-weight:650}
+.bi-stat-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+.bi-stat strong{display:block;margin:11px 0 5px;font-size:clamp(17px,2.2vw,24px);font-weight:850;overflow-wrap:anywhere;line-height:1.3;font-variant-numeric:tabular-nums}
+.bi-stat small{font-size:11px;color:var(--muted);line-height:1.45}
+.bi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.bi-card{min-width:0;overflow:hidden}
+.bi-card-head{display:flex;align-items:start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.bi-card h3{margin:0 0 5px;font-size:16px}
+.bi-subtitle{color:var(--muted);font-size:12px;margin:0;line-height:1.6}
+.bi-legend{display:flex;gap:13px;flex-wrap:wrap;color:var(--muted);font-size:11px;align-items:center}
+.bi-legend i,.bi-category-dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-inline-end:5px}
+.bi-scroll{max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.bi-bars{direction:ltr;height:224px;display:grid;grid-auto-columns:minmax(0,1fr);grid-auto-flow:column;gap:6px;align-items:stretch;border-bottom:1px solid var(--border);padding-top:14px}
+.bi-bars-col{min-width:0;display:grid;grid-template-rows:1fr 26px;gap:5px}
+.bi-bars-bars{display:flex;align-items:end;justify-content:center;gap:4px;height:100%;min-height:0}
+.bi-rect{flex:1;max-width:42px;min-width:3px;border-radius:6px 6px 2px 2px;transition:filter .16s;height:var(--bar-height);min-height:2px;cursor:help}
+.bi-rect:hover{filter:brightness(1.12)}
+.bi-bars-label{text-align:center;font-size:11px;color:var(--muted);overflow:hidden;text-overflow:clip;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bi-line-svg{width:100%;height:auto;display:block;overflow:visible;direction:ltr}
+.bi-line-svg text{fill:var(--muted);font-size:11px;font-family:inherit}
+.bi-line-svg .gridline{stroke:var(--border);stroke-width:1;stroke-dasharray:4 6}
+.bi-line-svg .baseline{stroke:var(--muted);stroke-width:1;opacity:.45}
+.bi-line-svg .trendline{fill:none;stroke:var(--primary);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.bi-line-svg .trendarea{fill:var(--primary);fill-opacity:.09}
+.bi-line-svg .point{stroke:var(--surface);stroke-width:3;fill:var(--primary)}
+.bi-donut-zone{display:grid;grid-template-columns:176px minmax(0,1fr);gap:17px;align-items:center}
+.bi-donut{height:170px;width:170px;border-radius:50%;display:grid;place-items:center;position:relative;margin:auto;flex-shrink:0;background:conic-gradient(var(--surface-2) 0 100%);transform:rotate(-90deg)}
+.bi-donut-hole{background:var(--surface);width:116px;height:116px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transform:rotate(90deg)}
+.bi-donut-hole strong{font-size:18px;max-width:110px;font-weight:850;font-variant-numeric:tabular-nums;direction:ltr}
+.bi-donut-hole span{font-size:10px;color:var(--muted);text-align:center}
+.bi-categories{display:grid;gap:4px;min-width:0}
+.bi-category{background:transparent;border:1px solid transparent;color:var(--text);width:100%;padding:7px 9px;border-radius:10px;display:flex;gap:7px;align-items:center;text-align:start;min-height:39px}
+.bi-category:hover,.bi-category[aria-pressed="true"]{background:var(--primary-soft);border-color:var(--border)}
+.bi-cat-name{font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.bi-cat-value{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bi-detail{margin-top:16px;border-top:1px solid var(--border);padding-top:14px}
+.bi-detail-head{font-size:12px;color:var(--muted);font-weight:750;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.bi-entry{border-bottom:1px solid var(--border);padding:10px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bi-entry:last-child{border-bottom:none}
+.bi-entry-text{min-width:0;display:flex;flex-direction:column;gap:3px;font-size:12px;font-weight:650}
+.bi-entry-text small{font-size:11px;color:var(--muted);font-weight:400}
+.bi-entry-amount{font-size:12px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bi-progress-item{margin:0 0 15px}
+.bi-progress-label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:12px}
+.bi-progress-label strong{font-variant-numeric:tabular-nums}
+.bi-track{width:100%;height:9px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.bi-fill{height:100%;border-radius:inherit;background:var(--primary);width:var(--fill-percent);transition:width .3s}
+.bi-insight{display:flex;align-items:start;gap:10px;background:var(--surface-2);padding:13px;border-radius:13px;font-size:12px;line-height:1.65;color:var(--text)}
+.bi-insight-icon{font-size:17px}
+.bi-mini-title{font-size:13px;font-weight:750;margin:0 0 9px}
+.bi-mini{display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;min-width:0}
+.bi-mini-spark{height:42px;width:160px;max-width:100%}
+.bi-mini-label{color:var(--muted);font-size:11px;margin-top:3px;line-height:1.5}
+.bi-mini-total{font-weight:850;font-size:19px;margin-top:4px;direction:ltr;unicode-bidi:isolate}
+.bi-link{display:inline-flex;margin-top:10px;font-size:12px;color:var(--primary);font-weight:800;border:0;background:none;padding:5px 0}
+.bi-empty{min-height:170px;display:grid;place-items:center;text-align:center;padding:14px;color:var(--muted);font-size:13px;line-height:1.7}
+.bi-empty span{display:block;font-size:26px;margin-bottom:8px}
+.bi-footer{margin-top:17px;font-size:11px;color:var(--muted);line-height:1.7}
+@media(max-width:1100px){.bi-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bi-donut-zone{grid-template-columns:148px minmax(0,1fr)}.bi-donut{width:145px;height:145px}.bi-donut-hole{width:102px;height:102px}}
+@media(max-width:780px){.bi-line-svg{min-width:530px}.bi-grid{grid-template-columns:1fr}.bi-intro h3{font-size:19px}.bi-donut-zone{grid-template-columns:160px minmax(0,1fr)}.bi-donut{width:160px;height:160px}.bi-donut-hole{width:108px;height:108px}}
+@media(max-width:440px){.bi-stat{padding:14px}.bi-stat strong{font-size:16px}.bi-donut-zone{grid-template-columns:1fr;gap:13px}.bi-donut{height:170px;width:170px}.bi-donut-hole{width:116px;height:116px}.bi-category{min-height:35px}.bi-mini-spark{width:115px}.bi-period button{padding:8px 11px}}
+
+
+/* v2.5 BI: period comparison, category trends, monthly drilldowns and schedule history. */
+.bi-section-title{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:25px 0 12px}
+.bi-section-title h3{font-size:17px;font-weight:850;margin:0}
+.bi-section-title p{margin:0;font-size:11px;color:var(--muted);line-height:1.6}
+.bi-compare-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.bi-compare-tile{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:16px;padding:16px;min-width:0}
+.bi-compare-name{font-size:12px;font-weight:750;color:var(--muted)}
+.bi-compare-total{font-size:clamp(16px,2vw,22px);font-weight:850;direction:ltr;unicode-bidi:isolate;margin:10px 0 6px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.bi-compare-change{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:850;direction:ltr;unicode-bidi:isolate;background:var(--surface-2);color:var(--muted)}
+.bi-compare-change.good{background:rgba(16,185,129,.11);color:#059669}
+.bi-compare-change.bad{background:rgba(239,68,68,.10);color:#e0525b}
+.bi-compare-desc{font-size:11px;color:var(--muted);line-height:1.65;margin:8px 0 0}
+.bi-duo-track{display:grid;gap:5px;margin-top:12px}
+.bi-duo-track span{display:block;height:7px;border-radius:999px;max-width:100%;min-width:0}
+.bi-duo-current{background:var(--primary)}
+.bi-duo-previous{background:var(--border)}
+.bi-help-line{font-size:11px;color:var(--muted);margin:8px 0 0;line-height:1.65}
+.bi-insight-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.bi-insight-note{border:1px solid var(--border);border-radius:14px;padding:14px 16px;background:var(--surface);display:flex;gap:11px;align-items:flex-start;line-height:1.65;font-size:12px}
+.bi-insight-note .glyph{font-size:18px;flex-shrink:0}
+.bi-insight-note strong{display:block;font-size:12px;margin-bottom:4px}
+.bi-insight-note p{font-size:11px;color:var(--muted);margin:0}
+.bi-category-rows{display:grid;gap:14px;margin-top:14px}
+.bi-category-head{display:flex;align-items:baseline;justify-content:space-between;gap:9px;font-size:12px;margin-bottom:6px}
+.bi-category-head strong{font-size:12px;font-weight:750;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.bi-category-head small{font-size:11px;color:var(--muted);white-space:nowrap;direction:ltr}
+.bi-cat-duo{display:grid;gap:5px}
+.bi-cat-duo .bi-cat-track{width:100%;height:9px;background:var(--surface-2);border-radius:99px;overflow:hidden;direction:ltr}
+.bi-cat-bar{height:100%;min-width:0;border-radius:99px;display:block}
+.bi-split-legend{display:flex;gap:14px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+.bi-split-legend i{width:9px;height:9px;border-radius:99px;display:inline-block;margin-inline-end:5px}
+.bi-sheet{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.bi-sheet-scroll{overflow-x:auto;max-width:100%;scrollbar-width:thin}
+.bi-ledger{border-collapse:collapse;min-width:620px;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+.bi-ledger th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:750;text-align:start;padding:13px 12px;white-space:nowrap}
+.bi-ledger td{border-top:1px solid var(--border);padding:12px;white-space:nowrap}
+.bi-ledger tr[data-action]{cursor:pointer}
+.bi-ledger tr[data-action]:hover,.bi-ledger tr[aria-selected=true]{background:var(--primary-soft)}
+.bi-ledger .bi-positive{color:#0d9f79;font-weight:800}
+.bi-ledger .bi-negative{color:#e0525b;font-weight:800}
+.bi-ledger .bi-transaction-count{color:var(--muted)}
+.bi-ledger .bi-blank{color:var(--muted);text-align:center;padding:22px}
+.bi-ledger button{border:0;background:transparent;color:var(--primary);text-decoration:underline;text-underline-offset:3px;font-weight:750;padding:3px 0}
+.bi-selected-ledger{border:1px solid var(--border);border-radius:14px;margin-top:14px;padding:16px;min-width:0}
+.bi-selected-ledger .bi-detail-head{margin-bottom:7px}
+.bi-selected-ledger .bi-entry:last-child{border:0}
+.bi-week-bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:14px;direction:ltr}
+.bi-week-day{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}
+.bi-week-bar{height:95px;width:100%;max-width:32px;display:flex;flex-direction:column;justify-content:flex-end;border-radius:9px;background:var(--surface-2);overflow:hidden}
+.bi-week-filled{display:block;flex-shrink:0;min-height:0;background:linear-gradient(0deg,var(--neon-brand-a),var(--neon-brand-b));border-radius:7px 7px 0 0}
+.bi-week-label{font-size:10px;color:var(--muted);text-align:center;white-space:nowrap}
+.bi-week-ratio{font-size:10px;font-weight:800;white-space:nowrap;color:var(--text)}
+.bi-work-status{height:16px;display:flex;border-radius:999px;overflow:hidden;gap:3px;background:var(--surface-2);margin-top:15px}
+.bi-work-status span{height:100%;min-width:0}
+.bi-status-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
+.bi-status-legend .group{min-width:0;background:var(--surface-2);border-radius:10px;padding:11px}
+.bi-status-legend .group strong{display:block;font-size:21px;font-weight:800;line-height:1.15}
+.bi-status-legend .group small{display:block;font-size:10px;color:var(--muted);margin-top:6px;line-height:1.5}
+.bi-metric-select{display:flex;gap:5px;flex-wrap:wrap;background:var(--surface-2);border-radius:11px;padding:4px}
+.bi-metric-select button{font-size:11px;font-weight:800;min-height:31px;padding:6px 10px;border:0;background:transparent;color:var(--muted);border-radius:8px}
+.bi-metric-select button.active{background:var(--surface);color:var(--primary);box-shadow:0 1px 5px rgba(15,23,42,.08)}
+@media(max-width:780px){.bi-compare-grid{grid-template-columns:1fr}.bi-compare-tile{padding:15px}.bi-insight-row{grid-template-columns:1fr}}
+@media(max-width:440px){.bi-section-title h3{font-size:16px}.bi-status-legend .group{padding:9px}.bi-status-legend .group strong{font-size:17px}.bi-week-bars{gap:3px}}
+
+
+/* v2.5.2 — Unified layout rhythm / RTL-LTR symmetry across the entire application.
+   Accent palettes, backgrounds and application behavior intentionally stay unchanged. */
+:root{--ui-space:16px;--ui-small-space:10px;--ui-control-height:42px}
+.view,.main,.grid,.bi-grid,.bi-compare-grid,.bi-stat-grid{min-width:0}
+.card,.bi-card,.bi-stat,.bi-compare-tile,.quick-card{min-width:0;box-sizing:border-box}
+.card h3,.bi-card h3,.bi-section-title h3{line-height:1.4;overflow-wrap:anywhere}
+.card p,.bi-card p,.bi-section-title p{overflow-wrap:anywhere}
+button,select,input,textarea{min-width:0;max-width:100%}
+.primary-btn,.secondary-btn,.danger-btn,.icon-btn,.lang-btn{min-height:var(--ui-control-height)}
+.section-head,.bi-card-head,.bi-section-title,.bi-intro{direction:inherit}
+.section-head>*,.bi-card-head>*,.bi-section-title>*,.bi-intro>*{min-width:0}
+.grid.kpis,.grid.two,.grid.three,.bi-stat-grid,.bi-compare-grid{align-items:stretch}
+/* Dashboard headline: all four values and labels occupy identical rows. */
+.quick-grid{align-items:stretch;grid-auto-rows:1fr}
+.quick-card{display:grid;grid-template-rows:minmax(34px,auto) minmax(2.85em,auto);align-content:stretch;align-items:end;gap:6px;padding:14px;line-height:1.35;text-align:start}
+.quick-card strong{display:block;margin:0;width:100%;font-size:clamp(16px,1.9vw,22px);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.3;align-self:end;overflow-wrap:anywhere;text-align:start;direction:inherit}
+.quick-card > span{display:block;width:100%;align-self:start;line-height:1.4;font-size:14px;min-width:0;text-align:start}
+.quick-card .hero-money{font-size:clamp(13px,1.8vw,20px);letter-spacing:-.015em;overflow-wrap:normal;word-break:normal}
+.quick-card .hero-money bdi{unicode-bidi:isolate;white-space:normal}
+/* Every KPI reserves equal areas for labels, numbers and explanatory text. */
+.kpi-card{display:flex;flex-direction:column;gap:5px;min-height:152px}
+.kpi-card .kpi-label{line-height:1.5;min-height:2.5em;display:block;overflow-wrap:anywhere}
+.kpi-card .kpi-value{line-height:1.25;margin:4px 0 3px;overflow-wrap:anywhere;text-align:start;font-variant-numeric:tabular-nums}
+.kpi-card .kpi-foot{line-height:1.5;margin-top:auto;min-height:2.5em;display:block;overflow-wrap:anywhere}
+/* BI summary cards have one common vertical hierarchy in every viewport. */
+.bi-stat-grid{grid-auto-rows:1fr}
+.bi-stat{display:flex;flex-direction:column;gap:6px;min-height:149px}
+.bi-stat-head{line-height:1.5;min-height:2.6em;align-items:flex-start}
+.bi-stat strong{line-height:1.32;margin:2px 0;min-height:1.4em;text-align:start}
+.bi-stat small{display:block;line-height:1.5;margin-top:auto;min-height:2.7em;overflow-wrap:anywhere;text-align:start}
+.bi-compare-grid{grid-auto-rows:1fr}
+.bi-compare-tile{display:flex;flex-direction:column;gap:4px;min-height:171px}
+.bi-compare-name{line-height:1.45;min-height:2.75em}
+.bi-compare-total{line-height:1.3;margin:0 0 4px;text-align:start;min-height:1.4em}
+.bi-compare-change{align-self:flex-start;max-width:100%;min-height:27px}
+.bi-compare-desc{margin:auto 0 0;min-height:2.8em;line-height:1.5}
+.bi-duo-track{width:100%}
+/* Financial values keep internal LTR number ordering, while the outer alignment follows the page. */
+body.arabic .bi-stat strong,body.arabic .bi-compare-total,body.arabic .bi-mini-total,body.arabic .bi-entry-amount,body.arabic .bi-cat-value,body.arabic .bi-category-head small{text-align:right}
+body:not(.arabic) .bi-stat strong,body:not(.arabic) .bi-compare-total,body:not(.arabic) .bi-mini-total,body:not(.arabic) .bi-entry-amount,body:not(.arabic) .bi-cat-value{text-align:left}
+/* Consistent chart title bars, spacing, legends and detail rows. */
+.bi-card{display:flex;flex-direction:column}
+.bi-card-head{min-height:59px;align-items:flex-start;gap:12px}
+.bi-card-head h3{line-height:1.4}
+.bi-card-head .bi-pill,.bi-card-head .bi-metric-select{flex-shrink:0}
+.bi-grid>.bi-card{height:100%}
+.bi-legend,.bi-split-legend{row-gap:8px;line-height:1.5}
+.bi-stat,.bi-compare-tile,.bi-insight-note,.bi-card,.card{scroll-margin-top:100px}
+.bi-insight-note{min-width:0}
+.bi-progress-label,.bi-category-head,.bi-detail-head,.bi-entry{min-width:0}
+.bi-category-head>strong{overflow-wrap:anywhere}
+.bi-selected-ledger{max-width:100%}
+.bi-sheet-scroll,.bi-scroll{overscroll-behavior-x:contain}
+/* Consistent column widths and touch targets for lists and settings. */
+.list-item .actions{align-items:center;gap:6px}
+.actions .action-btn{min-height:34px}
+.settings-actions{gap:10px;align-items:stretch}
+.settings-actions button{min-height:42px}
+.setting-line{align-items:center}
+.theme-control-head,.theme-selection-summary{line-height:1.5}
+.theme-color-option{min-width:0}
+.theme-color-option>span:last-child{overflow-wrap:anywhere;text-align:center}
+.theme-mode-option{justify-content:flex-start}
+.modal-actions{flex-wrap:wrap}
+.bi-ledger th,.bi-ledger td{font-variant-numeric:tabular-nums}
+@media(max-width:1100px){
+ .bi-stat-grid{grid-auto-rows:1fr}
+ .bi-compare-grid{grid-auto-rows:1fr}
+}
+@media(max-width:780px){
+ .bi-card-head{min-height:0}
+ .bi-intro{align-items:stretch}
+ .bi-section-title{align-items:flex-start}
+ .bi-compare-tile{min-height:151px}
+ .quick-card{grid-template-rows:minmax(29px,auto) minmax(2.8em,auto)}
+ .bi-stat{min-height:135px}
+ .kpi-card{min-height:145px}
+}
+@media(max-width:520px){
+ .view{padding:16px}
+ .grid{gap:12px}
+ .grid.kpis,.quick-grid{gap:10px}
+ .quick-card{padding:12px 11px;grid-template-rows:minmax(35px,auto) minmax(2.95em,auto);gap:5px}
+ .quick-card strong{font-size:clamp(16px,4.3vw,20px)}
+ .quick-card .hero-money{font-size:clamp(12px,3.6vw,16px);line-height:1.32}
+ .quick-card>span{font-size:clamp(12px,3.4vw,14px);line-height:1.38}
+ .hero{padding:18px}
+ .kpi-card{min-height:144px;padding:14px;gap:4px}
+ .kpi-card .kpi-value{font-size:clamp(17px,5vw,24px);line-height:1.3}
+ .bi-stat{min-height:137px;padding:14px 12px}
+ .bi-stat strong{font-size:clamp(15px,4.1vw,20px)}
+ .bi-compare-tile{min-height:156px}
+ .bi-donut-zone{gap:16px}
+ .bi-status-legend .group{min-width:0}
+}
+@media(max-width:355px){
+ .quick-card{padding:11px 9px}
+ .quick-card>span{font-size:12px}
+ .quick-card .hero-money{font-size:12px}
+ .bi-stat-head{font-size:11px}
+ .bi-stat strong{font-size:15px}
+ .bi-category{padding-inline:5px}
+ .topbar-actions{gap:4px}
+}
+
+
+/* Tight, matching card heights with special handling for long currency strings. */
+.quick-card{grid-template-rows:minmax(25px,auto) minmax(2.15em,auto);gap:4px;padding:13px 14px}
+.kpi-card{min-height:131px}
+.kpi-card .kpi-label,.kpi-card .kpi-foot{min-height:2em}
+.money-kpi .kpi-value{font-size:clamp(14px,1.6vw,20px);line-height:1.4;white-space:normal;overflow-wrap:normal;word-break:normal}
+@media(max-width:780px){
+ .quick-card{grid-template-rows:minmax(25px,auto) minmax(2.3em,auto)}
+ .kpi-card{min-height:131px}
+}
+@media(max-width:520px){
+ .quick-card{padding:12px 11px;grid-template-rows:minmax(26px,auto) minmax(2.35em,auto);gap:4px}
+ .kpi-card{min-height:129px}
+ .money-kpi .kpi-value{font-size:clamp(14px,3.5vw,17px)}
+}
+@media(max-width:355px){.quick-card{padding:11px 9px;grid-template-rows:minmax(28px,auto) minmax(2.35em,auto)}}
+
+
+/* Keep the number baseline and label start identical, including currency cells. */
+.quick-card{grid-template-rows:minmax(38px,auto) minmax(2.15em,auto)}
+.quick-card strong{min-height:38px;display:flex;align-items:flex-end;justify-content:flex-start}
+@media(max-width:520px){.quick-card{grid-template-rows:minmax(38px,auto) minmax(2.35em,auto)}}
+
+
+/* Extra-long amounts must remain fully readable, never hidden outside narrow cards. */
+.quick-card .hero-money bdi{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+.money-kpi .kpi-value{white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+
+
+/* Soft neon logo square — follows the selected color theme. */
+.brand .brand-mark{
+ border:1px solid rgba(255,255,255,.28);
+ box-shadow:0 0 8px rgba(120,120,255,.45),0 0 18px rgba(120,120,255,.25);
+ box-shadow:0 0 8px color-mix(in srgb,var(--neon-brand-a) 60%,transparent),
+  0 0 18px color-mix(in srgb,var(--neon-brand-b) 35%,transparent),
+  inset 0 0 8px rgba(255,255,255,.18);
+ text-shadow:0 0 6px rgba(255,255,255,.55);
+}
+
+/* Language button: flag + code; flag only on narrow phones so the top bar never wraps. */
+.lang-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;padding:0 9px}
+.lang-flag{font-size:17px;line-height:1}
+@media(max-width:400px){.lang-btn .lang-code{display:none}.lang-btn{padding:0;min-width:44px}}
+
+/* Reminders & notifications card */
+.notify-card{margin-top:18px}
+.notify-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.notify-head h3{margin:0}
+.notify-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.notify-status.ok{background:color-mix(in srgb,#22c55e 16%,transparent);color:#16a34a}
+.notify-status.warn{background:color-mix(in srgb,#f59e0b 18%,transparent);color:#b45309}
+body.dark .notify-status.ok{color:#4ade80}
+body.dark .notify-status.warn{color:#fbbf24}
+.notify-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid var(--border)}
+.notify-row:first-of-type{border-top:0}
+.notify-row .notify-text{display:grid;gap:3px;min-width:0}
+.notify-row .notify-text strong{font-size:14px}
+.notify-row .notify-text small{color:var(--muted);font-size:12px;line-height:1.5}
+.notify-controls{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.notify-controls select,.notify-controls input[type=time]{width:auto;min-width:0;height:38px;padding:0 9px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.notify-controls select:disabled,.notify-controls input:disabled{opacity:.45}
+.switch{position:relative;display:inline-block;width:46px;height:27px;flex-shrink:0}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.switch span{position:absolute;inset:0;border-radius:999px;background:var(--border);transition:.2s}
+.switch span::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:.2s}
+.switch input:checked+span{background:var(--accent-button,var(--primary))}
+.switch input:checked+span::after{transform:translateX(19px)}
+body.arabic .switch input:checked+span::after{transform:translateX(-19px)}
+.switch input:focus-visible+span{outline:3px solid var(--primary);outline-offset:2px}
+.notify-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.notify-note{margin:12px 0 0;font-size:12px;color:var(--muted);line-height:1.6}
+.notify-sub{opacity:1;transition:opacity .2s}
+.notify-sub.off{opacity:.5}
+@media(max-width:520px){.notify-row{align-items:flex-start}.notify-controls{flex-direction:column-reverse;align-items:flex-end;gap:8px}}
+
+/* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
+@supports (padding: env(safe-area-inset-top)) {
+ .topbar { border-top: env(safe-area-inset-top) solid transparent; }
+ .sidebar { padding-top: calc(24px + env(safe-area-inset-top)); }
+ @media (max-width: 780px) {
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .mobile-bottom-nav { bottom: calc(10px + env(safe-area-inset-bottom)); }
+ }
+}
+html { -webkit-text-size-adjust: 100%; }
+body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+</style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">D</div>
+        <div>
+          <h1>Daily Life OS</h1>
+          <span>Personal Operating System</span>
+        </div>
+      </div>
+
+      <nav class="nav-list" id="navList">
+        <button class="nav-item active" data-view="dashboard">🏠 <span class="nav-text">Dashboard</span></button>
+        <button class="nav-item" data-view="today">📅 <span class="nav-text">Today</span></button>
+        <button class="nav-item" data-view="work">💼 <span class="nav-text">Work</span></button>
+        <button class="nav-item" data-view="education">📚 <span class="nav-text">Education</span></button>
+        <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
+        <button class="nav-item" data-view="goals">🎯 <span class="nav-text">Goals</span></button>
+        <button class="nav-item" data-view="notes">📝 <span class="nav-text">Notes</span></button>
+        <button class="nav-item" data-view="reports">📊 <span class="nav-text">Reports</span></button>
+        <button class="nav-item" data-view="settings">⚙️ <span class="nav-text">Settings</span></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="storage-status">
+          <span id="storageLabel">Saved in this browser</span>
+          <strong id="storageCount">0 records</strong>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main" id="mainContent">
+      <header class="topbar">
+        <button class="icon-btn mobile-only" id="menuToggle" aria-label="Open navigation">☰</button>
+        <div>
+          <p class="eyebrow" id="todayDate"></p>
+          <h2 id="viewTitle">Dashboard</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="lang-btn" id="langToggle" title="Language">EN</button>
+          <button class="icon-btn" id="themeToggle" title="Toggle theme">🌙</button>
+          <button class="secondary-btn" id="installBtn" hidden>Install App</button>
+          <button class="primary-btn" id="quickAddBtn">＋ Quick Add</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboardView"></section>
+      <section class="view" id="todayView"></section>
+      <section class="view" id="workView"></section>
+      <section class="view" id="educationView"></section>
+      <section class="view" id="financeView"></section>
+      <section class="view" id="goalsView"></section>
+      <section class="view" id="notesView"></section>
+      <section class="view" id="reportsView"></section>
+      <section class="view" id="settingsView"></section>
+    </main>
+  </div>
+
+  <div id="navShade" class="nav-shade hidden"></div>
+  <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav active" data-view="dashboard"><span>🏠</span><small>Home</small></button>
+    <button class="mobile-nav" data-view="today"><span>✅</span><small>Today</small></button>
+    <button class="mobile-nav" data-view="work"><span>💼</span><small>Work</small></button>
+    <button class="mobile-nav" data-view="education"><span>📚</span><small>Learn</small></button>
+    <button class="mobile-nav" data-view="finance"><span>💰</span><small>Finance</small></button>
+  </nav>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add item</h3>
+        <button class="icon-btn" id="modalClose" type="button" aria-label="Close">✕</button>
+      </div>
+      <form id="modalForm" class="modal-body"></form>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+  <input type="file" id="importFile" accept="application/json,.json" hidden />
+
+  <script>
+'use strict';
+// Daily Life OS v2 — single-file offline-first app, compatible with v1 data.
+const STORAGE_KEY = 'ramziLifeOS_v1';
+const COLOR_PRESETS = {
+  blue:{ar:'الأصلي (أزرق / بنفسجي)',en:'Original Blue / Purple',
+    brand:['#5573F2','#6F65EF'],hero:['#3B82F6','#8B5CF6'],
+    light:{primary:'#3B82F6',soft:'#DBEAFE',button:'#2563EB'}, dark:{primary:'#93C5FD',soft:'#27406A',button:'#3B82F6'}},
+  green:{ar:'أخضر',en:'Green',
+    brand:['#34D399','#4ADE80'],hero:['#10B981','#22C55E'],
+    light:{primary:'#22C55E',soft:'#DCFCE7',button:'#16A34A'}, dark:{primary:'#6EE7B7',soft:'#18433A',button:'#22C55E'}},
+  red:{ar:'أحمر',en:'Red',
+    brand:['#D84960','#DD364F'],hero:['#F43F5E','#EF4444'],
+    light:{primary:'#EF4444',soft:'#FEE2E2',button:'#DC2626'}, dark:{primary:'#FDA4AF',soft:'#5A2430',button:'#EF4444'}},
+  orange:{ar:'برتقالي',en:'Orange',
+    brand:['#FB923C','#FBBF24'],hero:['#F59E0B','#FB923C'],
+    light:{primary:'#F97316',soft:'#FFEDD5',button:'#EA580C'}, dark:{primary:'#FDBA74',soft:'#5A3614',button:'#F97316'}},
+  pink:{ar:'وردي',en:'Pink',
+    brand:['#D83DA0','#CC36BA'],hero:['#EC4899','#D946EF'],
+    light:{primary:'#EC4899',soft:'#FCE7F3',button:'#DB2777'}, dark:{primary:'#F9A8D4',soft:'#5A2447',button:'#EC4899'}},
+  purple:{ar:'بنفسجي',en:'Purple',
+    brand:['#8663F3','#8858F5'],hero:['#8B5CF6','#A855F7'],
+    light:{primary:'#8B5CF6',soft:'#EDE9FE',button:'#7C3AED'}, dark:{primary:'#C4B5FD',soft:'#49346F',button:'#8B5CF6'}},
+  cyan:{ar:'سماوي',en:'Cyan',
+    brand:['#38BDF8','#22D3EE'],hero:['#0EA5E9','#06B6D4'],
+    light:{primary:'#06B6D4',soft:'#CFFAFE',button:'#0891B2'}, dark:{primary:'#67E8F9',soft:'#1B4650',button:'#06B6D4'}},
+  gold:{ar:'ذهبي',en:'Gold',
+    brand:['#F59E0B','#FACC15'],hero:['#F59E0B','#EAB308'],
+    light:{primary:'#D97706',soft:'#FEF3C7',button:'#D97706'}, dark:{primary:'#FCD34D',soft:'#5C4513',button:'#D97706'}}
+};
+const defaultState = { profile: {name:'Ramzi',currency:'SAR',monthlyIncome:0}, theme:'light', accent:'blue', lang:'ar', routines:[],work:[],education:[],finance:[],goals:[],notes:[] };
+const collectionKeys=['routines','work','education','finance','goals','notes'];
+const defs={
+ routine:{collection:'routines', ar:'مهمة يومية', en:'Daily task',fields:[
+  ['title','العنوان','Title','text',true],['date','التاريخ','Date','date',true],['time','الوقت','Time','time'],['category','التصنيف','Category','select',false,['Routine','Habit','Appointment','Prayer','Exercise','Personal']],['done','مكتملة','Completed','checkbox']]},
+ work:{collection:'work',ar:'مهمة عمل',en:'Work task',fields:[
+  ['title','المهمة','Task title','text',true],['project','المشروع أو النطاق','Project / Scope','text'],['due','تاريخ الاستحقاق','Due date','date'],['priority','الأولوية','Priority','select',false,['Low','Medium','High']],['status','الحالة','Status','select',false,['Open','Pending','Done']],['notes','ملاحظات','Notes','textarea']]},
+ education:{collection:'education',ar:'دراسة أو شهادة',en:'Course / certification',fields:[
+  ['title','اسم الدورة أو الشهادة','Course / certification','text',true],['type','النوع','Type','select',false,['Certification','Course','Book','Practice Test']],['progress','نسبة الإنجاز','Progress (%)','number',true],['target','التاريخ المستهدف','Target date','date'],['notes','ملاحظات','Notes','textarea']]},
+ finance:{collection:'finance',ar:'عملية مالية',en:'Financial transaction',fields:[
+  ['type','نوع العملية','Transaction type','select',true,['Expense','Income']],['amount','المبلغ','Amount','money',true],['date','التاريخ','Date','date',true],['category','التصنيف','Category','select',false,['Salary','Bonus','Side Income','Housing','Food','Transport','Shopping','Health','Education','Entertainment','Savings','Other']],['note','ملاحظة','Note','text']]},
+ goal:{collection:'goals',ar:'هدف',en:'Goal',fields:[
+  ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
+ note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
+};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const enumNames={
+ Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
+ Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
+ Certification:['شهادة','Certification'],Course:['دورة','Course'],Book:['كتاب','Book'],'Practice Test':['اختبار تدريبي','Practice Test'],
+ Income:['دخل','Income'],Expense:['مصروف','Expense'],Salary:['راتب','Salary'],Housing:['سكن','Housing'],Food:['طعام','Food'],Transport:['مواصلات','Transport'],Shopping:['تسوق','Shopping'],Health:['صحة','Health'],Education:['تعليم','Education'],Entertainment:['ترفيه','Entertainment'],Savings:['ادخار','Savings'],Bonus:['مكافأة','Bonus'],'Side Income':['دخل إضافي','Side income'],Other:['أخرى','Other'],
+ Family:['أسرة','Family'],Work:['عمل','Work'],Finance:['مالية','Finance'],General:['عام','General']
+};
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+
+// Country list for the currency picker (Israel and Iran intentionally excluded).
+const COUNTRY_CURRENCY={SA:'SAR',AE:'AED',KW:'KWD',QA:'QAR',BH:'BHD',OM:'OMR',YE:'YER',IQ:'IQD',JO:'JOD',LB:'LBP',SY:'SYP',PS:'JOD',TR:'TRY',CY:'EUR',EG:'EGP',DZ:'DZD',MA:'MAD',TN:'TND',LY:'LYD',SD:'SDG',SS:'SSP',MR:'MRU',SO:'SOS',DJ:'DJF',KM:'KMF',AO:'AOA',BJ:'XOF',BW:'BWP',BF:'XOF',BI:'BIF',CV:'CVE',CM:'XAF',CF:'XAF',TD:'XAF',CG:'XAF',CD:'CDF',CI:'XOF',GQ:'XAF',ER:'ERN',SZ:'SZL',ET:'ETB',GA:'XAF',GM:'GMD',GH:'GHS',GN:'GNF',GW:'XOF',KE:'KES',LS:'LSL',LR:'LRD',MG:'MGA',MW:'MWK',ML:'XOF',MU:'MUR',MZ:'MZN',NA:'NAD',NE:'XOF',NG:'NGN',RW:'RWF',ST:'STN',SN:'XOF',SC:'SCR',SL:'SLE',ZA:'ZAR',TZ:'TZS',TG:'XOF',UG:'UGX',ZM:'ZMW',ZW:'USD',AF:'AFN',AM:'AMD',AZ:'AZN',BD:'BDT',BT:'BTN',BN:'BND',KH:'KHR',CN:'CNY',GE:'GEL',HK:'HKD',IN:'INR',ID:'IDR',JP:'JPY',KZ:'KZT',KP:'KPW',KR:'KRW',KG:'KGS',LA:'LAK',MO:'MOP',MY:'MYR',MV:'MVR',MN:'MNT',MM:'MMK',NP:'NPR',PK:'PKR',PH:'PHP',SG:'SGD',LK:'LKR',TW:'TWD',TJ:'TJS',TH:'THB',TL:'USD',TM:'TMT',UZ:'UZS',VN:'VND',AL:'ALL',AD:'EUR',AT:'EUR',BY:'BYN',BE:'EUR',BA:'BAM',BG:'EUR',HR:'EUR',CZ:'CZK',DK:'DKK',EE:'EUR',FI:'EUR',FR:'EUR',DE:'EUR',GR:'EUR',HU:'HUF',IS:'ISK',IE:'EUR',IT:'EUR',LV:'EUR',LI:'CHF',LT:'EUR',LU:'EUR',MT:'EUR',MD:'MDL',MC:'EUR',ME:'EUR',NL:'EUR',MK:'MKD',NO:'NOK',PL:'PLN',PT:'EUR',RO:'RON',RU:'RUB',SM:'EUR',RS:'RSD',SK:'EUR',SI:'EUR',ES:'EUR',SE:'SEK',CH:'CHF',UA:'UAH',GB:'GBP',VA:'EUR',AG:'XCD',AR:'ARS',BS:'BSD',BB:'BBD',BZ:'BZD',BO:'BOB',BR:'BRL',CA:'CAD',CL:'CLP',CO:'COP',CR:'CRC',CU:'CUP',DM:'XCD',DO:'DOP',EC:'USD',SV:'USD',GD:'XCD',GT:'GTQ',GY:'GYD',HT:'HTG',HN:'HNL',JM:'JMD',MX:'MXN',NI:'NIO',PA:'USD',PY:'PYG',PE:'PEN',KN:'XCD',LC:'XCD',VC:'XCD',SR:'SRD',TT:'TTD',US:'USD',UY:'UYU',VE:'VES',AU:'AUD',FJ:'FJD',KI:'AUD',MH:'USD',FM:'USD',NR:'AUD',NZ:'NZD',PW:'USD',PG:'PGK',WS:'WST',SB:'SBD',TO:'TOP',TV:'AUD',VU:'VUV'};
+const CURRENCY_HOME={SAR:'SA',USD:'US',EUR:'DE',GBP:'GB',AED:'AE',AUD:'AU',CHF:'CH',XOF:'SN',XAF:'CM',XCD:'AG',JOD:'JO'};
+const flag=cc=>String(cc).toUpperCase().replace(/[A-Z]/g,ch=>String.fromCodePoint(127397+ch.charCodeAt(0)));
+const regionNames={};
+function regionName(cc){const l=state.lang==='ar'?'ar':'en';try{regionNames[l]=regionNames[l]||new Intl.DisplayNames([l],{type:'region'});return regionNames[l].of(cc)||cc;}catch{return cc;}}
+function profileCountry(){const p=state.profile;if(p.country&&COUNTRY_CURRENCY[p.country]===p.currency)return p.country;const cur=p.currency||'SAR';return CURRENCY_HOME[cur]||Object.keys(COUNTRY_CURRENCY).find(c=>COUNTRY_CURRENCY[c]===cur)||'SA';}
+function countryOptions(){const sel=profileCountry();const col=new Intl.Collator(state.lang==='ar'?'ar':'en');const list=Object.keys(COUNTRY_CURRENCY).sort((a,b)=>a==='SA'?-1:b==='SA'?1:col.compare(regionName(a),regionName(b)));return list.map(cc=>`<option value="${cc}" ${cc===sel?'selected':''}>${flag(cc)} ${safe(regionName(cc))} — ${COUNTRY_CURRENCY[cc]}</option>`).join('');}
+const tr=(ar,en)=>state.lang==='ar'?ar:en;
+const term=(v)=>enumNames[v] ? enumNames[v][state.lang==='ar'?0:1] : (v || '');
+function safe(v=''){return String(v??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));}
+function id(){return typeof crypto!=='undefined' && crypto.randomUUID? crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);}
+function dateLocal(d=new Date()) {const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),da=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${da}`;}
+const monthLocal=()=>dateLocal().slice(0,7);
+function dateLabel(s){if(!s)return tr('بدون موعد','No date');const dt=new Date(`${s.slice(0,10)}T12:00:00`);return isNaN(dt)?safe(s):new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-GB',{day:'numeric',month:'short',year:'numeric'}).format(dt);}
+function money(n){const val=Number(n)||0;try{return new Intl.NumberFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-SA',{style:'currency',currency:state.profile.currency||'SAR',maximumFractionDigits:2}).format(val)}catch{return `${val.toFixed(2)} SAR`;}}
+function profileInitial(){const name=String(state?.profile?.name||'').trim()||'Daily';const first=Array.from(name)[0]||'D';return /[A-Za-z]/.test(first)?first.toUpperCase():first;}
+function normalize(input){
+ const data=(input && typeof input==='object' && !Array.isArray(input))?input:{};
+ const result={...defaultState,...data};
+ result.profile={...defaultState.profile,...(data.profile && typeof data.profile==='object'?data.profile:{})};
+ for(const k of collectionKeys) result[k]=Array.isArray(data[k])?data[k].filter(v=>v&&typeof v==='object'&&!Array.isArray(v)).map(v=>({...v,id:typeof v.id==='string'&&/^[\w-]{1,100}$/.test(v.id)?v.id:id()})):[];
+ // Import older dark/light backups and presets without losing their selected color.
+ const legacyTheme=/^(blue|green|red|orange|pink|purple|cyan|gold)-(dark|light)$/.exec(data.theme||'');
+ result.theme = legacyTheme ? legacyTheme[2] : (data.theme==='dark'?'dark':'light');
+ result.accent = COLOR_PRESETS[data.accent] ? data.accent : (legacyTheme ? legacyTheme[1] : 'blue');
+ result.lang = data.lang==='en'?'en':'ar';
+ return result;
+}
+let storageEnabled=true;
+function load(){try {const raw=localStorage.getItem(STORAGE_KEY);return raw?normalize(JSON.parse(raw)):normalize(defaultState);} catch {storageEnabled=false;return normalize(defaultState);}}
+let state=load(); let currentView=(location.hash||'').replace('#',''); if(!viewNames[currentView])currentView='dashboard';
+let editContext=null;let filters={today:'today',work:'active',education:'all',finance:monthLocal(),goals:'active',notes:'all'};
+let searchText={};let toastTimer;let lastFocus=null;
+function save(){scheduleReminderSync();try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));storageEnabled=true;}catch{storageEnabled=false;message(tr('تعذر حفظ البيانات. صدّر نسخة احتياطية الآن.','Could not save data. Export a backup now.'),true);}updateStorage();}
+function updateStorage(){const count=collectionKeys.reduce((sum,k)=>sum+state[k].length,0);$('#storageCount').textContent=`${count} ${tr('سجل','records')}`;$('#storageLabel').textContent=storageEnabled?tr('محفوظة في هذا المتصفح','Saved in this browser'):tr('الحفظ غير متاح — صدّر نسخة','Storage unavailable — export data');}
+function message(s,isError=false){const el=$('#toast');clearTimeout(toastTimer);el.textContent=s;el.classList.remove('hidden');el.classList.toggle('error',isError);el.setAttribute('role','status');toastTimer=setTimeout(()=>el.classList.add('hidden'),3500);}
+function progress(n){return Math.max(0,Math.min(100,Number(n)||0));}
+const percent=(n,total)=>total?Math.round(n/total*100):0;
+function appearanceColor(){return (COLOR_PRESETS[state.accent]||COLOR_PRESETS.blue)[state.theme==='dark'?'dark':'light'];}
+function appearanceName(){const color=COLOR_PRESETS[state.accent]||COLOR_PRESETS.blue;return tr(color.ar,color.en)+' + '+(state.theme==='dark'?tr('أسود','Black'):tr('أبيض','White'));}
+function applyAppearance(){
+ document.body.classList.toggle('dark',state.theme==='dark');
+ document.body.classList.toggle('arabic',state.lang==='ar');
+ document.documentElement.lang=state.lang;
+ document.documentElement.dir=state.lang==='ar'?'rtl':'ltr';
+ const c=appearanceColor();
+ // Only accent tokens change, never neutral backgrounds, regular text, or status colors.
+ const preset=COLOR_PRESETS[state.accent]||COLOR_PRESETS.blue;
+ const vars={'--primary':c.primary,'--primary-soft':c.soft,'--accent-button':c.button,
+   '--neon-brand-a':preset.brand[0],'--neon-brand-b':preset.brand[1],
+   '--neon-hero-a':preset.hero[0],'--neon-hero-b':preset.hero[1],
+   '--accent-glow':state.theme==='dark'?`${c.primary}38`:`${c.primary}20`};
+ for(const [k,v] of Object.entries(vars)) document.body.style.setProperty(k,v);
+ $('#themeToggle').textContent=state.theme==='dark'?'☀️':'🌙';
+ $('#themeToggle').title=tr('تبديل المظهر','Toggle light / dark');
+ $('#langToggle').innerHTML=state.lang==='ar'?'<span class="lang-flag">🇺🇸</span><span class="lang-code">EN</span>':'<span class="lang-flag">🇸🇦</span><span class="lang-code">عربي</span>';
+ $('#langToggle').title=tr('Switch to English','التبديل إلى العربية');
+}
+function updateChrome(){
+ const brandMark=$('.brand-mark'); if(brandMark) brandMark.textContent=profileInitial();
+ $('#todayDate').textContent=new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+ $('#viewTitle').textContent=viewNames[currentView][state.lang==='ar'?0:1];
+ $('#quickAddBtn').innerHTML=`<span class="add-plus">＋</span> <span class="add-label">${tr('إضافة','Add')}</span>`;
+ $('#menuToggle').setAttribute('aria-label',tr('فتح القائمة','Open menu'));
+ $$('.nav-item, .mobile-nav').forEach(el=>{const v=el.dataset.view;if(!viewNames[v])return;const span=el.querySelector('.nav-text')||el.querySelector('small');if(span)span.textContent=(el.classList.contains('mobile-nav')&&v==='dashboard')?tr('الرئيسية','Home'):viewNames[v][state.lang==='ar'?0:1];el.classList.toggle('active',currentView===v);el.setAttribute('aria-current',currentView===v?'page':'false');});
+}
+function navigate(view){if(!viewNames[view])return;currentView=view;try{history.replaceState(null,'',location.pathname+location.search+'#'+view);}catch(e){/* Some restricted viewers block URL updates. */} $$('.view').forEach(v=>v.classList.toggle('active',v.id===view+'View'));$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');updateChrome();renderView();window.scrollTo({top:0,behavior:'instant'});}
+function updateRecord(type,itemId,changes,feedback){const cfg=defs[type];const item=state[cfg.collection].find(v=>v.id===itemId);if(!item)return;Object.assign(item,changes,{updatedAt:new Date().toISOString()});save();renderView();message(feedback||tr('تم التحديث','Updated'));}
+function kpi(label,value,foot,metricClass=''){return `<div class="card kpi-card ${metricClass}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-foot">${foot}</div></div>`;}
+function btn(label,action,type,id,kind='secondary-btn'){return `<button type="button" class="${kind}" data-action="${action}" data-type="${type}" data-id="${safe(id||'')}">${label}</button>`;}
+function header(title,subtitle,type,extra=''){return `<div class="section-head module-head"><div><h3>${title}</h3><p class="muted subheading">${subtitle}</p></div>${btn('＋ '+tr('إضافة','Add'),'add',type,'','primary-btn')}</div>${extra}`;}
+function empty(type,search=false){const ico={routine:'📅',work:'💼',education:'📚',finance:'💰',goal:'🎯',note:'📝'}[type]||'✨';return `<div class="empty-state"><div class="empty-icon">${ico}</div><strong>${search?tr('ما لقينا نتائج','No matching results'):tr('ابدأ بإضافة أول سجل','Start with your first entry')}</strong><p>${search?tr('جرّب كلمة بحث ثانية أو غيّر الفلتر.','Try another search or clear the filter.'):tr('كل ما تضيفه ينعرض هنا تلقائيًا.','Everything you add will appear here automatically.')}</p>${!search?btn('＋ '+tr('إضافة الآن','Add now'),'add',type,'','primary-btn'):''}</div>`;}
+function bar(n){return `<div class="progress" role="progressbar" aria-valuenow="${progress(n)}" aria-valuemin="0" aria-valuemax="100"><span style="width:${progress(n)}%"></span></div>`;}
+function actions(type,x){return `<div class="actions">${btn(tr('تعديل','Edit'),'edit',type,x.id,'action-btn')}${btn(tr('حذف','Delete'),'delete',type,x.id,'action-btn danger-inline')}</div>`;}
+function dateNote(s){return s?dateLabel(s):tr('لم يُحدد','Not set');}
+function isOverdue(s,completed){return Boolean(s&&s<dateLocal()&&!completed);}
+function cardRoutine(x){const done=!!x.done,late=isOverdue(x.date,done);return `<div class="list-item ${done?'completed':''}" data-search="${safe([x.title,x.category,x.date].join(' ').toLowerCase())}"><button type="button" class="check-toggle ${done?'checked':''}" data-action="toggleRoutine" data-type="routine" data-id="${safe(x.id)}" aria-label="${done?tr('إعادة فتح المهمة','Mark not done'):tr('إكمال المهمة','Mark complete')}" aria-pressed="${done}">${done?'✓':''}</button><div class="list-item-main grow"><h4>${safe(x.title)}</h4><p>🗓 ${dateNote(x.date)} ${x.time?'· '+safe(x.time):''} · ${safe(term(x.category||'Routine'))}</p></div><span class="badge ${done?'done':late?'high':'pending'}">${done?tr('مكتملة','Done'):late?tr('متأخرة','Overdue'):tr('قيد التنفيذ','To do')}</span>${actions('routine',x)}</div>`;}
+function cardWork(x){const done=x.status==='Done',late=isOverdue(x.due,done);return `<div class="list-item ${done?'completed':''}" data-search="${safe([x.title,x.project,x.status,x.priority].join(' ').toLowerCase())}"><button type="button" class="check-toggle ${done?'checked':''}" data-action="toggleWork" data-type="work" data-id="${safe(x.id)}" aria-label="${done?tr('إعادة فتح المهمة','Reopen task'):tr('إنهاء المهمة','Complete task')}" aria-pressed="${done}">${done?'✓':''}</button><div class="list-item-main grow"><h4>${safe(x.title)}</h4><p>${safe(x.project||tr('عام','General'))} · ${x.due?dateNote(x.due):tr('بدون موعد','No due date')}</p></div><div class="tags"><span class="badge ${done?'done':x.status==='Pending'?'pending':'open'}">${safe(term(x.status||'Open'))}</span>${!done?`<span class="badge ${late?'high':x.priority==='High'?'high':'neutral'}">${late?tr('متأخرة','Overdue'):term(x.priority||'Medium')}</span>`:''}</div>${actions('work',x)}</div>`;}
+function cardEducation(x){const n=progress(x.progress);return `<div class="list-item" data-search="${safe([x.title,x.type,x.notes].join(' ').toLowerCase())}"><div class="list-item-main grow"><h4>${safe(x.title)}</h4><p>${term(x.type||'Course')} · ${x.target?dateNote(x.target):tr('بدون موعد','No target date')} · <strong>${n}%</strong></p>${bar(n)}</div><div class="stepper">${btn('−10','progressDown','education',x.id,'action-btn')}${btn('+10','progressUp','education',x.id,'action-btn')}</div>${actions('education',x)}</div>`;}
+function cardFinance(x){const expense=x.type==='Expense';return `<div class="list-item" data-search="${safe([x.category,x.type,x.note].join(' ').toLowerCase())}"><div class="list-item-main grow"><h4>${safe(term(x.category||x.type))}</h4><p>${dateNote(x.date)} ${x.note?'· '+safe(x.note):''}</p></div><strong class="amount ${expense?'expense':'income'}" dir="ltr">${expense?'−':'+'} ${money(x.amount)}</strong>${actions('finance',x)}</div>`;}
+function cardGoal(x){const n=progress(x.progress);return `<div class="list-item" data-search="${safe([x.title,x.area,x.milestone].join(' ').toLowerCase())}"><div class="list-item-main grow"><h4>${safe(x.title)}</h4><p>${safe(term(x.area||'Personal'))} · ${x.due?dateNote(x.due):tr('بدون موعد','No target date')} · ${n}%</p>${bar(n)}${x.milestone?`<p class="next-step">${tr('الخطوة القادمة:','Next:')} ${safe(x.milestone)}</p>`:''}</div><div class="stepper">${btn('−10','progressDown','goal',x.id,'action-btn')}${btn('+10','progressUp','goal',x.id,'action-btn')}</div>${actions('goal',x)}</div>`;}
+function cardNote(x){return `<div class="list-item" data-search="${safe([x.title,x.body].join(' ').toLowerCase())}"><button type="button" class="pin-btn ${x.pinned?'active':''}" data-action="pinNote" data-type="note" data-id="${safe(x.id)}" aria-label="${tr('تثبيت الملاحظة','Pin note')}" title="${tr('تثبيت','Pin')}">${x.pinned?'📌':'♧'}</button><div class="list-item-main grow"><h4>${safe(x.title)}</h4><p>${safe((x.body||'').slice(0,180))}</p></div>${actions('note',x)}</div>`;}
+const sortRecent=(a,b)=>(b.createdAt||'').localeCompare(a.createdAt||'');
+function listModule(type,title,subtitle,items,cardFn,options={}){
+ const n=items.length;const hasFilter=options.filters?.length;const useSearch=n>0;
+ const control=hasFilter?`<select class="compact-select" data-filter="${type}" aria-label="${tr('تصفية','Filter')}">${options.filters.map(([v,ar,en])=>`<option value="${safe(v)}" ${(type==='routine'?filters.today:type==='goal'?filters.goals:filters[type])===v?'selected':''}>${tr(ar,en)}</option>`).join('')}</select>`:'';
+ const search=useSearch?`<input class="search-input" type="search" data-search-input="${type}" placeholder="${tr('ابحث هنا...','Search here...')}" value="${safe(searchText[type]||'')}" aria-label="${tr('بحث','Search')}" />`:'';
+ return `<div class="card">${header(title,subtitle,type)}${(control||search)?`<div class="filterbar">${search}${control}</div>`:''}<p class="result-count" data-count="${type}">${n} ${tr('عنصر','items')}</p><div class="list" data-list="${type}">${n?items.map(cardFn).join(''):empty(type)}</div><div class="hidden" data-empty-filter="${type}">${empty(type,true)}</div></div>`;
+}
+function renderDashboard(){
+ const d=dateLocal(),m=monthLocal();const daily=state.routines.filter(x=>x.date===d);const pending=daily.filter(x=>!x.done);
+ const workOpen=state.work.filter(x=>x.status!=='Done'); const urgent=workOpen.filter(x=>x.priority==='High'||isOverdue(x.due,false));
+ const edu=state.education.length?Math.round(state.education.reduce((a,x)=>a+progress(x.progress),0)/state.education.length):0;
+ const expenses=state.finance.filter(x=>x.type==='Expense'&&x.date?.slice(0,7)===m).reduce((a,x)=>a+Number(x.amount||0),0);
+ const goalsActive=state.goals.filter(x=>progress(x.progress)<100).length;
+ const priority=[...workOpen].sort((a,b)=>Number(isOverdue(b.due,false))-Number(isOverdue(a.due,false))||Number(b.priority==='High')-Number(a.priority==='High')||(a.due||'9999').localeCompare(b.due||'9999'));
+ $('#dashboardView').innerHTML=`<div class="hero"><div class="hero-content"><div><div class="hero-kicker">DAILY LIFE OS</div><h3>${tr('أهلًا','Hello')}, ${safe(state.profile.name||tr('صديقي','there'))} 👋</h3><p>${tr('خلّ يومك أبسط. ركّز على اللي يهمك الآن.','Make today simpler. Focus on what matters now.')}</p></div></div><div class="quick-grid"><div class="quick-card"><strong>${daily.filter(x=>x.done).length}/${daily.length}</strong><span>${tr('مهام اليوم المكتملة','Today completed')}</span></div><div class="quick-card"><strong>${workOpen.length}</strong><span>${tr('مهام عمل مفتوحة','Open work tasks')}</span></div><div class="quick-card"><strong>${edu}%</strong><span>${tr('متوسط الدراسة','Learning progress')}</span></div><div class="quick-card"><strong class="hero-money"><bdi dir="ltr">${money(expenses)}</bdi></strong><span>${tr('مصروف هذا الشهر','Month spending')}</span></div></div></div>
+ <div class="grid kpis">${kpi(tr('المتبقي اليوم','To do today'),pending.length,tr('مهمة تحتاج اهتمامك','Items need attention'))}${kpi(tr('عمل مهم','Priority work'),urgent.length,tr('عالية الأولوية أو متأخرة','High priority / overdue'))}${kpi(tr('الأهداف النشطة','Active goals'),goalsActive,tr('أهداف قيد التقدم','Goals in progress'))}${kpi(tr('المصروف الشهري','Monthly expenses'),money(expenses),tr('حسب العمليات المسجلة','Based on entries'),'money-kpi')}</div>
+ <div class="grid two" style="margin-top:18px"><div class="card"> <div class="section-head"><h3>${tr('مهام اليوم','Today’s tasks')}</h3>${btn(tr('عرض الكل','View all'),'go','today','','secondary-btn')}</div>${pending.length?`<div class="list">${pending.slice(0,4).map(cardRoutine).join('')}</div>`:`<div class="mini-empty">✅ ${tr('ما عندك مهام غير مكتملة لليوم.','Nothing left to do today.')}</div>`}${btn('＋ '+tr('مهمة جديدة','New task'),'add','routine','','text-btn')}</div>
+ <div class="card"><div class="section-head"><h3>${tr('أولوية العمل','Work priorities')}</h3>${btn(tr('عرض الكل','View all'),'go','work','','secondary-btn')}</div>${priority.length?`<div class="list">${priority.slice(0,4).map(cardWork).join('')}</div>`:`<div class="mini-empty">✨ ${tr('ما عندك مهام عمل مفتوحة.','No open work tasks.')}</div>`}${btn('＋ '+tr('مهمة عمل','Work task'),'add','work','','text-btn')}</div></div><div style="margin-top:18px">${biMiniPreview()}</div>`;
+}
+function renderToday(){const selected=filters.today||'today';const d=dateLocal();let items=[...state.routines].sort((a,b)=>(a.date+' '+(a.time||'')).localeCompare(b.date+' '+(b.time||'')));
+ if(selected==='today')items=items.filter(x=>x.date===d);if(selected==='upcoming')items=items.filter(x=>x.date>d&&!x.done);if(selected==='overdue')items=items.filter(x=>isOverdue(x.date,x.done));
+ $('#todayView').innerHTML=listModule('routine',tr('جدول يومك','Daily routine'),tr('مهمة، عادة، موعد... علّمها مكتملة بضغطة واحدة.','Tasks, habits and appointments. Check off in one tap.'),items,cardRoutine,{filters:[['today','اليوم','Today'],['upcoming','القادمة','Upcoming'],['overdue','المتأخرة','Overdue'],['all','الكل','All']]});
+}
+function renderWork(){const selected=filters.work||'active';let items=[...state.work].sort((a,b)=>Number(isOverdue(b.due,b.status==='Done'))-Number(isOverdue(a.due,a.status==='Done'))||Number(b.priority==='High')-Number(a.priority==='High')||(a.due||'9999').localeCompare(b.due||'9999'));
+ if(selected==='active')items=items.filter(x=>x.status!=='Done');else if(selected!=='all')items=items.filter(x=>x.status===selected);
+ $('#workView').innerHTML=listModule('work',tr('مهام العمل','Work tasks'),tr('تابع مهامك ومواعيد التسليم والأولويات.','Keep tasks, deadlines and priorities clear.'),items,cardWork,{filters:[['active','النشطة','Active'],['all','الكل','All'],['Open','المفتوحة','Open'],['Pending','قيد المتابعة','Pending'],['Done','المكتملة','Completed']]});
+}
+function renderEducation(){let items=[...state.education].sort((a,b)=>progress(a.progress)-progress(b.progress));if(filters.education==='active')items=items.filter(x=>progress(x.progress)<100);if(filters.education==='done')items=items.filter(x=>progress(x.progress)===100);
+ $('#educationView').innerHTML=listModule('education',tr('التعلّم والشهادات','Learning & certifications'),tr('تابع التقدم، وزِد الإنجاز من البطاقة مباشرة.','Track courses and adjust progress without opening a form.'),items,cardEducation,{filters:[['all','الكل','All'],['active','قيد الدراسة','In progress'],['done','المكتملة','Completed']]});
+}
+function renderFinance(){
+ const allMonths=[...new Set(state.finance.map(x=>String(x.date||'').slice(0,7)).filter(x=>/^\d{4}-\d{2}$/.test(x)))];if(!allMonths.includes(monthLocal()))allMonths.push(monthLocal());allMonths.sort().reverse();
+ const selected=filters.finance||monthLocal();const tx=state.finance.filter(x=>selected==='all'||x.date?.startsWith(selected)).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||sortRecent(a,b));
+ const inc=tx.filter(x=>x.type==='Income').reduce((a,x)=>a+Number(x.amount||0),0),exp=tx.filter(x=>x.type==='Expense').reduce((a,x)=>a+Number(x.amount||0),0);
+ const periodSelector=`<div class="period-select"><label for="financeMonth">${tr('الفترة','Period')}</label><select id="financeMonth" data-finance-period><option value="all" ${selected==='all'?'selected':''}>${tr('كل الفترات','All time')}</option>${allMonths.map(m=>`<option value="${m}" ${selected===m?'selected':''}>${safe(m)}</option>`).join('')}</select></div>`;
+ $('#financeView').innerHTML=`<div class="page-controls">${periodSelector}<div class="muted">${tr('الأرقام تحسب من العمليات التي أدخلتها فقط.','Totals use only the transactions you entered.')}</div></div><div class="grid kpis">${kpi(tr('الدخل','Income'),money(inc),tr('للفترة المحددة','Selected period'))}${kpi(tr('المصروفات','Expenses'),money(exp),tr('للفترة المحددة','Selected period'))}${kpi(tr('الصافي','Net balance'),money(inc-exp),tr('الدخل ناقص المصروفات','Income minus expenses'))}${kpi(tr('العمليات','Transactions'),tx.length,tr('عملية مسجلة','Recorded entries'))}</div><div style="margin-top:18px">${listModule('finance',tr('سجل العمليات','Transactions'),tr('أضف مبلغك وتصنيفك. الدخل والمصروف منفصلان.','Log spending and income with clear categories.'),tx,cardFinance)}</div>`;
+}
+function renderGoals(){let items=[...state.goals].sort((a,b)=>progress(a.progress)-progress(b.progress));if(filters.goals==='active')items=items.filter(x=>progress(x.progress)<100);if(filters.goals==='done')items=items.filter(x=>progress(x.progress)===100);
+ $('#goalsView').innerHTML=listModule('goal',tr('أهدافك','Your goals'),tr('قسّم الهدف إلى خطوات صغيرة، وحدّث الإنجاز بسهولة.','Make steady progress in manageable steps.'),items,cardGoal,{filters:[['active','النشطة','Active'],['all','الكل','All'],['done','المكتملة','Completed']]});
+}
+function renderNotes(){const items=[...state.notes].sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned)||sortRecent(a,b));$('#notesView').innerHTML=listModule('note',tr('ملاحظاتك','Your notes'),tr('سجل الأفكار والمعلومات، وثبّت المهمة منها.','Capture thoughts and pin important notes.'),items,cardNote);}
+// BI-style, fully offline analysis. All values are computed from real saved records.
+let biWindow=6, biCategory='all', biTrendMetric='net', biSelectedMonth=null;
+const BI_COLORS=['#60a5fa','#a78bfa','#34d399','#fb923c','#f472b6','#22d3ee','#fbbf24','#f87171'];
+function biNumber(x){const v=Number(x)||0;const f=new Intl.NumberFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-US',{notation:'compact',maximumFractionDigits:1});return f.format(v);}
+function biMonths(count){const d=new Date(),result=[];for(let i=count-1;i>=0;i--){const m=new Date(d.getFullYear(),d.getMonth()-i,1);result.push(dateLocal(m).slice(0,7));}return result;}
+function biMonthLabel(m){const dt=new Date(Number(m.slice(0,4)),Number(m.slice(5,7))-1,1);return new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-US',{month:'short'}).format(dt);}
+function biReadMonths(months){const sums=months.map(m=>({month:m,income:0,expense:0,net:0}));const index=new Map(sums.map((m,i)=>[m.month,i]));const category=new Map();const expenseEntries=[];for(const x of state.finance){const month=String(x.date||'').slice(0,7),i=index.get(month),amount=Number(x.amount);if(i===undefined||!Number.isFinite(amount)||amount<=0)continue;if(x.type==='Income')sums[i].income+=amount;else if(x.type==='Expense'){sums[i].expense+=amount;const key=String(x.category||'Other');category.set(key,(category.get(key)||0)+amount);expenseEntries.push(x);}}
+ for(const m of sums)m.net=m.income-m.expense;return {sums,category,expenseEntries};}
+function biTopCards(sums){const inc=sums.reduce((s,m)=>s+m.income,0),exp=sums.reduce((s,m)=>s+m.expense,0),net=inc-exp;const rate=inc>0?Math.round(net/inc*100):null;const items=[
+ [tr('إجمالي الدخل','Total income'),money(inc),tr('خلال الفترة المحددة','In selected period'),'#10b981'],
+ [tr('إجمالي المصروف','Total spending'),money(exp),tr('خلال الفترة المحددة','In selected period'),'#f87171'],
+ [tr('صافي التدفق','Net cash flow'),money(net),tr('الدخل ناقص المصروف','Income less expenses'),'var(--primary)'],
+ [tr('نسبة الادخار','Savings rate'),rate===null?'—':rate+'%',rate===null?tr('أضف دخلًا لحساب النسبة','Add income to calculate'):tr('الصافي من إجمالي الدخل','Net as a share of income'),'#fbbf24']
+ ];return `<div class="bi-stat-grid">${items.map(([title,value,note,color])=>`<div class="bi-stat"><div class="bi-stat-head"><i class="bi-stat-dot" style="background:${color}"></i>${safe(title)}</div><strong dir="ltr">${safe(value)}</strong><small>${safe(note)}</small></div>`).join('')}</div>`;}
+function biCompare(sums){const max=Math.max(0,...sums.flatMap(x=>[x.income,x.expense]));if(max<=0)return biEmpty(tr('أضف دخلًا أو مصروفًا لعرض المقارنة.','Add income or expenses to see the comparison.'));
+ return `<div class="bi-legend"><span><i style="background:#10b981"></i>${tr('الدخل','Income')}</span><span><i style="background:#f87171"></i>${tr('المصروف','Expenses')}</span></div><div class="bi-bars" style="min-width:max(100%,${sums.length*52}px)" role="img" aria-label="${safe(tr('مقارنة الدخل والمصروفات شهريًا','Monthly income versus expenses'))}">${sums.map(s=>`<div class="bi-bars-col"><div class="bi-bars-bars"><div class="bi-rect" style="background:#10b981;--bar-height:${Math.max(s.income>0?2:0,s.income/max*100)}%" title="${safe(biMonthLabel(s.month)+' · '+tr('الدخل','Income')+': '+money(s.income))}"></div><div class="bi-rect" style="background:#f87171;--bar-height:${Math.max(s.expense>0?2:0,s.expense/max*100)}%" title="${safe(biMonthLabel(s.month)+' · '+tr('المصروف','Expenses')+': '+money(s.expense))}"></div></div><div class="bi-bars-label" dir="auto">${safe(biMonthLabel(s.month))}</div></div>`).join('')}</div>`;}
+function biTrend(sums,metric='net'){if(!sums.some(x=>x.income>0||x.expense>0))return biEmpty(tr('سيظهر الاتجاه بعد تسجيل معاملات مالية.','The trend appears when you add transactions.'));
+ const key=['income','expense','net'].includes(metric)?metric:'net';const values=sums.map(m=>m[key]),mx=Math.max(0,...values),mn=Math.min(0,...values),range=Math.max(1,mx-mn),w=660,h=220,top=20,bottom=180,left=64,right=642;
+ const x=i=>left+(right-left)*(sums.length===1?.5:i/(sums.length-1)),y=v=>top+(mx-v)/range*(bottom-top);
+ const pts=values.map((v,i)=>[x(i),y(v)]),d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' '),area=d+` L${pts[pts.length-1][0].toFixed(1)} ${bottom} L${pts[0][0].toFixed(1)} ${bottom} Z`;
+ const ticks=Array.from({length:5},(_,i)=>mx-range*i/4);const baseline=y(0);
+ return `<svg class="bi-line-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${safe(tr('الاتجاه الشهري للمؤشر المختار','Monthly trend of selected metric'))}">${ticks.map(t=>`<line class="gridline" x1="${left}" x2="${right}" y1="${y(t).toFixed(1)}" y2="${y(t).toFixed(1)}"/><text text-anchor="end" x="${left-8}" y="${(y(t)+4).toFixed(1)}">${safe(biNumber(t))}</text>`).join('')}<line class="baseline" x1="${left}" x2="${right}" y1="${baseline.toFixed(1)}" y2="${baseline.toFixed(1)}"/><path class="trendarea" d="${area}"/><path class="trendline" d="${d}"/>${pts.map((p,i)=>`<circle class="point" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5"><title>${safe(sums[i].month+' · '+money(values[i]))}</title></circle><text text-anchor="middle" x="${p[0].toFixed(1)}" y="207">${safe(biMonthLabel(sums[i].month))}</text>`).join('')}</svg>`;}
+function biEmpty(message){return `<div class="bi-empty"><div><span>📊</span>${safe(message)}</div></div>`;}
+function biDonut(category,expenseEntries){let entries=Array.from(category.entries()).sort((a,b)=>b[1]-a[1]);const sum=entries.reduce((s,x)=>s+x[1],0);if(!sum){biCategory='all';return biEmpty(tr('سجّل مصروفات لكي يظهر توزيع الفئات.','Add expenses to see a category breakdown.'));}
+ const otherKeys=entries.slice(5).map(x=>x[0]);if(entries.length>6){const others=entries.slice(5).reduce((s,x)=>s+x[1],0);entries=[...entries.slice(0,5),["__other__",others]];}
+ const names=entries.map(x=>x[0]);if(biCategory!=='all'&&!names.includes(biCategory))biCategory='all';let accum=0;
+ const stops=entries.map(([k,value],i)=>{const a=accum,b=Math.min(100,accum+value/sum*100);accum=b;return `${BI_COLORS[i%BI_COLORS.length]} ${a.toFixed(2)}% ${b.toFixed(2)}%`;}).join(',');
+ const main=`<div class="bi-donut-zone"><div class="bi-donut" style="background:conic-gradient(${stops})" role="img" aria-label="${safe(tr('تصنيف المصروفات','Spending category breakdown'))}"><div class="bi-donut-hole"><strong>${safe(biNumber(sum))}</strong><span>${safe(state.profile.currency||'SAR')} · ${tr('المصروف','spent')}</span></div></div><div class="bi-categories">${entries.map(([key,value],i)=>`<button type="button" class="bi-category" data-action="biCategory" data-bi-cat="${safe(key)}" aria-pressed="${biCategory===key}"><span class="bi-category-dot" style="background:${BI_COLORS[i%BI_COLORS.length]}"></span><span class="bi-cat-name">${key==='__other__'?tr('فئات أخرى','Other categories'):safe(term(key))}</span><span class="bi-cat-value">${Math.round(value/sum*100)}%</span></button>`).join('')}</div></div>`;
+ let filtered=expenseEntries;if(biCategory==='__other__')filtered=filtered.filter(x=>otherKeys.includes(String(x.category||'Other')));else if(biCategory!=='all')filtered=filtered.filter(x=>String(x.category||'Other')===biCategory);
+ const ordered=[...filtered].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).slice(0,4);
+ const detail=`<div class="bi-detail"><div class="bi-detail-head"><span>${tr('أحدث العمليات','Recent transactions')} · ${filtered.length}</span>${biCategory==='all'?'':`<button type="button" class="bi-link" style="margin:0" data-action="biCategory" data-bi-cat="all">${tr('عرض الكل','Show all')}</button>`}</div>${ordered.map(x=>`<div class="bi-entry"><div class="bi-entry-text"><span>${safe(x.note||term(x.category)||tr('مصروف','Expense'))}</span><small>${safe(dateLabel(x.date))}</small></div><span class="bi-entry-amount" dir="ltr">${safe(money(x.amount))}</span></div>`).join('')}</div>`;
+ return main+detail;}
+function biProgress(){const workTotal=state.work.length,workDone=state.work.filter(x=>x.status==='Done').length,dayTotal=state.routines.length,dayDone=state.routines.filter(x=>x.done).length,goalsTotal=state.goals.length,goalsDone=state.goals.filter(x=>progress(x.progress)>=100).length,studyTotal=state.education.length,studyMean=studyTotal?Math.round(state.education.reduce((s,x)=>s+progress(x.progress),0)/studyTotal):0;
+ const metrics=[[tr('العمل','Work'),workDone,workTotal,'#60a5fa'],[tr('المهام اليومية','Daily tasks'),dayDone,dayTotal,'#34d399'],[tr('الأهداف','Goals'),goalsDone,goalsTotal,'#a78bfa'],[tr('التعلّم','Learning'),studyMean,studyTotal?'%':0,'#fbbf24']];
+ return metrics.map(([label,n,total,c],i)=>{const pct=i===3?n:percent(n,total);return `<div class="bi-progress-item"><div class="bi-progress-label"><span>${label}</span><strong dir="ltr">${pct}% ${i===3?'':`· ${n}/${total}`}</strong></div><div class="bi-track"><div class="bi-fill" style="--fill-percent:${pct}%;background:${c}"></div></div></div>`;}).join('')+`<div class="bi-insight"><span class="bi-insight-icon">💡</span><span>${tr('المؤشرات تُحسب تلقائيًا من المهام والأهداف والدورات المسجلة؛ لا تُحسب من أمثلة أو بيانات وهمية.','Metrics are calculated from your recorded tasks, goals and courses, not sample data.')}</span></div>`;}
+function biMiniPreview(){const last=biReadMonths(biMonths(6)).sums;const vals=last.map(x=>x.expense),max=Math.max(1,...vals),has=vals.some(v=>v>0),n=last.length;
+ return `<div class="card bi-mini-card"><div class="bi-mini"><div><div class="bi-mini-title">📊 ${tr('لمحة من تحليلاتك','Your insights')}</div><div class="bi-mini-label">${tr('مصروف آخر 6 أشهر','Expenses · last 6 months')}</div><div class="bi-mini-total">${has?safe(money(vals.reduce((a,b)=>a+b,0))):'—'}</div></div><svg class="bi-mini-spark" viewBox="0 0 160 50" role="img" aria-label="${tr('ملخص بصري للمصروفات','Spending sparkline')}">${has?`<path d="${vals.map((v,i)=>`${i===0?'M':'L'}${6+i*29.6} ${42-v/max*34}`).join(' ')}" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${vals.map((v,i)=>`<circle cx="${6+i*29.6}" cy="${42-v/max*34}" r="3" fill="var(--primary)"/>`).join('')}`:`<line x1="0" x2="155" y1="40" y2="40" stroke="var(--border)" stroke-width="2" stroke-dasharray="4 4"/>`}</svg></div><button type="button" class="bi-link" data-action="go" data-type="reports">${tr('عرض لوحة التحليلات','Open analytics dashboard')} ↗</button></div>`;}
+
+// Additional BI panels. Periods use calendar months; the current month is partial.
+function biPreviousMonths(months){const oldest=months[0];const [yy,mm]=oldest.split('-').map(Number);return Array.from({length:months.length},(_,i)=>{const d=new Date(yy,mm-1-months.length+i,1);return dateLocal(d).slice(0,7);});}
+function biTotals(sums){return sums.reduce((a,m)=>({income:a.income+m.income,expense:a.expense+m.expense,net:a.net+m.net}),{income:0,expense:0,net:0});}
+function biChange(current,previous){if(previous===0)return null;return (current-previous)/Math.abs(previous)*100;}
+function biComparePeriods(now,prior){const n=biTotals(now),p=biTotals(prior);
+ const cols=[['income',tr('الدخل','Income'),'#10b981',true],['expense',tr('المصروفات','Spending'),'#ef7777',false],['net',tr('صافي التدفق','Net cash flow'),'var(--primary)',true]];
+ return `<div class="bi-compare-grid">${cols.map(([k,label,color,positive])=>{const a=n[k],b=p[k],change=biChange(a,b);const cls=change===null?'':Math.abs(change)<.05?'':(change>0)===positive?'good':'bad';const arrow=change===null?'—':`${change>0?'↑':change<0?'↓':'→'} ${Math.abs(change).toFixed(1)}%`;
+ const max=Math.max(Math.abs(a),Math.abs(b),1);return `<div class="bi-compare-tile"><div class="bi-compare-name">${label}</div><div class="bi-compare-total">${safe(money(a))}</div><span class="bi-compare-change ${cls}">${safe(arrow)}</span><p class="bi-compare-desc">${tr('الفترة السابقة','Previous period')}: <strong dir="ltr">${safe(money(b))}</strong></p><div class="bi-duo-track" aria-hidden="true"><span class="bi-duo-current" style="background:${color};width:${(Math.abs(a)/max*100).toFixed(2)}%"></span><span class="bi-duo-previous" style="width:${(Math.abs(b)/max*100).toFixed(2)}%"></span></div>${change===null?`<p class="bi-help-line">${tr('لا توجد قيمة سابقة مناسبة لحساب النسبة.','No usable previous value for a percentage change.')}</p>`:''}</div>`;}).join('')}</div>`;}
+function biSmartInsights(current,prior,categories){const n=biTotals(current),p=biTotals(prior),total=state.finance.filter(x=>Number(x.amount)>0).length;
+ if(!total)return `<div class="bi-insight-note"><span class="glyph">📝</span><div><strong>${tr('اللوحة جاهزة','Your dashboard is ready')}</strong><p>${tr('ابدأ بتسجيل معاملاتك في المالية لتظهر المقارنات والاستنتاجات المبنية على بياناتك.','Add financial transactions to see meaningful comparisons and insights.')}</p></div></div>`;
+ const items=[];
+ if(n.income>0){const rate=n.net/n.income*100;items.push(['💰',tr('نسبة صافي التدفق','Net cash-flow ratio'),tr('صافي التدفق يساوي ','Net cash flow represents ')+`${rate.toFixed(1)}%`+tr(' من الدخل المسجّل في الفترة.',' of recorded income during the period.')]);}
+ if(p.expense>0){const d=biChange(n.expense,p.expense);items.push([d<=0?'📉':'📈',tr('حركة الإنفاق','Spending movement'),d===0?tr('الإنفاق لم يتغير عن الفترة السابقة.','Spending is unchanged from the previous period.'):Math.abs(d).toFixed(1)+'% · '+(d<0?tr('انخفض الإنفاق عن الفترة السابقة.','Spending decreased versus the previous period.'):tr('ارتفع الإنفاق عن الفترة السابقة.','Spending increased versus the previous period.'))]);}
+ const top=[...categories.entries()].sort((a,b)=>b[1]-a[1])[0];if(top && n.expense>0){items.push(['🎯',tr('أكبر بند مصروفات','Largest expense category'),`${tr('الفئة','Category')}: ${term(top[0])} · ${(top[1]/n.expense*100).toFixed(1)}% ${tr('من إنفاق الفترة.','of period spending.')}`]);}
+ if(!items.length)items.push(['📊',tr('البيانات المسجلة','Recorded data'),tr('أضف المزيد من العمليات في الفترات الحالية والسابقة لتحسين المقارنة.','Add more records to current and previous periods for richer comparisons.')]);
+ return `<div class="bi-insight-row">${items.slice(0,4).map(([icon,title,desc])=>`<div class="bi-insight-note"><span class="glyph">${icon}</span><div><strong>${safe(title)}</strong><p>${safe(desc)}</p></div></div>`).join('')}</div>`;}
+function biCategoryComparison(current,prior){const categories=[...new Set([...current.keys(),...prior.keys()])].map(k=>({key:k,now:current.get(k)||0,prev:prior.get(k)||0})).filter(x=>x.now>0||x.prev>0).sort((a,b)=>(b.now+b.prev)-(a.now+a.prev)).slice(0,6);
+ if(!categories.length)return biEmpty(tr('أضف مصروفات لتظهر مقارنة فئات الإنفاق.','Add spending transactions to compare categories.'));
+ const max=Math.max(1,...categories.flatMap(x=>[x.now,x.prev]));return `<div class="bi-split-legend"><span><i style="background:var(--primary)"></i>${tr('الفترة الحالية','Current period')}</span><span><i style="background:#bcc5d6"></i>${tr('الفترة السابقة','Previous period')}</span></div><div class="bi-category-rows">${categories.map(x=>`<div><div class="bi-category-head"><strong title="${safe(term(x.key))}">${safe(term(x.key))}</strong><small>${safe(biNumber(x.now))} / ${safe(biNumber(x.prev))}</small></div><div class="bi-cat-duo"><div class="bi-cat-track"><span class="bi-cat-bar" style="background:var(--primary);width:${(x.now/max*100).toFixed(1)}%"></span></div><div class="bi-cat-track"><span class="bi-cat-bar" style="background:#bcc5d6;width:${(x.prev/max*100).toFixed(1)}%"></span></div></div></div>`).join('')}</div>`;}
+function biMonthlyLedger(sums){if(!sums.some(x=>x.income>0||x.expense>0))return biEmpty(tr('سيظهر السجل الشهري بعد إضافة معاملات مالية.','Your monthly breakdown appears when you add transactions.'));
+ if(biSelectedMonth && !sums.some(x=>x.month===biSelectedMonth))biSelectedMonth=null;
+ const months=[...sums].reverse();const rows=months.map(x=>{const tx=state.finance.filter(t=>String(t.date||'').slice(0,7)===x.month && Number(t.amount)>0 && ['Income','Expense'].includes(t.type));const rate=x.income>0?(x.net/x.income*100).toFixed(1)+'%':'—';return `<tr data-action="biMonth" data-bi-month="${safe(x.month)}" aria-selected="${biSelectedMonth===x.month}"><td><button type="button" data-action="biMonth" data-bi-month="${safe(x.month)}">${safe(x.month)}</button></td><td dir="ltr">${safe(money(x.income))}</td><td dir="ltr">${safe(money(x.expense))}</td><td dir="ltr" class="${x.net<0?'bi-negative':'bi-positive'}">${safe(money(x.net))}</td><td dir="ltr">${rate}</td><td class="bi-transaction-count">${tx.length}</td></tr>`;}).join('');
+ const details=biSelectedMonth?biMonthTransactions(biSelectedMonth):'';
+ return `<div class="bi-sheet"><div class="bi-sheet-scroll"><table class="bi-ledger"><thead><tr><th>${tr('الشهر','Month')}</th><th>${tr('الدخل','Income')}</th><th>${tr('المصروف','Spending')}</th><th>${tr('الصافي','Net')}</th><th>${tr('معدل الصافي','Net ratio')}</th><th>${tr('العمليات','Entries')}</th></tr></thead><tbody>${rows}</tbody></table></div></div>${details}`;}
+function biMonthTransactions(month){const tx=state.finance.filter(t=>String(t.date||'').slice(0,7)===month && Number(t.amount)>0 && ['Income','Expense'].includes(t.type)).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));const max=12;
+ return `<div class="bi-selected-ledger"><div class="bi-detail-head"><span>📅 ${safe(month)} · ${tx.length} ${tr('عملية','entries')}</span><button type="button" class="bi-link" data-action="biMonth" data-bi-month="" style="margin:0">${tr('إغلاق','Close')} ×</button></div>${tx.length?tx.slice(0,max).map(x=>`<div class="bi-entry"><span class="bi-entry-text"><span>${safe(x.note||term(x.category)||term(x.type))}</span><small>${safe(dateLabel(x.date))} · ${safe(term(x.category))}</small></span><span class="bi-entry-amount ${x.type==='Expense'?'bi-negative':'bi-positive'}" dir="ltr">${x.type==='Expense'?'−':'+'}${safe(money(x.amount))}</span></div>`).join(''):biEmpty(tr('لا توجد عمليات في هذا الشهر.','No transactions in this month.'))}${tx.length>max?`<p class="bi-help-line">${tr('يعرض أحدث 12 عملية من أصل','Showing the latest 12 of')} ${tx.length}</p>`:''}</div>`;}
+function biWeekActivity(){const start=new Date(),days=[];for(let i=6;i>=0;i--){const d=new Date(start.getFullYear(),start.getMonth(),start.getDate()-i);const day=dateLocal(d),entries=state.routines.filter(x=>x.date===day),done=entries.filter(x=>x.done).length;days.push({day,total:entries.length,done});}
+ if(!days.some(x=>x.total))return biEmpty(tr('أضف مهام بتاريخ خلال آخر 7 أيام لتظهر المتابعة اليومية.','Record dated daily tasks in the last seven days to see activity.'));
+ const max=Math.max(1,...days.map(x=>x.total));return `<div class="bi-week-bars" role="img" aria-label="${tr('المهام المكتملة والمجدولة لآخر 7 أيام','Completed and scheduled tasks over the last seven days')}">${days.map(x=>{const lab=x.day.slice(5),rate=x.total?Math.round(x.done/x.total*100):0;return `<div class="bi-week-day" title="${safe(x.day+' · '+x.done+'/'+x.total)}"><span class="bi-week-ratio" dir="ltr">${x.done}/${x.total}</span><div class="bi-week-bar"><span class="bi-week-filled" style="height:${x.total?Math.max(5,x.done/max*100):0}%"></span></div><span class="bi-week-label" dir="ltr">${lab}</span></div>`;}).join('')}</div><p class="bi-help-line">${tr('الأرقام حسب تاريخ المهمة وحالتها الحالية، وليست سجلًا تاريخيًا لوقت إكمالها.','Based on task date and current completion status, not historical completion timestamps.')}</p>`;}
+function biWorkSnapshot(){const tasks=state.work,done=tasks.filter(x=>x.status==='Done').length,pending=tasks.filter(x=>x.status==='Pending').length,open=tasks.length-done-pending;const overdue=tasks.filter(x=>x.status!=='Done'&&x.due&&x.due<dateLocal()).length,urgent=tasks.filter(x=>x.status!=='Done'&&x.priority==='High').length;
+ if(!tasks.length)return biEmpty(tr('سجّل مهام العمل لرؤية توزيع الحالات والأولويات.','Add work tasks to see statuses and priorities.'));
+ return `<div class="bi-work-status" role="img" aria-label="${tr('حالات مهام العمل','Work task status proportions')}"><span style="width:${done/tasks.length*100}%;background:#34d399"></span><span style="width:${pending/tasks.length*100}%;background:#fbbf24"></span><span style="width:${open/tasks.length*100}%;background:#60a5fa"></span></div><div class="bi-status-legend"><div class="group"><strong>${done}</strong><small>🟢 ${tr('مكتملة','Done')}</small></div><div class="group"><strong>${pending}</strong><small>🟡 ${tr('قيد المتابعة','Pending')}</small></div><div class="group"><strong>${open}</strong><small>🔵 ${tr('مفتوحة','Open')}</small></div></div><div class="bi-insight" style="margin-top:14px"><span class="bi-insight-icon">⚑</span><span>${tr('متأخرة','Overdue')}: <strong>${overdue}</strong> · ${tr('عالية الأولوية وغير مكتملة','High priority / unfinished')}: <strong>${urgent}</strong><br/><small>${tr('المتأخرة تُحسب من تاريخ الاستحقاق والحالة الحالية.','Overdue counts use the due date and current status.')}</small></span></div>`;}
+
+function renderReports(){const months=biMonths(biWindow),data=biReadMonths(months),{sums,category,expenseEntries}=data;
+ const monthText=biWindow===3?tr('3 أشهر','3 months'):biWindow===6?tr('6 أشهر','6 months'):tr('12 شهرًا','12 months');
+ $('#reportsView').innerHTML=`<div class="bi-intro"><div><h3>📊 ${tr('تحليلات الحياة','Life Analytics')}</h3><p>${tr('لوحة تفاعلية شبيهة بذكاء الأعمال، مبنية على بياناتك الفعلية.','An interactive BI-style overview of your real records.')}</p></div><div class="bi-period" role="group" aria-label="${tr('الفترة الزمنية','Time period')}">${[3,6,12].map(n=>`<button type="button" data-action="biWindow" data-bi-window="${n}" class="${biWindow===n?'active':''}" aria-pressed="${biWindow===n}">${n===3?tr('3 أشهر','3 mo'):n===6?tr('6 أشهر','6 mo'):tr('12 شهرًا','12 mo')}</button>`).join('')}</div></div>
+ ${biTopCards(sums)}
+ <div class="bi-section-title"><h3>📈 ${tr('مقارنة الفترات','Period-over-period comparison')}</h3><p>${tr('الفترة المحددة مقابل نفس المدة السابقة؛ الشهر الجاري غير مكتمل','Selected period vs previous equal period; the current month is incomplete')}</p></div>
+ ${biComparePeriods(sums,biReadMonths(biPreviousMonths(months)).sums)}
+ <div class="bi-section-title"><h3>💡 ${tr('قراءة سريعة لبياناتك','Insights from your data')}</h3><p>${tr('استنتاجات حسابية وليست توصيات مالية','Calculated observations, not financial advice')}</p></div>
+ ${biSmartInsights(sums,biReadMonths(biPreviousMonths(months)).sums,category)}
+ <div class="bi-section-title"><h3>📊 ${tr('المخططات الأساسية','Core charts')}</h3></div>
+ <div class="bi-grid"><div class="card bi-card"><div class="bi-card-head"><div><h3>${tr('الدخل مقابل المصروف','Income vs Expenses')}</h3><p class="bi-subtitle">${tr('مقارنة شهرية','Monthly comparison')} · ${monthText}</p></div><span class="bi-pill">${tr('أعمدة','Bars')}</span></div><div class="bi-scroll">${biCompare(sums)}</div></div>
+ <div class="card bi-card"><div class="bi-card-head"><div><h3>${tr('اتجاه المؤشر','Metric Trend')}</h3><p class="bi-subtitle">${tr('اختر المؤشر لمتابعة تغيره شهرًا بعد شهر','Select a metric to track it month by month')}</p></div><div class="bi-metric-select" role="group" aria-label="${tr('المؤشر المعروض','Displayed metric')}">${[['net','الصافي','Net'],['income','الدخل','Income'],['expense','المصروف','Expense']].map(([key,ar,en])=>`<button type="button" data-action="biMetric" data-bi-metric="${key}" class="${biTrendMetric===key?'active':''}" aria-pressed="${biTrendMetric===key}">${tr(ar,en)}</button>`).join('')}</div></div><div class="bi-scroll">${biTrend(sums,biTrendMetric)}</div></div>
+ <div class="card bi-card"><div class="bi-card-head"><div><h3>${tr('أين تذهب المصروفات؟','Where Your Money Goes')}</h3><p class="bi-subtitle">${tr('اضغط على فئة لمشاهدة عملياتها','Tap a category to inspect transactions')}</p></div><span class="bi-pill">${tr('دائري','Donut')}</span></div>${biDonut(category,expenseEntries)}</div>
+ <div class="card bi-card"><div class="bi-card-head"><div><h3>${tr('الإنجاز والإنتاجية','Progress & Productivity')}</h3><p class="bi-subtitle">${tr('مؤشرات تراكمية حتى اليوم','All-time completion metrics')}</p></div><span class="bi-pill">${tr('تقدم','Progress')}</span></div>${biProgress()}</div></div>
+ <div class="bi-section-title"><h3>🗂 ${tr('مقارنة فئات المصروفات','Spending categories over time')}</h3><p>${tr('أبرز 6 فئات خلال الفترتين','Top 6 categories across both periods')}</p></div>
+ <div class="bi-grid"><div class="card bi-card"><div class="bi-card-head"><div><h3>${tr('تحوّل الإنفاق حسب الفئة','Category spending comparison')}</h3><p class="bi-subtitle">${tr('الفترة الحالية مقابل السابقة','Current period vs previous period')}</p></div><span class="bi-pill">${tr('مقارنة','Comparison')}</span></div>${biCategoryComparison(category,biReadMonths(biPreviousMonths(months)).category)}</div>
+ <div class="card bi-card"><div class="bi-card-head"><div><h3>${tr('حالات مهام العمل','Work task status')}</h3><p class="bi-subtitle">${tr('عرض حي للحالة الحالية، مع المهام المتأخرة والعاجلة','Current status, overdue and high-priority tasks')}</p></div><span class="bi-pill">${tr('إنتاجية','Productivity')}</span></div>${biWorkSnapshot()}</div></div>
+ <div class="bi-section-title"><h3>🗓 ${tr('التفاصيل الشهرية','Monthly details')}</h3><p>${tr('اضغط على الشهر لعرض آخر عملياته','Tap a month to inspect its transactions')}</p></div>
+ <div class="card bi-card">${biMonthlyLedger(sums)}</div>
+ <div class="bi-section-title"><h3>✅ ${tr('نشاط المهام اليومية','Daily task activity')}</h3><p>${tr('آخر 7 أيام حسب تاريخ المهمة وحالتها الحالية','Last 7 days by task date and current status')}</p></div>
+ <div class="card bi-card">${biWeekActivity()}</div>
+ <p class="bi-footer">🔒 ${tr('البيانات محفوظة على الجهاز. تتحدث التحليلات تلقائيًا عند إضافة أو تعديل أو حذف سجل. ولا يتطلب رسم المخططات اتصالًا بالإنترنت.','Data stays on-device. Charts refresh when you add, edit or delete records. No internet is needed to draw charts.')}</p>`;
+}
+
+const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
+function renderSettings(){
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v2.7.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+}
+function renderView(){
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+}
+function renderAll(){updateChrome();renderView();updateStorage();}
+function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
+ const termText=(searchText[type]||'').toLocaleLowerCase();const container=$(`[data-list="${type}"]`);if(!container)return;const cards=Array.from(container.querySelectorAll('.list-item'));let shown=0;
+ for(const card of cards){const matched=(card.dataset.search||'').includes(termText);card.classList.toggle('hidden',!matched);if(matched)shown++;}
+ const count=$(`[data-count="${type}"]`);if(count)count.textContent=`${shown} ${tr('عنصر','items')}`;
+ const emptyEl=$(`[data-empty-filter="${type}"]`);if(emptyEl)emptyEl.classList.toggle('hidden',shown>0||cards.length===0);
+}
+function createPicker(){
+ editContext={picker:true};lastFocus=document.activeElement;
+ $('#modalTitle').textContent=tr('إيش تبغى تضيف؟','What would you like to add?');
+ const options=[['routine','📅','مهمة يومية','Daily task'],['work','💼','مهمة عمل','Work task'],['education','📚','دراسة / شهادة','Course / certification'],['finance','💰','عملية مالية','Transaction'],['goal','🎯','هدف','Goal'],['note','📝','ملاحظة','Note']];
+ $('#modalForm').innerHTML=`<div class="picker-grid">${options.map(([type,icon,ar,en])=>`<button type="button" class="picker-tile" data-action="add" data-type="${type}"><span>${icon}</span><strong>${tr(ar,en)}</strong></button>`).join('')}</div>`;showModal();
+}
+function fieldHTML([name,ar,en,type,required,options],item){
+ const lbl=tr(ar,en)+(required?' *':'');const defaultValue={date:dateLocal(),progress:'0',priority:'Medium',status:'Open',category:'Other',type:'Expense'};
+ const value=item?.[name]??(name==='date'?dateLocal():(defaultValue[name]??''));const idAttribute=`fld-${name}`;
+ if(type==='select')return `<div class="form-row"><label for="${idAttribute}">${lbl}</label><select id="${idAttribute}" name="${name}">${options.map(opt=>`<option value="${safe(opt)}" ${value===opt?'selected':''}>${safe(term(opt))}</option>`).join('')}</select></div>`;
+ if(type==='checkbox')return `<label class="checkbox-field" for="${idAttribute}"><input id="${idAttribute}" name="${name}" type="checkbox" ${value?'checked':''}/><span>${tr(ar,en)}</span></label>`;
+ if(type==='textarea')return `<div class="form-row"><label for="${idAttribute}">${lbl}</label><textarea id="${idAttribute}" name="${name}" rows="3" ${required?'required':''} maxlength="5000">${safe(value)}</textarea></div>`;
+ const attrs=type==='number'?'min="0" max="100" step="1"':type==='money'?'min="0.01" step="0.01" inputmode="decimal"':'maxlength="200"';
+ return `<div class="form-row"><label for="${idAttribute}">${lbl}</label><input id="${idAttribute}" name="${name}" type="${type==='money'?'number':type}" value="${safe(value)}" ${required?'required':''} ${attrs} /></div>`;
+}
+function openModal(type,itemId=null){const config=defs[type];if(!config)return;
+ const item=itemId?state[config.collection].find(x=>x.id===itemId):null;if(itemId&&!item)return;
+ editContext={type,id:itemId};lastFocus=document.activeElement;
+ $('#modalTitle').textContent=(itemId?tr('تعديل ','Edit '):tr('إضافة ','Add '))+tr(config.ar,config.en);
+ const important=config.fields.filter(f=>f[0]==='title'||f[0]==='type'||f[0]==='amount');const other=config.fields.filter(f=>!important.includes(f));
+ $('#modalForm').innerHTML=`${[...important,...other].map(f=>fieldHTML(f,item)).join('')}<div class="modal-actions"><button type="button" class="secondary-btn" data-action="close">${tr('إلغاء','Cancel')}</button><button class="primary-btn" type="submit">${itemId?tr('حفظ التغييرات','Save changes'):tr('إضافة وحفظ','Add & save')}</button></div>`;
+ showModal();setTimeout(()=>$('#modalForm input:not([type="checkbox"]), #modalForm select')?.focus(),30);
+}
+function showModal(){$('#modalBackdrop').classList.remove('hidden');document.body.classList.add('modal-open');}
+function closeModal(){$('#modalBackdrop').classList.add('hidden');document.body.classList.remove('modal-open');editContext=null;lastFocus?.focus?.();}
+function submitModal(e){e.preventDefault();if(!editContext?.type)return;const cfg=defs[editContext.type];const fd=new FormData(e.currentTarget),out={};
+ for(const [name,,,type] of cfg.fields){if(type==='checkbox')out[name]=e.currentTarget.elements[name].checked;else if(type==='number'||type==='money')out[name]=Number(fd.get(name));else out[name]=String(fd.get(name)||'').trim();}
+ if(out.title!==undefined&&!out.title.trim())return message(tr('اكتب عنوانًا أولًا','Title is required'),true);
+ if(out.amount!==undefined && (!Number.isFinite(out.amount)||out.amount<=0))return message(tr('المبلغ يجب أن يكون أكبر من صفر','Amount must be greater than zero'),true);
+ for(const x of ['progress'])if(x in out)out[x]=progress(out[x]);
+ if(cfg.collection==='finance' && /^\d{4}-\d{2}/.test(out.date||'')) filters.finance=out.date.slice(0,7);
+ if(cfg.collection==='routines' && out.date!==dateLocal()) filters.today='all';
+ if(cfg.collection==='work' && out.status==='Done') filters.work='all';
+ if(cfg.collection==='goals' && progress(out.progress)===100) filters.goals='all';
+ if(editContext.id){const x=state[cfg.collection].find(v=>v.id===editContext.id);if(!x)return;Object.assign(x,out,{updatedAt:new Date().toISOString()});}
+ else state[cfg.collection].unshift({id:id(),createdAt:new Date().toISOString(),...out});
+ save();closeModal();renderAll();message(tr('تم الحفظ بنجاح','Saved successfully'));
+}
+function removeItem(type,itemId){const cfg=defs[type];if(!cfg)return;const x=state[cfg.collection].find(v=>v.id===itemId);if(!x)return;
+ if(!confirm(tr(`حذف «${x.title||term(x.category)||cfg.ar}» نهائيًا؟`,`Permanently delete “${x.title||x.category||cfg.en}”?`)))return;
+ state[cfg.collection]=state[cfg.collection].filter(v=>v.id!==itemId);save();renderView();message(tr('تم الحذف','Deleted'));
+}
+function exportData(){const json=JSON.stringify({...state,backupDate:new Date().toISOString(),appVersion:'2.5'},null,2);if(window.DailyLifeAndroid){window.DailyLifeAndroid.exportBackup(json);return;}const blob=new Blob([json],{type:'application/json'});const fileName=`daily-life-os-backup-${dateLocal()}.json`;
+ // iPhone / iPad: use the share sheet (Save to Files, AirDrop, WhatsApp…) — plain downloads are unreliable there.
+ if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&navigator.canShare){const file=new File([blob],fileName,{type:'application/json'});if(navigator.canShare({files:[file]})){navigator.share({files:[file],title:'Daily Life OS backup'}).then(()=>message(tr('تم إنشاء النسخة الاحتياطية','Backup generated'))).catch(()=>{});return;}}
+ const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fileName;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);message(tr('تم إنشاء النسخة الاحتياطية','Backup generated'));}
+function importData(file){if(!file)return;if(file.size>10*1024*1024)return message(tr('الملف كبير جدًا (الحد 10MB)','Backup is too large (10MB max)'),true);
+ const reader=new FileReader();reader.onload=()=>{try{const parsed=JSON.parse(String(reader.result));if(!parsed||typeof parsed!=='object'||Array.isArray(parsed)||!collectionKeys.some(k=>Array.isArray(parsed[k])))throw new Error('bad format');
+ const incoming=normalize(parsed);const count=collectionKeys.reduce((n,k)=>n+incoming[k].length,0);if(!confirm(tr(`استيراد ${count} سجل؟ سيتم استبدال بياناتك الحالية. صدّر نسخة أولًا إن احتجتها.`,`Import ${count} records? This replaces your existing entries. Export a backup first if needed.`)))return;
+ state=incoming;save();applyAppearance();renderAll();message(tr('تم استيراد النسخة بنجاح','Backup imported successfully'));
+ }catch(e){message(tr('تعذر قراءة النسخة الاحتياطية. تأكد من الملف.','Could not import this backup file.'),true);}finally{$('#importFile').value='';}};reader.onerror=()=>message(tr('حدث خطأ أثناء قراءة الملف','Could not read the file'),true);reader.readAsText(file);}
+function importAndroidBackupBase64(base64){try{const data=atob(base64),bytes=new Uint8Array(data.length);for(let i=0;i<data.length;i++)bytes[i]=data.charCodeAt(i);importData(new File([bytes],'android-backup.json',{type:'application/json'}));}catch(e){message(tr('تعذر قراءة النسخة','Could not read the backup'),true);}}
+function resetData(){if(!confirm(tr('متأكد من حذف كل البيانات المخزنة هنا؟ لا يمكن التراجع عن هذه الخطوة.','Delete ALL local entries? This cannot be undone.')))return;
+ if(!confirm(tr('تأكيد أخير: هل قمت بتصدير نسخة احتياطية؟','Final confirmation: Have you exported a backup?')))return;
+ const theme=state.theme,accent=state.accent,lang=state.lang;state=normalize({...defaultState,theme,accent,lang});save();navigate('dashboard');message(tr('تم حذف البيانات','Local data cleared'));
+}
+function toggleLanguage(){state.lang=state.lang==='ar'?'en':'ar';save();applyAppearance();renderAll();}
+function chooseAccent(accent){if(!COLOR_PRESETS[accent])return;state.accent=accent;save();applyAppearance();renderAll();message(tr('تم تطبيق ','Applied ')+appearanceName());}
+function chooseMode(mode){if(!['light','dark'].includes(mode))return;state.theme=mode;save();applyAppearance();renderAll();message(tr('تم تطبيق ','Applied ')+appearanceName());}
+function toggleTheme(){chooseMode(state.theme==='dark'?'light':'dark');}
+function action(e){const b=e.target.closest('[data-action]');if(!b)return;const ac=b.dataset.action,type=b.dataset.type,itemId=b.dataset.id;
+ switch(ac){
+  case 'go':navigate(type);break;
+  case 'quickPick':createPicker();break;
+  case 'add':openModal(type);break;
+  case 'edit':openModal(type,itemId);break;
+  case 'delete':removeItem(type,itemId);break;
+  case 'close':closeModal();break;
+  case 'toggleRoutine':{const item=state.routines.find(x=>x.id===itemId);if(item)updateRecord('routine',itemId,{done:!item.done});break;}
+  case 'toggleWork':{const item=state.work.find(x=>x.id===itemId);if(item)updateRecord('work',itemId,{status:item.status==='Done'?'Open':'Done'});break;}
+  case 'progressDown':case 'progressUp':{const item=state[defs[type]?.collection]?.find(x=>x.id===itemId);if(item)updateRecord(type,itemId,{progress:progress(Number(item.progress||0)+(ac==='progressUp'?10:-10))});break;}
+  case 'pinNote':{const item=state.notes.find(x=>x.id===itemId);if(item)updateRecord('note',itemId,{pinned:!item.pinned});break;}
+   case 'biWindow':{const n=Number(b.dataset.biWindow);if([3,6,12].includes(n)){biWindow=n;biCategory='all';biSelectedMonth=null;renderReports();}break;}
+   case 'biCategory':{biCategory=b.dataset.biCat||'all';renderReports();break;}
+   case 'biMetric':{if(['income','expense','net'].includes(b.dataset.biMetric)){biTrendMetric=b.dataset.biMetric;renderReports();}break;}
+   case 'biMonth':{biSelectedMonth=b.dataset.biMonth||null;renderReports();break;}
+  case 'language':toggleLanguage();break;case 'theme':toggleTheme();break;case 'chooseAccent':chooseAccent(b.dataset.accent);break;case 'chooseMode':chooseMode(b.dataset.mode);break;case 'export':exportData();break;case 'import':if(window.DailyLifeAndroid)window.DailyLifeAndroid.openBackup();else $('#importFile').click();break;case 'reset':resetData();break;
+ }
+}
+function init(){
+ $$('.nav-item,.mobile-nav').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.view)));
+ document.addEventListener('click',action);
+ $('#menuToggle').addEventListener('click',()=>{$('#sidebar').classList.toggle('open');$('#navShade').classList.toggle('hidden',!$('#sidebar').classList.contains('open'));});
+ $('#navShade').addEventListener('click',()=>{$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');});
+ $('#themeToggle').addEventListener('click',toggleTheme);
+ $('#langToggle').addEventListener('click',toggleLanguage);
+ $('#quickAddBtn').addEventListener('click',()=>{const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
+ $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal();});
+ $('#modalForm').addEventListener('submit',submitModal);
+ $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');if(!$('#modalBackdrop').classList.contains('hidden'))closeModal();}if((e.ctrlKey||e.metaKey)&&e.key==='Enter'&&!$('#modalBackdrop').classList.contains('hidden')&&!editContext?.picker){e.preventDefault();$('#modalForm').requestSubmit();}});
+ document.addEventListener('input',e=>{const el=e.target;if(el.matches('[data-search-input]')){searchText[el.dataset.searchInput]=el.value;applyClientFilter();}});
+ document.addEventListener('change',e=>{const el=e.target;if(el.matches('[data-filter]')){const type=el.dataset.filter;if(type==='routine')filters.today=el.value;else if(type==='goal')filters.goals=el.value;else filters[type]=el.value;renderView();}else if(el.matches('[data-finance-period]')){filters.finance=el.value;renderView();}});
+ document.addEventListener('submit',e=>{if(e.target.id!=='profileForm')return;e.preventDefault();const fd=new FormData(e.target);state.profile={...state.profile,name:String(fd.get('name')||'').trim().slice(0,80)||'Ramzi',country:COUNTRY_CURRENCY[String(fd.get('country'))]?String(fd.get('country')):profileCountry(),currency:COUNTRY_CURRENCY[String(fd.get('country'))]||state.profile.currency||'SAR',monthlyIncome:Math.max(0,Number(fd.get('monthlyIncome'))||0)};save();renderAll();message(tr('تم حفظ الملف الشخصي','Profile saved'));});
+ window.addEventListener('hashchange',()=>{const v=location.hash.replace('#','');if(viewNames[v]&&v!==currentView)navigate(v);});
+ window.addEventListener('storage',e=>{if(e.key!==STORAGE_KEY)return;state=load();applyAppearance();renderAll();message(tr('تحدّثت البيانات من تبويب آخر','Data updated in another tab'));});
+ applyAppearance();navigate(currentView);updateStorage();
+}
+
+// ---- Reminders & notifications (Android app) ----
+const NOTIFY_DEFAULTS={enabled:true,tasks:true,lead:0,summary:true,summaryTime:'08:00',due:true,dueTime:'09:00'};
+let reminderCount=null, reminderTimer=null;
+const androidNotify=()=>window.DailyLifeAndroid&&typeof window.DailyLifeAndroid.syncReminders==='function'?window.DailyLifeAndroid:null;
+function notifySettings(){return {...NOTIFY_DEFAULTS,...(state.notify&&typeof state.notify==='object'?state.notify:{})};}
+function notifyStatus(){const a=androidNotify();if(!a)return null;try{return JSON.parse(a.notificationStatus()||'{}');}catch{return {};}}
+function localMs(date,time){if(!date)return NaN;const [y,m,d]=String(date).slice(0,10).split('-').map(Number);const [hh,mm]=String(time||'09:00').split(':').map(Number);return new Date(y,(m||1)-1,d||1,hh||0,mm||0,0,0).getTime();}
+function ymd(dt){return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;}
+function clock(t){const [hh,mm]=String(t||'').split(':').map(Number);if(isNaN(hh))return '';return new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-nu-latn':'en-US',{hour:'numeric',minute:'2-digit'}).format(new Date(2000,0,1,hh,mm||0));}
+function taskCount(n){if(state.lang!=='ar')return `${n} task${n===1?'':'s'}`;return n===1?'مهمة واحدة':n===2?'مهمتين':n<=10?`${n} مهام`:`${n} مهمة`;}
+function buildReminders(){
+ const s=notifySettings(),now=Date.now(),list=[],used=new Set(),lang=state.lang;
+ const push=(key,it)=>{if(!(it.at>now))return;let h=2166136261;for(const ch of key){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}let n=(h>>>0)%900000+1000;while(used.has(n))n=n+1>=901000?1000:n+1;used.add(n);list.push({id:n,lang,kind:'task',task:'',...it});};
+ if(s.tasks)for(const r of state.routines){if(r.done||!r.date||!r.time)continue;const lead=Number(s.lead)||0;
+  push('r'+r.id+r.date+r.time+lead,{at:localMs(r.date,r.time)-lead*60000,title:`⏰ ${r.title}`,
+   body:lead?tr(`بعد ${lead} دقيقة · ${clock(r.time)}`,`In ${lead} min · ${clock(r.time)}`):tr(`حان وقت المهمة · ${clock(r.time)}`,`It's time · ${clock(r.time)}`),view:'today',task:'routine:'+r.id});}
+ if(s.due){
+  for(const w of state.work){if(!w.due||w.status==='Done')continue;push('w'+w.id+w.due+s.dueTime,{at:localMs(w.due,s.dueTime),title:`📌 ${w.title}`,body:tr('اليوم موعد تسليم مهمة العمل','This work task is due today')+(w.project?` · ${w.project}`:''),view:'work',task:'work:'+w.id});}
+  for(const g of state.goals){if(!g.due||progress(g.progress)>=100)continue;push('g'+g.id+g.due+s.dueTime,{at:localMs(g.due,s.dueTime),title:`🎯 ${g.title}`,body:tr(`اليوم التاريخ المستهدف لهدفك (${progress(g.progress)}%)`,`Your goal's target date is today (${progress(g.progress)}%)`)+(g.milestone?tr(` · الخطوة القادمة: ${g.milestone}`,` · Next: ${g.milestone}`):''),view:'goals'});}
+  for(const e of state.education){if(!e.target||progress(e.progress)>=100)continue;push('e'+e.id+e.target+s.dueTime,{at:localMs(e.target,s.dueTime),title:`📚 ${e.title}`,body:tr(`اليوم التاريخ المستهدف (${progress(e.progress)}%) — كمّل وأنجزها!`,`Target date is today (${progress(e.progress)}%) — finish strong!`),view:'education'});}
+ }
+ if(s.summary){const name=state.profile.name||'';const hour=Number(String(s.summaryTime).split(':')[0])||8;
+  const greet=hour<12?tr('صباح الخير','Good morning'):hour<18?tr('مساء الخير','Good afternoon'):tr('مساء الخير','Good evening');
+  for(let i=0;i<14;i++){const dt=new Date();dt.setDate(dt.getDate()+i);const day=ymd(dt);
+   const items=[...state.routines.filter(r=>!r.done&&r.date===day),...state.work.filter(w=>w.status!=='Done'&&w.due===day)];
+   const names=items.slice(0,2).map(x=>x.title).join(tr('، ',', '));
+   push('s'+day+s.summaryTime,{at:localMs(day,s.summaryTime),kind:'summary',view:'today',title:`${greet}${name?' '+name:''} ☀️`,
+    body:items.length?tr(`عندك ${taskCount(items.length)} اليوم`,`You have ${taskCount(items.length)} today`)+` · ${names}${items.length>2?'…':''}`:tr('يومك فاضي — خطط لشي جميل اليوم ✨','Your day is open — plan something great ✨')});}
+ }
+ return list.sort((a,b)=>a.at-b.at).slice(0,150);
+}
+function syncRemindersNow(){const a=androidNotify();if(!a)return;const s=notifySettings();try{reminderCount=a.syncReminders(JSON.stringify(s.enabled?buildReminders():[]));}catch{reminderCount=null;}const el=document.getElementById('notifyCount');if(el)el.textContent=reminderCountText();}
+function scheduleReminderSync(){if(!androidNotify())return;clearTimeout(reminderTimer);reminderTimer=setTimeout(syncRemindersNow,400);}
+function reminderCountText(){if(reminderCount==null||reminderCount<0)return '';return notifySettings().enabled?tr(`${reminderCount} تذكير مجدول`,`${reminderCount} reminder${reminderCount===1?'':'s'} scheduled`):tr('التذكيرات متوقفة','Reminders are off');}
+function applyDoneQueue(){const a=androidNotify();if(!a||typeof a.takeDoneQueue!=='function')return;let q=[];try{q=JSON.parse(a.takeDoneQueue()||'[]');}catch{}let n=0;const now=new Date().toISOString();
+ for(const key of q){const [kind,itemId]=String(key).split(':');if(kind==='routine'){const r=state.routines.find(x=>x.id===itemId);if(r&&!r.done){r.done=true;r.updatedAt=now;n++;}}else if(kind==='work'){const w=state.work.find(x=>x.id===itemId);if(w&&w.status!=='Done'){w.status='Done';w.updatedAt=now;n++;}}}
+ if(n){save();renderAll();message(tr(`تم إنجاز ${taskCount(n)} من الإشعارات ✓`,`${taskCount(n)} completed from notifications ✓`));}}
+function setNotify(changes){state.notify={...notifySettings(),...changes};save();if(currentView==='settings')renderView();}
+function notifySwitch(key,on,label){return `<label class="switch" title="${safe(label)}"><input type="checkbox" data-notify="${key}" ${on?'checked':''} aria-label="${safe(label)}"><span></span></label>`;}
+function notifyCard(){
+ const a=androidNotify(),s=notifySettings(),st=notifyStatus()||{};
+ const title=`<div class="notify-head"><h3>🔔 ${tr('التنبيهات والإشعارات','Reminders & notifications')}</h3>`;
+ if(!a)return `<div class="card notify-card">${title}</div><p class="notify-note">${tr('التنبيهات تشتغل في تطبيق أندرويد فقط. ثبّت التطبيق عشان توصلك تذكيرات مهامك حتى لو التطبيق مقفل.','Reminders work in the Android app. Install it to get task reminders even when the app is closed.')}</p></div>`;
+ const perm=st.perm||'ask';const pill=perm==='granted'?`<span class="notify-status ok">● ${tr('الإشعارات مفعّلة','Notifications on')}</span>`:`<span class="notify-status warn">● ${perm==='denied'?tr('الإشعارات مقفلة من الجوال','Blocked in phone settings'):tr('تحتاج إذن','Permission needed')}</span>`;
+ const dis=s.enabled?'':'disabled';
+ const leads=[[0,'في وقتها','At time'],[5,'قبل 5 دقائق','5 min before'],[10,'قبل 10 دقائق','10 min before'],[15,'قبل 15 دقيقة','15 min before'],[30,'قبل 30 دقيقة','30 min before'],[60,'قبل ساعة','1 hour before']];
+ const row=(text,sub,controls,off)=>`<div class="notify-row notify-sub ${off?'off':''}"><div class="notify-text"><strong>${text}</strong><small>${sub}</small></div><div class="notify-controls">${controls}</div></div>`;
+ return `<div class="card notify-card">${title}${pill}</div>
+ <p class="muted subheading">${tr('توصلك التذكيرات حتى لو التطبيق مقفل، وتقدر تنجز المهمة أو تأجلها ١٠ دقائق من الإشعار نفسه.','Reminders arrive even when the app is closed. Mark a task done or snooze it 10 minutes right from the notification.')}</p>
+ ${row(tr('تفعيل التذكيرات','Enable reminders'),`<span id="notifyCount">${reminderCountText()}</span>`,notifySwitch('enabled',s.enabled,tr('تفعيل التذكيرات','Enable reminders')),false)}
+ ${row('⏰ '+tr('تذكير المهام اليومية','Daily task reminders'),tr('للمهام اللي لها وقت في صفحة يومي','For tasks with a time in Today'),`<select data-notify="lead" ${dis||(!s.tasks?'disabled':'')} aria-label="${tr('وقت التذكير','Reminder time')}">${leads.map(([v,ar,en])=>`<option value="${v}" ${Number(s.lead)===v?'selected':''}>${tr(ar,en)}</option>`).join('')}</select>${notifySwitch('tasks',s.tasks,tr('تذكير المهام اليومية','Daily task reminders'))}`,!s.enabled)}
+ ${row('☀️ '+tr('ملخص اليوم','Daily summary'),tr('كل يوم: كم مهمة عندك وأهمها','Every day: how many tasks you have'),`<input type="time" data-notify="summaryTime" value="${safe(s.summaryTime)}" ${dis||(!s.summary?'disabled':'')} aria-label="${tr('وقت الملخص','Summary time')}">${notifySwitch('summary',s.summary,tr('ملخص اليوم','Daily summary'))}`,!s.enabled)}
+ ${row('📌 '+tr('مواعيد الاستحقاق','Due dates'),tr('مهام العمل والأهداف والدورات في يومها','Work tasks, goals and courses on their date'),`<input type="time" data-notify="dueTime" value="${safe(s.dueTime)}" ${dis||(!s.due?'disabled':'')} aria-label="${tr('وقت تذكير الاستحقاق','Due reminder time')}">${notifySwitch('due',s.due,tr('مواعيد الاستحقاق','Due dates'))}`,!s.enabled)}
+ <div class="notify-actions">${perm!=='granted'?`<button type="button" class="primary-btn" data-notify-action="permission">${perm==='denied'?tr('فتح إعدادات الإشعارات','Open notification settings'):tr('السماح بالإشعارات','Allow notifications')}</button>`:''}<button type="button" class="secondary-btn" data-notify-action="test">🔔 ${tr('إرسال إشعار تجريبي','Send a test notification')}</button>${st.exact===false?`<button type="button" class="secondary-btn" data-notify-action="exact">⏱ ${tr('السماح بالتنبيه في الوقت الدقيق','Allow exact timing')}</button>`:''}</div>
+ ${st.exact===false?`<p class="notify-note">${tr('بدون إذن الوقت الدقيق، ممكن يتأخر التنبيه دقائق بسيطة.','Without exact timing, reminders may arrive a few minutes late.')}</p>`:''}
+ </div>`;
+}
+function notifyAction(kind){const a=androidNotify();if(!a)return;
+ if(kind==='permission')a.requestNotifications();
+ else if(kind==='exact')a.openExactAlarmSettings();
+ else if(kind==='test'){const st=notifyStatus()||{};if(st.perm!=='granted'){a.requestNotifications();return;}
+  a.testNotification(JSON.stringify({id:999,lang:state.lang,kind:'task',task:'',view:'settings',title:'🔔 Daily Life OS',body:tr('الإشعارات شغّالة! بنذكّرك بمهامك في وقتها 💜','Notifications are working! We will remind you right on time 💜')}));message(tr('تم إرسال إشعار تجريبي','Test notification sent'));}}
+window.dailyLifeOnPermission=st=>{message(st==='granted'?tr('تم تفعيل الإشعارات ✓','Notifications enabled ✓'):tr('الإشعارات غير مفعّلة','Notifications are off'),st!=='granted');syncRemindersNow();if(currentView==='settings')renderView();};
+window.dailyLifeOnResume=()=>{applyDoneQueue();scheduleReminderSync();if(currentView==='settings')renderView();};
+function initNotifications(){
+ document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('[data-notify]'))return;const k=el.dataset.notify;
+  const v=el.type==='checkbox'?el.checked:k==='lead'?Number(el.value)||0:el.value;
+  if(k.endsWith('Time')&&!/^\d{2}:\d{2}$/.test(v))return;
+  setNotify({[k]:v});
+  if(k==='enabled'&&v&&(notifyStatus()||{}).perm!=='granted')androidNotify()?.requestNotifications();});
+ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-notify-action]');if(b)notifyAction(b.dataset.notifyAction);});
+ const a=androidNotify();if(!a)return;
+ applyDoneQueue();syncRemindersNow();
+ // Ask once on first launch (Android 13+ shows the system permission dialog).
+ const st=notifyStatus()||{};if(notifySettings().enabled&&st.perm==='ask'&&!state.notifyAsked){state.notifyAsked=true;save();setTimeout(()=>a.requestNotifications(),1200);}
+}
+
+document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded',initNotifications);
+
+</script>
+<script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
