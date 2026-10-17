@@ -1,5 +1,5 @@
 // Daily Life OS offline worker. Bump CACHE on every release so phones pick up the update.
-const CACHE = 'dlos-2.7.5';
+const CACHE = 'dlos-2.8.0';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png'];
 self.addEventListener('install', e => {
@@ -19,4 +19,43 @@ self.addEventListener('fetch', e => {
     return;
   }
   e.respondWith(caches.match(req).then(hit => hit || fetch(req)));
+});
+
+// Push: the server sends only {id, at}; the text comes from IndexedDB written by the app.
+function reminderText(id) {
+  return new Promise(resolve => {
+    try {
+      const r = indexedDB.open('dlos-push', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('reminders', { keyPath: 'id' });
+      r.onerror = () => resolve(null);
+      r.onsuccess = () => {
+        try {
+          const g = r.result.transaction('reminders', 'readonly').objectStore('reminders').get(id);
+          g.onsuccess = () => resolve(g.result || null);
+          g.onerror = () => resolve(null);
+        } catch (err) { resolve(null); }
+      };
+    } catch (err) { resolve(null); }
+  });
+}
+self.addEventListener('push', e => {
+  e.waitUntil((async () => {
+    let d = {};
+    try { d = e.data ? e.data.json() : {}; } catch (err) {}
+    const item = d.test ? null : await reminderText(d.id);
+    const title = d.test ? d.title : (item && item.title) || 'Daily Life OS';
+    const body = d.test ? d.body : (item && item.body) || 'عندك تذكير جديد · You have a reminder';
+    await self.registration.showNotification(title, {
+      body, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png',
+      tag: 'dlos-' + (d.test ? 'test' : d.id), data: { view: (item && item.view) || (d.test ? 'settings' : 'today') },
+    });
+  })());
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  const view = (e.notification.data && e.notification.data.view) || 'today';
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) { c.postMessage({ type: 'open-view', view }); return c.focus(); }
+    return self.clients.openWindow(new URL('./#' + view, self.registration.scope).href);
+  }));
 });
