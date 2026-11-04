@@ -1,12 +1,14 @@
-// Daily Life OS offline worker. Bump CACHE on every release so phones pick up the update.
-const CACHE = 'dlos-2.9.3';
+// Offline worker. Bump CACHE on every release so phones pick up the update.
+const PREFIX = 'dlos-';
+const CACHE = PREFIX + '2.9.3';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './adhan.m4a'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+  // Only our own old caches: another app on this origin keeps its files.
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 // iPhone Safari loads audio in byte ranges and rejects a full 200 reply from a service worker.
@@ -31,7 +33,7 @@ self.addEventListener('fetch', e => {
       .catch(() => caches.match('./index.html')));
     return;
   }
-  e.respondWith(caches.match(req).then(hit => hit || fetch(req)));
+  e.respondWith(caches.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req)));
 });
 
 // Push: the server sends only {id, at}; the text comes from IndexedDB written by the app.
@@ -68,7 +70,7 @@ self.addEventListener('notificationclick', e => {
   e.notification.close();
   const view = (e.notification.data && e.notification.data.view) || 'today';
   e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-    for (const c of list) { c.postMessage({ type: 'open-view', view }); return c.focus(); }
-    return self.clients.openWindow(new URL('./#' + view, self.registration.scope).href);
+    for (const c of list) { c.postMessage({ type: 'open-view', view, fromNotification: true }); return c.focus(); }
+    return self.clients.openWindow(new URL('./?from=notification#' + view, self.registration.scope).href);
   }));
 });
