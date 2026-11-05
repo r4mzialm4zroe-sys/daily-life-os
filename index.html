@@ -1082,6 +1082,40 @@ body.dark .mp-head,body.dark .mp-foot{color:#c9b37a}
 .dt-emos button{width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-size:20px;cursor:pointer}
 .dt-emos button.on{border-color:var(--primary);background:var(--primary-soft)}
 
+/* ---- Outing ---- */
+.ot-hero{cursor:pointer}
+.ot-list{display:grid;gap:10px;margin-bottom:14px}
+.ot-card{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:14px;border-radius:18px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;cursor:pointer;box-shadow:var(--shadow)}
+.ot-card.past{opacity:.6}
+.ot-card-m{flex:1;min-width:0;display:grid;gap:3px}.ot-card-m b{font-size:16px}.ot-card-m span{font-size:13px;color:var(--muted)}
+.ot-past summary{cursor:pointer;font-weight:800;padding:8px 2px 12px;color:var(--muted)}
+.ot-tl{display:grid;gap:0;margin-top:12px;text-align:start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px 12px}
+.ot-tl-r{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--border)}
+.ot-tl-r:last-child{border-bottom:0}
+.ot-tl-i{font-size:18px}.ot-tl-l{flex:1;font-size:14px;color:var(--muted)}.ot-tl-r b{font-size:15px}
+.ot-sum .dt-clock{margin-top:2px}
+.dt-clock>div{text-align:center}
+.ot-form{display:grid;gap:18px;margin-bottom:14px}
+.ot-row{padding-bottom:16px;border-bottom:1px solid var(--border)}
+.ot-hint{margin-inline-start:auto;font-size:12px;color:var(--muted)}
+.ot-in{font:inherit;font-size:16px;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;min-height:46px;width:100%;box-sizing:border-box}
+.ot-in:focus{outline:none;border-color:var(--primary);background:var(--surface)}
+.ot-day{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;background:var(--surface-2);border-radius:12px;padding:12px 14px}
+.ot-day b{font-size:18px}.ot-day span{font-size:13px;color:var(--muted)}
+.ot-steps{display:flex;gap:12px;flex-wrap:wrap}
+.ot-step{display:flex;align-items:center;gap:6px}
+.ot-step button{width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:20px;cursor:pointer;touch-action:manipulation}
+.ot-step output{min-width:34px;text-align:center;font-size:20px;font-weight:800}
+.ot-step span{font-size:14px;color:var(--muted);font-weight:700}
+.ot-warn{font-size:13px;line-height:1.7;background:color-mix(in srgb,var(--warning) 14%,var(--surface));border-radius:12px;padding:10px 12px}
+.ot-dist{display:grid;gap:10px;background:var(--surface-2);border-radius:14px;padding:12px}
+.ot-km{display:flex;align-items:baseline;gap:6px;justify-content:center}.ot-km b{font-size:28px;font-weight:800;color:var(--primary)}.ot-km span{font-size:14px;color:var(--muted);font-weight:700}
+.ot-hms{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ot-hms>div{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 4px;display:grid;gap:2px;text-align:center}
+.ot-hms b{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}.ot-hms span{font-size:12px;color:var(--muted)}
+.ot-dnote{font-size:12.5px;color:var(--muted);text-align:center;line-height:1.6}
+.ot-from{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -1112,6 +1146,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item" data-view="groceries">🛒 <span class="nav-text">Groceries</span></button>
         <button class="nav-item" data-view="travel">🧳 <span class="nav-text">Travel</span></button>
         <button class="nav-item" data-view="dates">⏳ <span class="nav-text">Dates</span></button>
+        <button class="nav-item" data-view="outing">🚗 <span class="nav-text">Outing</span></button>
         <button class="nav-item" data-view="work">💼 <span class="nav-text">Work</span></button>
         <button class="nav-item" data-view="education">📚 <span class="nav-text">Education</span></button>
         <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
@@ -1152,6 +1187,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view" id="groceriesView"></section>
       <section class="view" id="travelView"></section>
       <section class="view" id="datesView"></section>
+      <section class="view" id="outingView"></section>
       <section class="view" id="workView"></section>
       <section class="view" id="educationView"></section>
       <section class="view" id="financeView"></section>
@@ -1232,7 +1268,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],dates:['المواعيد','Key dates'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],dates:['المواعيد','Key dates'],outing:['طلعة','Outing'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -1464,10 +1500,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.4.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.5.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,dates:renderDates,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,dates:renderDates,outing:renderOuting,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1562,7 +1598,7 @@ function init(){
  $('#navShade').addEventListener('click',()=>{$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');});
  $('#themeToggle').addEventListener('click',toggleTheme);
  $('#langToggle').addEventListener('click',toggleLanguage);
- $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='dates'){dtUI.add=true;dtUI.filter='all';renderDates();setTimeout(()=>{const n=$('#dtName');if(n){n.scrollIntoView({block:'center'});n.focus();}},30);return;}if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
+ $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='outing'){const o=otNew();otUI.open=o.id;renderOuting();scrollTo(0,0);return;}if(currentView==='dates'){dtUI.add=true;dtUI.filter='all';renderDates();setTimeout(()=>{const n=$('#dtName');if(n){n.scrollIntoView({block:'center'});n.focus();}},30);return;}if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
  $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal();});
  $('#modalForm').addEventListener('submit',submitModal);
  $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));
@@ -1606,6 +1642,7 @@ function buildReminders(){
  }
  for(const it of prayerReminderItems(now)){const {key,...rest}=it;push(key,rest);}
  try{for(const it of dtReminderItems(now)){const {key,...rest}=it;push(key,rest);}}catch{}
+ try{for(const it of otReminderItems(now)){const {key,...rest}=it;push(key,rest);}}catch{}
  return list.sort((a,b)=>a.at-b.at).slice(0,400);
 }
 function syncRemindersNow(){const a=androidNotify();if(!a)return;const s=notifySettings();try{reminderCount=a.syncReminders(JSON.stringify(s.enabled?buildReminders():[]));}catch{reminderCount=null;}const el=document.getElementById('notifyCount');if(el)el.textContent=reminderCountText();}
@@ -2605,6 +2642,125 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
   if(!n){message(tr('اكتب اسم الموعد','Type a name'),true);$('#dtName')?.focus();return;}if(!dtParse(d)){message(tr('اختر التاريخ','Choose the date'),true);return;}
   o.custom.push({id:id(),t:n.slice(0,60),date:d,rep:['g','h','once'].includes(rep)?rep:'g',e:em&&em.e||'📌'});dtUI.add=false;save();renderDates();message(tr('تمت إضافة الموعد ✓','Date added ✓'));return;}
  if(a==='cdel'){if(confirm(tr('حذف هذا الموعد؟','Delete this date?'))){o.custom=o.custom.filter(c=>c.id!==b.dataset.id);delete o.remind['c:'+b.dataset.id];save();renderDates();}return;}
+});
+
+// ---- Outing (طلعة) ----
+let otUI={open:null,past:false},otTimer=null;
+const OT_PLACE=[['rest','🍽️','مطعم','Restaurant'],['cafe','☕','كوفي','Café'],['hotel','🏨','فندق','Hotel'],['mall','🛍️','مول','Mall'],['park','🌳','حديقة','Park'],
+ ['beach','🏖️','بحر / كورنيش','Beach / corniche'],['desert','🏜️','بر','Desert'],['chalet','🏡','شاليه','Chalet'],['istiraha','🌴','استراحة','Istiraha'],['farm','🌾','مزرعة','Farm'],
+ ['home','🏠','بيت (أهل / أصحاب)','A home (family / friends)'],['cinema','🎬','سينما','Cinema'],['stadium','🏟️','ملعب','Stadium'],['event','🎡','فعالية / موسم','Event / season'],['gym','🏋️','نادي','Gym'],['other','📍','أخرى','Other']];
+const OT_WITH=[['wife','💑','الزوجة','My wife'],['kids','🧒','الأولاد','The kids'],['family','👪','الأهل','Family'],['relatives','👴','الأقارب','Relatives'],
+ ['friends','👥','الأصحاب','Friends'],['work','💼','زملاء العمل','Colleagues'],['guests','🤝','ضيوف','Guests'],['alone','🙋','لحالي','Just me']];
+const OT_OCC=[['dinner','🍽️','عشاء','Dinner'],['lunch','🥗','غداء','Lunch'],['breakfast','🥐','فطور','Breakfast'],['coffee','☕','قهوة','Coffee'],['outing','🚗','خرجة','Night out'],
+ ['kashta','🔥','كشتة','Desert camping'],['trip','🌄','طلعة','Day trip'],['match','⚽','مباراة','Match'],['bday','🎂','عيد ميلاد','Birthday'],['wedding','💍','زواج','Wedding'],
+ ['invite','🍖','عزيمة','Invitation'],['bbq','🍢','شواء','BBQ'],['shop','🛍️','تسوق','Shopping'],['movie','🎬','سينما','Movie'],['sport','🏃','رياضة','Sport'],['other','✨','أخرى','Other']];
+const OT_SPEED=[['auto','تلقائي','Auto',0],['city','داخل المدينة','In the city',40],['mixed','مختلط','Mixed',70],['highway','طريق سريع','Highway',110],['walk','مشي','Walking',5]];
+const otFind=(list,k)=>list.find(x=>x[0]===k);
+function otList(){if(!Array.isArray(state.outings))state.outings=[];state.outings=state.outings.filter(o=>o&&typeof o==='object'&&typeof o.id==='string');
+ state.outings.forEach(o=>{if(!Array.isArray(o.with))o.with=[];});return state.outings;}
+function otNew(){const o={id:id(),created:dateLocal(),date:dateLocal(),time:'20:00',ptype:'',pname:'',plink:'',plat:null,plon:null,from:null,with:[],withNames:'',durH:2,durM:0,km:'',speed:'auto',occ:'',notes:'',remind:true};otList().unshift(o);save();return o;}
+function otGet(){return otUI.open?otList().find(o=>o.id===otUI.open):null;}
+function otStart(o){return o.date&&o.time?localMs(o.date,o.time):NaN;}
+function otOrigin(o){if(o.from&&o.from.lat!=null)return o.from;try{if(prayerReady()){const s=prayerSettings();return {lat:+s.lat,lon:+s.lng,pr:1};}}catch{}return null;}
+function otKm(o){const k=parseFloat(String(o.km).replace(',','.'));if(k>0)return {km:k,est:false};
+ const a=otOrigin(o);if(o.plat!=null&&a){const r=Math.PI/180,dl=(o.plat-a.lat)*r,dn=(o.plon-a.lon)*r,x=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(o.plat*r)*Math.sin(dn/2)**2;
+  return {km:Math.round(12742*Math.asin(Math.sqrt(x))*1.25*10)/10,est:true};}return null;}
+function otSpeed(o,km){const s=otFind(OT_SPEED,o.speed)||OT_SPEED[0];return s[3]||(km<20?40:km<100?70:110);}
+function otDriveSec(o){const d=otKm(o);if(!d)return null;return Math.round(d.km/otSpeed(o,d.km)*3600);}
+function otDurMin(o){return Math.max(0,(+o.durH||0)*60+(+o.durM||0));}
+function otPlan(o){const st=otStart(o);if(isNaN(st))return null;const drive=otDriveSec(o)||0,dur=otDurMin(o)*60e3;
+ return {start:st,leaveHome:st-drive*1000,leavePlace:st+dur,home:st+dur+drive*1000,drive,dur};}
+function otHMS(sec){sec=Math.max(0,Math.round(sec));return {h:Math.floor(sec/3600),m:Math.floor(sec%3600/60),s:sec%60};}
+function otTitle(o){const occ=otFind(OT_OCC,o.occ),pl=otFind(OT_PLACE,o.ptype);const a=occ?tr(occ[2],occ[3]):'',b=o.pname||(pl?tr(pl[2],pl[3]):'');
+ return [a,b].filter(Boolean).join(tr(' — ',' — '))||tr('طلعة جديدة','New outing');}
+function otEmoji(o){const occ=otFind(OT_OCC,o.occ),pl=otFind(OT_PLACE,o.ptype);return occ?occ[1]:pl?pl[1]:'🚗';}
+function otWithText(o){const a=o.with.map(k=>{const w=otFind(OT_WITH,k);return w?tr(w[2],w[3]):'';}).filter(Boolean);if(o.withNames)a.push(o.withNames);return a.join(tr('، ',', '));}
+function otDayName(s){const d=dtParse(s);return d?dtWeekday(d):'';}
+function otLeft(ms){const s=Math.floor((ms-Date.now())/1000);if(s<=0)return '';const d=Math.floor(s/86400),hh=Math.floor(s%86400/3600),mm=Math.floor(s%3600/60);
+ if(d>=1)return tr(`باقي ${qNum(d)} ${dtDayWord(d)}`,`in ${d} day${d===1?'':'s'}`);if(hh>=1)return tr(`باقي ${qNum(hh)} ${hh===1?'ساعة':hh===2?'ساعتان':hh<=10?'ساعات':'ساعة'}`,`in ${hh} h`);return tr(`باقي ${qNum(mm)} دقيقة`,`in ${mm} min`);}
+function otTimeline(o,p){if(!p)return '';const row=(ic,lbl,ms)=>`<div class="ot-tl-r"><span class="ot-tl-i">${ic}</span><span class="ot-tl-l">${lbl}</span><b>${timeOf(ms)}</b></div>`;
+ return `<div class="ot-tl">${p.drive?row('🚗',tr('تطلع من البيت','Leave home'),p.leaveHome):''}${row('📍',tr('توصل المكان','Arrive'),p.start)}${p.dur?row('👋',tr('تطلعون من المكان','Leave the place'),p.leavePlace):''}${p.drive||p.dur?row('🏠',tr('ترجع البيت تقريبًا','Back home around'),p.home):''}</div>`;}
+function otClockHTML(ms,idName){return `<div class="dt-clock" id="${idName}" data-at="${ms}">${['d','h','m','s'].map(u=>`<div><b data-u="${u}">–</b><span>${tr({d:'يوم',h:'ساعة',m:'دقيقة',s:'ثانية'}[u],{d:'days',h:'hours',m:'min',s:'sec'}[u])}</span></div>`).join('')}</div>`;}
+function otTick(){const c=$('#otClock');if(!c)return false;const s=Math.max(0,Math.floor((+c.dataset.at-Date.now())/1000));const v={d:Math.floor(s/86400),h:Math.floor(s%86400/3600),m:Math.floor(s%3600/60),s:s%60};
+ c.querySelectorAll('b[data-u]').forEach(b=>{const t=qNum(String(v[b.dataset.u]).padStart(b.dataset.u==='d'?1:2,'0'));if(b.textContent!==t)b.textContent=t;});return true;}
+function otCardHTML(o){const p=otPlan(o),past=p&&p.home<Date.now(),left=p?otLeft(p.start):'';
+ return `<button type="button" class="ot-card ${past?'past':''}" data-ot="open" data-id="${o.id}"><span class="dt-emo">${otEmoji(o)}</span>
+  <span class="ot-card-m"><b>${safe(otTitle(o))}</b><span>${o.date?`${otDayName(o.date)}${tr('، ',', ')}${dtDateText(dtParse(o.date))}`:''}${o.time?` — ${clock(o.time)}`:''}</span>${o.with.length||o.withNames?`<span>👥 ${safe(otWithText(o))}</span>`:''}</span>
+  ${left?`<span class="tv-cd">${left}</span>`:p&&!past?`<span class="tv-cd">${tr('الآن 🎉','Now 🎉')}</span>`:''}</button>`;}
+function otHomeHTML(){const list=otList(),now=Date.now();
+ const withP=list.map(o=>({o,p:otPlan(o)}));const up=withP.filter(x=>!x.p||x.p.home>=now).sort((a,b)=>(a.p?a.p.start:9e15)-(b.p?b.p.start:9e15)),past=withP.filter(x=>x.p&&x.p.home<now).sort((a,b)=>b.p.start-a.p.start);
+ const next=up.find(x=>x.p);
+ const hero=next?`<div class="card dt-hero ot-hero" data-ot="open" data-id="${next.o.id}"><div class="dt-hero-k">⏳ ${tr('أقرب طلعة','Next outing')}</div><div class="dt-hero-t">${otEmoji(next.o)} ${safe(otTitle(next.o))}</div>
+  <div class="dt-hero-d">${otDayName(next.o.date)}${tr('، ',', ')}${dtDateText(dtParse(next.o.date))} — ${clock(next.o.time)}</div>${next.p.start>now?otClockHTML(next.p.start,'otClock'):`<div class="dt-hero-now">🎉 ${tr('استمتعوا بطلعتكم','Enjoy your outing')}</div>`}${otTimeline(next.o,next.p)}</div>`:'';
+ return `<div class="card tv-hero"><div><div class="tv-hero-t">🚗 ${tr('طلعة','Outing')}</div><div class="hint">${tr('رتّب طلعتك: الموعد، المكان، مع مين، المدة، المسافة والمناسبة','Plan it: when, where, with whom, how long, how far and what for')}</div></div>
+  <button type="button" class="primary-btn" data-ot="new">＋ ${tr('طلعة جديدة','New outing')}</button></div>${hero}
+  ${up.length>(next?1:0)?`<div class="ot-list">${up.filter(x=>x!==next).map(x=>otCardHTML(x.o)).join('')}</div>`:next?'':`<div class="card tv-empty">🚗 ${tr('ما عندك طلعات قادمة — اضغط «طلعة جديدة»','No upcoming outings — tap “New outing”')}</div>`}
+  ${past.length?`<details class="ot-past" ${otUI.past?'open':''}><summary data-ot="pasttoggle">🕘 ${tr(`طلعات سابقة (${qNum(past.length)})`,`Past outings (${past.length})`)}</summary><div class="ot-list">${past.map(x=>otCardHTML(x.o)).join('')}</div></details>`:''}`;}
+function otRow(n,ok,label,body,hint=''){return `<div class="tv-row ot-row"><div class="tv-row-h"><span class="tv-num sm ${ok?'ok':''}">${ok?'✓':qNum(n)}</span><span class="tv-lbl">${label}</span>${hint?`<span class="ot-hint">${hint}</span>`:''}</div>${body}</div>`;}
+function otChips(list,sel,act,multi){const s=multi?new Set(sel):null;return `<div class="tv-chips">${list.map(x=>{const on=multi?s.has(x[0]):sel===x[0];return `<button type="button" class="tv-chip ${on?'on':''}" data-ot="${act}" data-k="${x[0]}" aria-pressed="${on}">${x[1]} ${tr(x[2],x[3])}</button>`;}).join('')}</div>`;}
+function otEditHTML(o){const p=otPlan(o),d=otKm(o),drive=otDriveSec(o),org=otOrigin(o),today=dateLocal(),tm=dtParse(today);
+ const nextDow=w=>{const x=new Date(tm);x.setDate(x.getDate()+((w-x.getDay()+7)%7||7));return ymd(x);};
+ const qd=[[today,tr('اليوم','Today')],[ymd(new Date(tm.getTime()+864e5)),tr('بكرة','Tomorrow')],[nextDow(4),tr('الخميس الجاي','Next Thursday')],[nextDow(5),tr('الجمعة الجاية','Next Friday')]];
+ const qt=['08:00','13:00','16:00','20:00','21:00'];
+ const top=`<div class="tv-top"><button type="button" class="secondary-btn" data-ot="home">${tr('‹ طلعاتي','‹ My outings')}</button><span class="tv-top-sp"></span><button type="button" class="tv-icon" data-ot="del" aria-label="${tr('حذف','Delete')}">🗑️</button></div>`;
+ const sum=`<div class="card tv-sum ot-sum"><div class="tv-sum-r">${otEmoji(o)} <b>${safe(otTitle(o))}</b></div>
+  <div class="tv-sum-m">${o.date?`<span class="tv-pill">📅 ${otDayName(o.date)}${tr('، ',', ')}${dtDateText(dtParse(o.date))}</span>`:''}${o.time?`<span class="tv-pill">🕒 ${clock(o.time)}</span>`:''}${o.with.length||o.withNames?`<span class="tv-pill">👥 ${safe(otWithText(o))}</span>`:''}</div>
+  ${p&&p.start>Date.now()?otClockHTML(p.start,'otClock'):''}${otTimeline(o,p)}</div>`;
+ const hms=drive!=null?otHMS(drive):null;
+ const rows=[
+  otRow(1,!!o.date,tr('التاريخ','Date'),`<input class="ot-in" type="date" data-of="date" value="${safe(o.date||'')}"><div class="tv-chips">${qd.map(x=>`<button type="button" class="tv-chip ${o.date===x[0]?'on':''}" data-ot="qdate" data-v="${x[0]}">${x[1]}</button>`).join('')}</div>`),
+  otRow(2,!!o.date,tr('اليوم','Day'),`<div class="ot-day">${o.date?`<b>${otDayName(o.date)}</b><span>${hijriLabel(dtParse(o.date))}</span>`:`<span class="tv-ph">${tr('يظهر تلقائيًا من التاريخ','Filled in from the date')}</span>`}</div>`),
+  otRow(3,!!o.time,tr('الساعة','Time'),`<input class="ot-in" type="time" data-of="time" value="${safe(o.time||'')}"><div class="tv-chips">${qt.map(t=>`<button type="button" class="tv-chip ${o.time===t?'on':''}" data-ot="qtime" data-v="${t}">${clock(t)}</button>`).join('')}</div>`),
+  otRow(4,!!(o.ptype||o.pname),tr('المكان','Place'),`${otChips(OT_PLACE,o.ptype,'ptype',false)}
+   <label class="tv-f"><span>${tr('اسم المكان','Place name')}</span><input data-of="pname" value="${safe(o.pname||'')}" maxlength="80" dir="auto" placeholder="${tr('مثال: مطعم … ، فندق …','e.g. the restaurant or hotel name')}"></label>
+   <label class="tv-f"><span>${tr('رابط الموقع أو الإحداثيات (اختياري — لحساب المسافة)','Map link or coordinates (optional — for the distance)')}</span><input data-of="plink" value="${safe(o.plink||'')}" maxlength="500" dir="ltr" placeholder="https://maps.google.com/…@24.71,46.67"></label>
+   ${o.plink&&o.plat==null?`<div class="ot-warn">⚠️ ${tr('ما لقيت إحداثيات في الرابط — افتح الموقع في الخرائط وانسخ الرابط الطويل أو الإحداثيات، أو اكتب المسافة بنفسك تحت.','No coordinates found in this link — copy the long link or the coordinates from your maps app, or type the distance below.')}</div>`:''}`),
+  otRow(5,!!(o.with.length||o.withNames),tr('مع مين','With whom'),`${otChips(OT_WITH,o.with,'with',true)}<label class="tv-f"><span>${tr('الأسماء (اختياري)','Names (optional)')}</span><input data-of="withNames" value="${safe(o.withNames||'')}" maxlength="120" dir="auto"></label>`),
+  otRow(6,otDurMin(o)>0,tr('كم بتاخذ الطلعة','How long it takes'),`<div class="ot-steps">${[['durH',tr('ساعة','hours'),24,1],['durM',tr('دقيقة','minutes'),45,15]].map(([k,l,mx,st])=>`<div class="ot-step"><button type="button" data-ot="dur" data-k="${k}" data-d="${-st}" aria-label="−">−</button><output>${qNum(+o[k]||0)}</output><button type="button" data-ot="dur" data-k="${k}" data-d="${st}" aria-label="+">＋</button><span>${l}</span></div>`).join('')}</div>
+   ${p&&(p.dur||p.drive)?`<div class="tv-dline">🏠 ${tr(`ترجعون البيت تقريبًا الساعة ${timeOf(p.home)}`,`You'll be back home around ${timeOf(p.home)}`)}${p.drive?tr(' (مع الطريق رايح جاي)',' (including the drive both ways)'):''}</div>`:''}`),
+  otRow(7,!!d,tr('المسافة ووقت الطريق','Distance & drive time'),`<div class="tv-grid2"><label class="tv-f"><span>${tr('المسافة (كم)','Distance (km)')}</span><input type="number" inputmode="decimal" min="0" step="0.1" data-of="km" value="${safe(o.km||'')}" placeholder="${d&&d.est?safe(String(d.km)):''}"></label>
+   <label class="tv-f"><span>${tr('نوع الطريق','Road')}</span><select data-of="speed">${OT_SPEED.map(s=>`<option value="${s[0]}" ${o.speed===s[0]?'selected':''}>${tr(s[1],s[2])}${s[3]?` (${qNum(s[3])} ${tr('كم/س','km/h')})`:''}</option>`).join('')}</select></label></div>
+   ${d?`<div class="ot-dist"><div class="ot-km"><b>${qNum(d.km)}</b><span>${tr('كم','km')}${d.est?tr(' (تقريبي)',' (estimate)'):''}</span></div>
+    <div class="ot-hms">${['h','m','s'].map(u=>`<div><b>${qNum(String(hms[u]).padStart(u==='h'?1:2,'0'))}</b><span>${tr({h:'ساعة',m:'دقيقة',s:'ثانية'}[u],{h:'hours',m:'min',s:'sec'}[u])}</span></div>`).join('')}</div>
+    <div class="ot-dnote">${tr(`وقت الطريق للذهاب بسرعة ${qNum(otSpeed(o,d.km))} كم/س — رايح جاي ${timeLen(drive*2)}`,`One-way drive at ${otSpeed(o,d.km)} km/h — round trip ${timeLen(drive*2)}`)}</div></div>`
+    :`<div class="hint">${tr('اكتب المسافة، أو الصق رابط الموقع فوق ونحسبها من موقعك.','Type the distance, or paste the map link above and we work it out from your location.')}</div>`}
+   <div class="ot-from"><span class="hint">📍 ${o.from?tr('من موقعك الحالي','From your current location'):org&&org.pr?tr('من مدينتك في إعدادات الصلاة','From your city in the prayer settings'):tr('حدد موقعك لحساب المسافة من الرابط','Set your location to measure from the link')}</span><button type="button" class="dt-tool" data-ot="gps">🎯 ${tr('موقعي الحالي','My location')}</button></div>`),
+  otRow(8,!!o.occ,tr('المناسبة','Occasion'),otChips(OT_OCC,o.occ,'occ',false))];
+ const extra=`<label class="tv-f tv-wide"><span>${tr('ملاحظات','Notes')}</span><textarea data-of="notes" rows="3" maxlength="2000" dir="auto">${safe(o.notes||'')}</textarea></label>
+  <button type="button" class="dt-tool dt-bell ${o.remind?'on':''}" data-ot="bell" aria-pressed="${!!o.remind}">${o.remind?'🔔 '+tr('بنذكرك قبل الطلعة بنص ساعة ووقت الطلعة','Reminder 30 min before you leave and at leaving time'):'🔕 '+tr('ذكّرني قبل الطلعة','Remind me before I leave')}</button>`;
+ return top+sum+`<div class="card ot-form">${rows.join('')}${extra}</div>`;}
+function timeLen(sec){const v=otHMS(sec);return tr([v.h?`${qNum(v.h)} ساعة`:'',v.m?`${qNum(v.m)} دقيقة`:'',!v.h&&!v.m?`${qNum(v.s)} ثانية`:''].filter(Boolean).join(' و'),[v.h?`${v.h} h`:'',v.m?`${v.m} min`:'',!v.h&&!v.m?`${v.s} s`:''].filter(Boolean).join(' '));}
+function renderOuting(){const el=$('#outingView');if(!el)return;const o=otGet();if(otUI.open&&!o)otUI.open=null;el.innerHTML=o?otEditHTML(o):otHomeHTML();
+ otTick();clearInterval(otTimer);otTimer=setInterval(()=>{if(currentView!=='outing'||!otTick())clearInterval(otTimer);},1000);}
+function otParseLink(s){s=String(s||'');const m=/@(-?\d{1,2}\.\d+),\s*(-?\d{1,3}\.\d+)/.exec(s)||/[?&](?:q|query|ll|destination|daddr)=(-?\d{1,2}\.\d+)(?:,|%2C)\s*(-?\d{1,3}\.\d+)/i.exec(s)||/!3d(-?\d{1,2}\.\d+)!4d(-?\d{1,3}\.\d+)/.exec(s)||/^\s*(-?\d{1,2}\.\d+)\s*[, ]\s*(-?\d{1,3}\.\d+)\s*$/.exec(s);
+ if(!m)return null;const lat=+m[1],lon=+m[2];return Math.abs(lat)<=90&&Math.abs(lon)<=180?{lat,lon}:null;}
+/** Outing reminders: 30 minutes before leaving home, and at leaving time. */
+function otReminderItems(now){const out=[];for(const o of otList()){if(!o.remind)continue;const p=otPlan(o);if(!p)continue;const t=otTitle(o),em=otEmoji(o);
+ out.push({key:`ot${o.id}${p.leaveHome}a`,at:p.leaveHome-30*60e3,title:`${em} ${tr(`بعد نص ساعة: ${t}`,`In 30 min: ${t}`)}`,body:p.drive?tr(`اطلع من البيت الساعة ${timeOf(p.leaveHome)} عشان توصل ${timeOf(p.start)}`,`Leave home at ${timeOf(p.leaveHome)} to arrive at ${timeOf(p.start)}`):tr(`الموعد الساعة ${timeOf(p.start)}`,`It starts at ${timeOf(p.start)}`),view:'outing'});
+ out.push({key:`ot${o.id}${p.leaveHome}b`,at:p.leaveHome,title:`🚗 ${tr(`حان وقت الطلعة: ${t}`,`Time to go: ${t}`)}`,body:o.pname?o.pname:tr('يلا مشينا 🚗','Let\'s go 🚗'),view:'outing'});}
+ return out.filter(x=>x.at>now);}
+document.addEventListener('change',e=>{const f=e.target.closest&&e.target.closest('[data-of]');if(!f||currentView!=='outing')return;const o=otGet();if(!o)return;const k=f.dataset.of,v=String(f.value||'').trim();
+ if(k==='plink'){o.plink=v.slice(0,500);const c=otParseLink(v);o.plat=c?c.lat:null;o.plon=c?c.lon:null;}
+ else if(k==='km'){const n=parseFloat(v.replace(',','.'));o.km=n>0?String(Math.min(20000,n)):'';}
+ else if(['date','time','pname','withNames','notes','speed'].includes(k))o[k]=v.slice(0,k==='notes'?2000:120);
+ save();if(k!=='notes')renderOuting();});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ot]');if(!b)return;const a=b.dataset.ot;
+ if(a==='new'){const o=otNew();otUI.open=o.id;renderOuting();scrollTo(0,0);return;}
+ if(a==='open'){otUI.open=b.dataset.id;renderOuting();scrollTo(0,0);return;}
+ if(a==='home'){otUI.open=null;renderOuting();scrollTo(0,0);return;}
+ if(a==='pasttoggle'){otUI.past=!otUI.past;return;}
+ const o=otGet();if(!o)return;
+ if(a==='del'){if(confirm(tr('حذف هذه الطلعة؟','Delete this outing?'))){state.outings=otList().filter(x=>x.id!==o.id);otUI.open=null;save();renderOuting();scrollTo(0,0);}return;}
+ if(a==='qdate'){o.date=b.dataset.v;save();renderOuting();return;}
+ if(a==='qtime'){o.time=b.dataset.v;save();renderOuting();return;}
+ if(a==='ptype'){o.ptype=o.ptype===b.dataset.k?'':b.dataset.k;save();renderOuting();return;}
+ if(a==='occ'){o.occ=o.occ===b.dataset.k?'':b.dataset.k;save();renderOuting();return;}
+ if(a==='with'){const k=b.dataset.k;o.with=o.with.includes(k)?o.with.filter(x=>x!==k):(k==='alone'?['alone']:[...o.with.filter(x=>x!=='alone'),k]);save();renderOuting();return;}
+ if(a==='dur'){const k=b.dataset.k,mx=k==='durH'?24:45;o[k]=Math.max(0,Math.min(mx,(+o[k]||0)+(+b.dataset.d)));save();renderOuting();return;}
+ if(a==='bell'){o.remind=!o.remind;save();renderOuting();message(o.remind?tr('بنذكرك قبل الطلعة بنص ساعة ووقتها 🔔','We\'ll remind you 30 min before and at leaving time 🔔'):tr('تم إيقاف التذكير','Reminder off'));return;}
+ if(a==='gps'){if(!navigator.geolocation){message(tr('تحديد الموقع غير متاح هنا','Location is not available here'),true);return;}message(tr('جاري تحديد موقعك…','Finding your location…'));
+  navigator.geolocation.getCurrentPosition(pos=>{o.from={lat:+pos.coords.latitude.toFixed(4),lon:+pos.coords.longitude.toFixed(4)};save();if(currentView==='outing')renderOuting();message(tr('تم تحديد موقعك ✓','Location set ✓'));},
+   ()=>message(tr('ما قدرنا نحدد موقعك — فعّل الموقع أو اكتب المسافة بنفسك','Could not get your location — turn on location or type the distance'),true),{enableHighAccuracy:false,timeout:15000,maximumAge:600e3});return;}
 });
 
 document.addEventListener('DOMContentLoaded',init);
