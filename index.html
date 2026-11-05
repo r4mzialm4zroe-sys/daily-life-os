@@ -886,6 +886,143 @@ body.dark .mp-head,body.dark .mp-foot{color:#c9b37a}
 .gr-danger{color:var(--danger)}
 .gr-empty{text-align:center;color:var(--muted);padding:26px 10px}
 
+/* ---- Travel ---- */
+.tv-hero{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.tv-hero-t{font-size:21px;font-weight:800}
+.tv-trips{display:grid;gap:10px;margin-bottom:14px}
+.tv-trip{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:14px;border-radius:18px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;cursor:pointer;box-shadow:var(--shadow)}
+.tv-trip.past{opacity:.6}
+.tv-trip-f{font-size:26px;flex:none;max-width:80px;line-height:1.2}
+.tv-trip-m{flex:1;display:grid;gap:3px;min-width:0}.tv-trip-m b{font-size:16.5px;overflow-wrap:anywhere}.tv-trip-m span{font-size:13px;color:var(--muted)}
+.tv-cd{flex:none;font-size:12.5px;font-weight:800;color:var(--primary);background:var(--primary-soft);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.tv-empty{text-align:center;color:var(--muted);padding:26px 12px}
+.tv-guidecard{display:grid;gap:10px}.tv-guidecard h3{margin:0}
+.tv-src{font-size:11.5px;color:var(--muted);text-align:center;margin:10px 0 4px}
+.tv-chips{display:flex;flex-wrap:wrap;gap:7px}
+.tv-chip{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 12px;font:inherit;font-size:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.tv-chip.on{background:var(--primary-soft);border-color:var(--primary);font-weight:700}
+.tv-top{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.tv-top .secondary-btn{flex:none}
+.tv-title{flex:1;min-width:0;font:inherit;font-size:17px;font-weight:800;border:1px solid transparent;border-radius:12px;padding:8px 10px;background:transparent;color:var(--text)}
+.tv-title:focus{outline:none;border-color:var(--primary);background:var(--surface)}
+.tv-gt{flex:1;font-size:18px;min-width:0}
+.tv-icon{flex:none;width:38px;height:38px;border:0;border-radius:11px;background:none;color:var(--muted);font-size:16px;cursor:pointer}
+.tv-icon:hover,.tv-icon:focus-visible{background:var(--surface-2)}
+.tv-sum{display:grid;gap:8px;margin-bottom:14px}
+.tv-sum-r{font-size:16px;line-height:1.6}
+.tv-sum-m{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;color:var(--muted);align-items:center}
+.tv-prog{display:flex;align-items:center;gap:5px}.tv-prog i{flex:1;height:6px;border-radius:9px;background:var(--surface-2)}.tv-prog i.ok{background:var(--success)}
+.tv-prog span{flex:none;font-size:12px;color:var(--muted);font-weight:700;margin-inline-start:6px}
+.tv-sec{margin-bottom:14px;display:grid;gap:12px}
+.tv-sec-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.tv-sec-h h3{margin:0;font-size:17.5px;flex:1 1 0;min-width:150px;line-height:1.5}
+.tv-sec-sub{font-size:12.5px;color:var(--muted);margin-inline-start:auto}
+.tv-num{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:800;background:var(--surface-2);color:var(--muted)}
+.tv-num.ok{background:var(--success);color:#fff}
+.tv-stop{display:grid;gap:10px;padding-bottom:12px;border-bottom:1px dashed var(--border)}
+.tv-stop:last-of-type{border-bottom:0}
+.tv-stop-h{display:flex;align-items:center;justify-content:space-between}
+.tv-row{display:flex;gap:10px;align-items:flex-start}
+.tv-row .tv-num{margin-top:22px}
+.tv-row-b{flex:1;display:grid;gap:5px;min-width:0}
+.tv-lbl{font-size:13px;color:var(--muted);font-weight:700}
+.tv-pick{display:flex;align-items:center;gap:8px;width:100%;min-height:48px;padding:10px 14px;border-radius:14px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font:inherit;font-size:16px;text-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tv-pick>span:first-child{flex:1;min-width:0;overflow-wrap:anywhere}
+.tv-pick.empty{border-style:dashed}
+.tv-ph{color:var(--muted)}.tv-dis{padding:10px 2px;font-size:14px}
+.tv-chev{flex:none;color:var(--muted);font-size:20px;line-height:1}
+[dir="rtl"] .tv-chev{transform:scaleX(-1)}
+.tv-addstop{justify-self:start}
+.tv-f{display:grid;gap:5px;font-size:13px;color:var(--muted);font-weight:700}
+.tv-f input,.tv-f select,.tv-f textarea{font:inherit;font-size:16px;font-weight:400;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;min-height:44px;width:100%;box-sizing:border-box}
+.tv-f textarea{resize:vertical;line-height:1.6}
+.tv-f input:focus,.tv-f select:focus,.tv-f textarea:focus{outline:none;border-color:var(--primary);background:var(--surface)}
+.tv-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tv-wide{grid-column:1/-1}
+.tv-nights{max-width:220px}
+.tv-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--surface-2);padding:4px;border-radius:14px}
+.tv-seg button{border:0;border-radius:11px;padding:10px 4px;background:none;color:var(--text);font:inherit;font-size:14px;cursor:pointer}
+.tv-seg button.on{background:var(--surface);font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.08);color:var(--primary)}
+.tv-dline{font-size:14px;color:var(--text);background:var(--surface-2);border-radius:12px;padding:10px 12px;line-height:1.7}
+.tv-isl{display:grid;gap:8px}
+.tv-isl>div{border-radius:12px;padding:10px 12px;background:var(--surface-2);border-inline-start:4px solid var(--warning)}
+.tv-step{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.tv-step>div:first-child{display:grid;gap:2px}
+.tv-step-c{display:flex;align-items:center;gap:6px}
+.tv-step-c button{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:20px;cursor:pointer;touch-action:manipulation}
+.tv-step-c button:disabled{opacity:.35;cursor:default}
+.tv-step-c output{min-width:30px;text-align:center;font-size:18px;font-weight:800}
+.tv-ages{display:grid;gap:6px;padding:8px 0;border-bottom:1px solid var(--border)}
+.tv-age{display:flex;align-items:center;gap:6px;font-size:13.5px}
+.tv-age select{font:inherit;font-size:15px;border:1px solid var(--border);border-radius:10px;padding:6px;background:var(--surface-2);color:var(--text)}
+.tv-leg{border:1px solid var(--border);border-radius:14px;padding:4px 12px 12px}
+.tv-leg summary{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 0;cursor:pointer;list-style:none}
+.tv-leg summary::-webkit-details-marker{display:none}
+.tv-leg summary .hint{flex-basis:100%;order:3}
+.tv-leg-sel{margin-inline-start:auto;font-size:18px}
+.tv-trg{display:grid;gap:6px;margin-bottom:10px}
+.tv-trg-h{font-size:12px;color:var(--muted);font-weight:700}
+.tv-stay{display:grid;gap:10px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.tv-stay:last-child{border-bottom:0;padding-bottom:0}
+.tv-stay-h{font-weight:800;font-size:15.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tv-tag{font-size:12.5px;font-weight:700;background:var(--primary-soft);color:var(--text);border-radius:999px;padding:3px 9px}
+.tv-stars{display:flex;gap:4px}
+.tv-stars button{border:0;background:none;font-size:26px;color:var(--border);cursor:pointer;padding:0 2px;line-height:1}
+.tv-stars button.on{color:#f5b301}
+.tv-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:12px}
+.tv-facts>div{background:var(--surface-2);border-radius:12px;padding:9px 11px;display:grid;gap:3px}
+.tv-facts span{font-size:12px;color:var(--muted)}.tv-facts b{font-size:14.5px;overflow-wrap:anywhere}
+.tv-info{display:grid;gap:10px}
+.tv-sub{font-weight:800;font-size:15px;margin-top:6px}
+.tv-months{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.tv-months span{text-align:center;font-size:12px;padding:7px 2px;border-radius:9px;background:var(--surface-2);color:var(--muted);border:2px solid transparent}
+.tv-months span.best{background:color-mix(in srgb,var(--success) 22%,var(--surface));color:var(--text);font-weight:700}
+.tv-months span.trip{border-color:var(--primary)}
+.tv-legend{display:flex;gap:14px;font-size:12px;color:var(--muted)}
+.tv-legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-2px;margin-inline-end:5px}
+.tv-legend i.best{background:color-mix(in srgb,var(--success) 40%,var(--surface))}
+.tv-legend i.trip{border:2px solid;border-color:var(--primary)}
+.tv-ok-line{font-size:14px;font-weight:700;color:var(--success)}
+.tv-ok-line.mid{color:var(--warning)}.tv-ok-line.no{color:var(--danger)}
+.tv-clim{margin:0;line-height:1.8;font-size:14.5px}
+.tv-ev{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.tv-ev>div{flex:1;display:grid;gap:3px;min-width:0}
+.tv-ev b{font-size:15px}
+.tv-ev.on b{color:var(--primary)}
+.tv-star{flex:none;width:40px;height:40px;border:0;border-radius:12px;background:var(--surface-2);font-size:20px;color:var(--muted);cursor:pointer}
+.tv-star.on{color:#f5b301}
+.tv-more summary{cursor:pointer;font-weight:800;font-size:15px;padding:6px 0}
+.tv-tips{margin:0;padding-inline-start:20px;display:grid;gap:6px;line-height:1.7;font-size:14.5px}
+.tv-note{font-size:12px;color:var(--muted)}
+.tv-none{padding:4px 0}
+.tv-cinfo{display:grid;gap:8px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.tv-act{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.tv-act .tv-icon{margin-inline-start:auto;width:32px;height:32px;font-size:13px}
+.tv-actadd{display:grid;grid-template-columns:1fr auto;gap:6px}
+.tv-actadd #tvActIn{grid-column:1/-1}
+.tv-actadd input{font:inherit;font-size:15px;min-width:0;border:1px solid var(--border);border-radius:12px;padding:9px 10px;background:var(--surface-2);color:var(--text)}
+.tv-actadd input[type=date]{width:100%}
+.tv-age span{white-space:nowrap}
+.tv-sheet-back{position:fixed;inset:0;z-index:1200;background:rgba(10,15,25,.45);display:flex;align-items:flex-end;justify-content:center}
+.tv-sheet-back.hidden{display:none}
+.tv-sheet{width:min(640px,100%);max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;gap:8px;background:var(--surface);color:var(--text);border-radius:22px 22px 0 0;padding:14px 14px calc(12px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.tv-sheet-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:16.5px}
+#tvSheetQ{font:inherit;font-size:16px;border:1px solid var(--border);border-radius:14px;padding:11px 14px;background:var(--surface-2);color:var(--text);width:100%;box-sizing:border-box}
+#tvSheetQ:focus{outline:none;border-color:var(--primary)}
+.tv-sheet-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;color:var(--muted)}
+.tv-sheet-nav.hidden{display:none}
+.tv-sheet-res{overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:160px;flex:1;overscroll-behavior:contain}
+.tv-sheet-sec{font-size:12px;color:var(--muted);font-weight:700;padding:6px 2px}
+.tv-res{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:8px 6px;border:0;border-bottom:1px solid var(--border);background:none;color:var(--text);font:inherit;text-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tv-res:active{background:var(--surface-2)}
+.tv-res-m{flex:1;display:grid;gap:2px;min-width:0}.tv-res-m b{font-size:15.5px;font-weight:700}
+.tv-res-m .hint{font-size:12.5px}
+.tv-flag{font-size:22px;margin-inline-end:8px}
+.tv-res-m:has(.tv-flag){display:flex;align-items:center}
+.tv-badge{flex:none;font-size:11.5px;color:var(--muted);background:var(--surface-2);border-radius:999px;padding:3px 8px}
+.tv-custom{color:var(--primary);font-weight:700}
+.tv-approx .tv-res-m b::after{content:' ≈';color:var(--muted);font-weight:400}
+.tv-all{color:var(--success)}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -914,6 +1051,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item active" data-view="dashboard">🏠 <span class="nav-text">Dashboard</span></button>
         <button class="nav-item" data-view="today">📅 <span class="nav-text">Today</span></button>
         <button class="nav-item" data-view="groceries">🛒 <span class="nav-text">Groceries</span></button>
+        <button class="nav-item" data-view="travel">🧳 <span class="nav-text">Travel</span></button>
         <button class="nav-item" data-view="work">💼 <span class="nav-text">Work</span></button>
         <button class="nav-item" data-view="education">📚 <span class="nav-text">Education</span></button>
         <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
@@ -952,6 +1090,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view active" id="dashboardView"></section>
       <section class="view" id="todayView"></section>
       <section class="view" id="groceriesView"></section>
+      <section class="view" id="travelView"></section>
       <section class="view" id="workView"></section>
       <section class="view" id="educationView"></section>
       <section class="view" id="financeView"></section>
@@ -1032,7 +1171,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -1264,10 +1403,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.2.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.3.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1362,7 +1501,7 @@ function init(){
  $('#navShade').addEventListener('click',()=>{$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');});
  $('#themeToggle').addEventListener('click',toggleTheme);
  $('#langToggle').addEventListener('click',toggleLanguage);
- $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
+ $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
  $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal();});
  $('#modalForm').addEventListener('submit',submitModal);
  $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));
@@ -1949,6 +2088,330 @@ document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.c
  if(a==='cleardone'){state.groceries=list.filter(i=>!i.done);save();renderGroceries();return;}
  if(a==='uncheck'){list.forEach(i=>i.done=false);save();renderGroceries();return;}
  if(a==='clear'){if(confirm(tr('مسح كل القائمة؟','Clear the whole list?'))){state.groceries=[];save();renderGroceries();}return;}
+});
+
+// ---- Travel (السفر): trip planner ----
+const TV={idx:null,info:null,cmap:{},c:{},load:{}};
+let tvUI={open:null,guide:null},tvSheet=null;
+function tvFetch(u){return fetch(u).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();});}
+function tvBase(){if(TV.idx&&TV.info)return Promise.resolve();
+ if(!TV.load.base)TV.load.base=Promise.all([tvFetch('travel/index.json'),tvFetch('travel/info.json')]).then(([a,b])=>{TV.idx=a;TV.info=b;a.countries.forEach(c=>TV.cmap[c.cc]=c);}).catch(e=>{TV.load.base=null;throw e;});
+ return TV.load.base;}
+function tvData(cc){if(TV.c[cc])return Promise.resolve(TV.c[cc]);
+ if(!TV.load[cc])TV.load[cc]=tvFetch(`travel/c/${cc}.json`).then(d=>{d.keys=d.p.map(r=>' '+tvKey(r[0])+' | '+tvKey(r[1]));return TV.c[cc]=d;}).catch(e=>{delete TV.load[cc];throw e;});
+ return TV.load[cc];}
+const tvIsAr=()=>state.lang==='ar';
+function tvKey(s){return String(s||'').normalize('NFD').replace(/[̀-ًͯ-ٰٟـ]/g,'').replace(/[ٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[’‘'`ʿʾ.\-]/g,'').toLowerCase().replace(/\s+/g,' ').trim();}
+function tvSkel(s){s=String(s||'').toLowerCase();
+ if(/[؀-ۿ]/.test(s)){const m={'ب':'b','پ':'b','ت':'t','ط':'t','ث':'s','س':'s','ص':'s','ش':'s','ج':'g','غ':'g','گ':'g','ق':'k','ك':'k','د':'d','ض':'d','ذ':'d','ز':'d','ظ':'d','ر':'r','ف':'f','ڤ':'f','ل':'l','م':'m','ن':'n'};let o='';for(const ch of s.replace(/(^|\s)ال/g,'$1'))o+=m[ch]||'';return o.replace(/(.)\1+/g,'$1');}
+ s=s.replace(/(^|[\s-])(al|el|ad|an|ar|as|ash|at|az)[\s-]/g,'$1').replace(/[çş]/g,'s').replace(/ğ/g,'').normalize('NFD').replace(/[̀-ͯ]/g,'');
+ return s.replace(/sh|ch|th/g,'s').replace(/kh/g,'').replace(/gh|j/g,'g').replace(/dh|z/g,'d').replace(/ck|q|c(?=[aou])/g,'k').replace(/x/g,'ks').replace(/p/g,'b').replace(/v|w(?=[aeiou])/g,'f').replace(/c/g,'s').replace(/[^bdfgklmnrst]/g,'').replace(/(.)\1+/g,'$1');}
+function tvN(pair){if(!pair)return '';const en=Array.isArray(pair)?pair[0]:pair.en,ar=Array.isArray(pair)?pair[1]:pair.ar;return tvIsAr()&&ar?ar:en;}
+function tvB(s){return `<bdi>${safe(s)}</bdi>`;}
+function tvCName(cc){const c=TV.cmap[cc];if(!c)return regionName(cc);return tvIsAr()?(c.ar||regionName(cc)):c.en;}
+function tvNum(n){return qNum(new Intl.NumberFormat('en-US').format(n));}
+function tvDays(n){return tr(n===1?'يوم':n===2?'يومان':n>=3&&n<=10?`${qNum(n)} أيام`:`${qNum(n)} يومًا`,n===1?'1 day':`${n} days`);}
+function tvNights(n){return tr(n===1?'ليلة':n===2?'ليلتان':n>=3&&n<=10?`${qNum(n)} ليالٍ`:`${qNum(n)} ليلة`,n===1?'1 night':`${n} nights`);}
+const tvSep=()=>tr('، ',' · '),tvArr=()=>tr(' ← ',' → ');   // never "·" next to Arabic digits: it reads like the Arabic zero
+function tvPlaces(n){return tr(n===1?'مكان واحد':n===2?'مكانان':n>=3&&n<=10?`${qNum(n)} مدن وقرى`:`${tvNum(n)} مدينة وقرية`,`${n} place${n===1?'':'s'}`);}
+function tvDate(s){return s&&/^\d{4}-\d{2}-\d{2}$/.test(s)?new Date(`${s}T12:00:00`):null;}
+function tvAdd(s,n){const d=tvDate(s);if(!d)return '';d.setDate(d.getDate()+n);return dateLocal(d);}
+function tvDiff(a,b){const x=tvDate(a),y=tvDate(b);return x&&y?Math.round((y-x)/864e5):null;}
+const TV_TR=[['air',[['flight','✈️','طيران','Flight'],['private','🛩️','طيران خاص','Private jet'],['heli','🚁','هليكوبتر','Helicopter']]],
+ ['rail',[['train','🚆','قطار','Train'],['hsr','🚄','قطار سريع','High-speed train'],['metro','🚇','مترو','Metro'],['tram','🚊','ترام','Tram']]],
+ ['road',[['car','🚗','سيارتي الخاصة','My own car'],['rent','🚙','سيارة إيجار','Rental car'],['driver','🚘','سيارة مع سائق','Car with driver'],['taxi','🚕','تاكسي','Taxi'],['app','📱','تطبيقات التوصيل','Ride-hailing app'],
+  ['bus','🚌','حافلة','Bus'],['coach','🚐','حافلة سياحية','Tour coach'],['rv','🛻','كرفان / بيت متنقل','Campervan / RV'],['moto','🏍️','دراجة نارية','Motorbike'],['bike','🚲','دراجة هوائية','Bicycle'],['walk','🚶','مشي','Walking']]],
+ ['sea',[['ferry','⛴️','عبّارة','Ferry'],['cruise','🛳️','رحلة بحرية (كروز)','Cruise'],['boat','🛥️','قارب / يخت','Boat / yacht']]],
+ ['other',[['cable','🚡','تلفريك','Cable car'],['camel','🐪','جمال / خيل','Camel / horse']]]];
+const TV_TRG={air:['جوي','Air'],rail:['سكك حديد','Rail'],road:['بري','Road'],sea:['بحري','Sea'],other:['أخرى','Other']};
+const TV_TRM={};TV_TR.forEach(([,l])=>l.forEach(x=>TV_TRM[x[0]]=x));
+const TV_CLS=[['eco','اقتصادية','Economy'],['peco','اقتصادية مميزة','Premium economy'],['bus','رجال الأعمال','Business'],['first','الأولى','First']];
+const TV_ST=[['hotel','🏨','فندق','Hotel'],['resort','🏝️','منتجع','Resort'],['sapt','🏢','شقة فندقية','Serviced apartment'],['apt','🏠','شقة / بيت للإيجار','Apartment / holiday home'],
+ ['villa','🏡','فيلا','Villa'],['chalet','🏖️','شاليه','Chalet'],['istiraha','🌴','استراحة','Istiraha'],['farm','🌾','مزرعة','Farm stay'],['guest','🛖','بيت ضيافة / نُزُل','Guesthouse / B&B'],
+ ['hostel','🛏️','بيت شباب (هوستل)','Hostel'],['cabin','🏔️','كوخ جبلي','Mountain cabin'],['lodge','🦁','نُزُل سفاري','Safari lodge'],['camp','⛺','مخيم / خيمة','Camp / tent'],['glamp','🏕️','تخييم فاخر','Glamping'],
+ ['rvst','🚐','كرفان','Caravan'],['motel','🛣️','موتيل','Motel'],['trad','🏯','سكن تقليدي (رياض، ريوكان…)','Traditional stay (riad, ryokan…)'],['capsule','🛌','فندق كبسولة','Capsule hotel'],
+ ['houseboat','🚤','قارب / بيت عائم','Houseboat'],['ship','🛳️','على متن السفينة','On board the ship'],['family','🏘️','عند الأهل أو الأصدقاء','With family or friends'],['other','➕','أخرى','Other']];
+const TV_STM={};TV_ST.forEach(x=>TV_STM[x[0]]=x);
+const TV_BOARD=[['','—','—'],['ro','بدون وجبات','Room only'],['bb','مع الإفطار','Breakfast'],['hb','نصف إقامة','Half board'],['fb','إقامة كاملة','Full board'],['ai','شامل كليًا','All inclusive']];
+const TV_POP=['SA','AE','TR','EG','GB','FR','CH','AT','MY','ID','TH','GE','AZ','BA','MA','JO','BH','QA','IT','ES','JP','MV'];
+function tvTrips(){if(!Array.isArray(state.trips))state.trips=[];state.trips=state.trips.filter(t=>t&&typeof t==='object'&&typeof t.id==='string');
+ state.trips.forEach(t=>{if(!Array.isArray(t.stops)||!t.stops.length)t.stops=[tvStop()];t.pax={ad:1,ch:0,inf:0,ages:[],rooms:1,...(t.pax||{})};if(!Array.isArray(t.pax.ages))t.pax.ages=[];
+  t.legs=t.legs&&typeof t.legs==='object'?t.legs:{};if(!Array.isArray(t.ev))t.ev=[];if(!Array.isArray(t.acts))t.acts=[];t.stops.forEach(s=>{if(!s.stay||typeof s.stay!=='object')s.stay={};});});
+ return state.trips;}
+function tvStop(){return {id:id(),cc:'',a1:'',a2:'',a1n:null,a2n:null,city:null,vil:null,nights:'',stay:{}};}
+function tvNew(){const t={id:id(),created:dateLocal(),title:'',type:'round',dep:'',ret:'',flex:0,from:null,stops:[tvStop()],pax:{ad:1,ch:0,inf:0,ages:[],rooms:1},legs:{},ev:[],acts:[],notes:''};tvTrips().unshift(t);save();return t;}
+function tvTrip(){return tvUI.open?tvTrips().find(x=>x.id===tvUI.open):null;}
+function tvStopPlace(s){return s.vil||s.city;}
+const tvIso=x=>x?'⁨'+x+'⁩':'';
+function tvStopName(s){const pl=tvStopPlace(s);if(pl&&s.vil&&s.city&&tvKey(s.vil.en)!==tvKey(s.city.en))return `${tvIso(tvN(s.vil))}${tr('، ',', ')}${tvIso(tvN(s.city))}`;if(pl)return tvIso(tvN(pl));if(s.a2n)return tvIso(tvN(s.a2n));if(s.a1n)return tvIso(tvN(s.a1n));return s.cc?tvCName(s.cc):'';}
+function tvTitle(t){if(t.title)return t.title;const n=t.stops.map(tvStopName).filter(Boolean);return n.length?n.join(tvArr()):tr('رحلة جديدة','New trip');}
+function tvNightsSum(t){return t.stops.reduce((a,s)=>a+(Math.max(0,parseInt(s.nights,10)||0)),0);}
+function tvEnd(t){if(!t.dep)return '';if(t.type==='round')return t.ret||'';if(t.type==='multi'&&t.ret)return t.ret;const n=tvNightsSum(t);return n?tvAdd(t.dep,n):(t.type==='oneway'?t.dep:'');}
+function tvPaxTotal(t){return (t.pax.ad||0)+(t.pax.ch||0)+(t.pax.inf||0);}
+function tvPaxText(t){const p=t.pax,a=[];if(p.ad)a.push(tr(`${qNum(p.ad)} ${p.ad===1?'بالغ':'بالغين'}`,`${p.ad} adult${p.ad===1?'':'s'}`));
+ if(p.ch)a.push(tr(`${qNum(p.ch)} ${p.ch===1?'طفل':'أطفال'}`,`${p.ch} child${p.ch===1?'':'ren'}`));if(p.inf)a.push(tr(`${qNum(p.inf)} ${p.inf===1?'رضيع':'رضّع'}`,`${p.inf} infant${p.inf===1?'':'s'}`));return a.join(tr('، ',', '));}
+function tvCountdown(t){const end=tvEnd(t),today=dateLocal();if(!t.dep)return '';const d=tvDiff(today,t.dep);
+ if(d>1)return tr(`باقي ${tvDays(d)}`,`${d} days to go`);if(d===1)return tr('بكرة! 🎒','Tomorrow! 🎒');if(d===0)return tr('اليوم! ✈️','Today! ✈️');
+ if(end&&tvDiff(today,end)>=0)return tr(`في الرحلة — اليوم ${qNum(1-d)}`,`On the trip — day ${1-d}`);return tr('انتهت','Finished');}
+function tvMonths(t){const a=t.dep,b=tvEnd(t)||t.dep;const out=new Set();if(!tvDate(a))return out;const d=tvDate(a),e=tvDate(b)||d;let i=0;while(d<=e&&i<400){out.add(d.getMonth()+1);d.setDate(d.getDate()+1);i++;}return out;}
+function tvMonthsFor(t,cc){if(t.stops.length<2||!tvDate(t.dep)||!t.stops.every(s=>parseInt(s.nights,10)>0))return tvMonths(t);
+ const out=new Set();let start=t.dep;for(const s of t.stops){const n=parseInt(s.nights,10),end=tvAdd(start,n);if(s.cc===cc)tvMonths({dep:start,type:'round',ret:end,stops:[]}).forEach(m=>out.add(m));start=end;}return out.size?out:tvMonths(t);}
+function tvIslamic(t){const a=tvDate(t.dep),b=tvDate(tvEnd(t)||t.dep);if(!a)return [];const f=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{month:'numeric',day:'numeric'});
+ const seen={},out=[];const d=new Date(a);let i=0;
+ while(d<=b&&i<370){let m=0,dd=0;try{const p=f.formatToParts(d);m=+p.find(x=>x.type==='month').value;dd=+p.find(x=>x.type==='day').value;}catch{break;}
+  const k=m===9?'ram':m===10&&dd<=3?'fitr':m===12&&dd===9?'arafah':m===12&&dd>=10&&dd<=13?'adha':m===12&&dd===8?'hajj':'';
+  if(k&&!seen[k]){seen[k]=1;out.push([k,dateLocal(d)]);}d.setDate(d.getDate()+1);i++;}
+ const L={ram:['🌙 شهر رمضان','🌙 Ramadan','مطاعم كثيرة تغلق نهارًا في الدول الإسلامية، والعمرة مزدحمة في العشر الأواخر.','Many restaurants close by day in Muslim countries; Umrah is crowded in the last ten nights.'],
+  fitr:['🎉 عيد الفطر','🎉 Eid al-Fitr','إجازات وزحام وارتفاع في أسعار الطيران والفنادق.','Holidays, crowds and higher flight and hotel prices.'],
+  hajj:['🕋 أيام الحج','🕋 Hajj days','زحام شديد في مكة والمشاعر، والدخول لها بتصريح.','Very crowded in Makkah and the holy sites; entry needs a permit.'],
+  arafah:['🤲 يوم عرفة','🤲 Day of Arafah','يوم فاضل يُستحب صيامه لغير الحاج.','A blessed day; fasting is recommended for non-pilgrims.'],
+  adha:['🐑 عيد الأضحى','🐑 Eid al-Adha','إجازات وزحام وارتفاع في أسعار الطيران والفنادق.','Holidays, crowds and higher flight and hotel prices.']};
+ return out.map(([k,d])=>({k,d,ar:L[k][0],en:L[k][1],nar:L[k][2],nen:L[k][3]}));}
+function tvTzDiff(tz){try{const now=new Date(),f=z=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:z,hourCycle:'h23',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric'}).formatToParts(now);const g=k=>+p.find(x=>x.type===k).value;return Date.UTC(g('year'),g('month')-1,g('day'),g('hour')%24,g('minute'));};
+ return Math.round((f(tz)-f(Intl.DateTimeFormat().resolvedOptions().timeZone))/18e5)/2;}catch{return null;}}
+function tvKm(a,b){if(!a||!b||a.lat==null||b.lat==null)return null;const r=Math.PI/180,dl=(b.lat-a.lat)*r,dn=(b.lon-a.lon)*r;const x=Math.sin(dl/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dn/2)**2;return Math.round(12742*Math.asin(Math.sqrt(x)));}
+function tvStopPoint(s){const pl=tvStopPlace(s);if(pl&&pl.lat!=null)return pl;const c=TV.cmap[s.cc];return c&&c.lat!=null?{lat:c.lat,lon:c.lon}:null;}
+function tvMonthName(m,len='long'){try{return new Intl.DateTimeFormat(tvIsAr()?'ar-u-ca-gregory':'en-US',{month:len,timeZone:'UTC'}).format(new Date(Date.UTC(2026,m-1,15)));}catch{return String(m);}}
+function tvDone(t){const s=t.stops;return [s.every(x=>x.cc),s.every(x=>x.city||x.vil),s.every(x=>x.a1||x.vil),!!t.dep&&(t.type!=='round'||!!t.ret),tvPaxTotal(t)>0,
+ !!((t.legs.go||{}).t||[]).length,s.every(x=>x.stay&&x.stay.type),!!(t.ev.length||t.acts.length)];}
+function renderTravel(){const el=$('#travelView');if(!el)return;
+ if(!TV.idx){el.innerHTML=`<div class="card tv-empty">${tr('جارٍ تحميل بيانات السفر…','Loading travel data…')}</div>`;
+  tvBase().then(()=>{if(currentView==='travel')renderTravel();}).catch(()=>{el.innerHTML=`<div class="card tv-empty">${tr('تعذر تحميل بيانات السفر','Could not load the travel data')}</div>`;});return;}
+ const t=tvTrip();if(tvUI.open&&!t)tvUI.open=null;
+ el.innerHTML=t?tvTripHTML(t):tvUI.guide?tvGuideHTML(tvUI.guide):tvHomeHTML();}
+function tvHomeHTML(){const list=tvTrips(),today=dateLocal();
+ const sorted=[...list].sort((a,b)=>{const ea=tvEnd(a)||a.dep,eb=tvEnd(b)||b.dep,pa=ea&&ea<today,pb=eb&&eb<today;if(pa!==pb)return pa?1:-1;return (a.dep||'9999').localeCompare(b.dep||'9999');});
+ const cards=sorted.map(t=>{const flags=[...new Set(t.stops.map(s=>s.cc).filter(Boolean))].map(flag).join(' ')||'🧳',end=tvEnd(t),n=t.dep&&end?tvDiff(t.dep,end):null,done=tvDone(t).filter(Boolean).length;
+  return `<button type="button" class="tv-trip ${end&&end<today?'past':''}" data-tv="open" data-id="${t.id}"><span class="tv-trip-f">${flags}</span>
+   <span class="tv-trip-m"><b>${tvB(tvTitle(t))}</b><span>${t.dep?dateLabel(t.dep)+(end&&end!==t.dep?' – '+dateLabel(end):''):tr('بدون موعد بعد','No dates yet')}${n?tvSep()+tvNights(n):''}</span>
+   <span>${tvPaxText(t)}${tvSep()}${tr(`التخطيط ${qNum(done)} من ${qNum(8)}`,`Planning ${done} of 8`)}</span></span>${t.dep?`<span class="tv-cd">${tvCountdown(t)}</span>`:''}</button>`;}).join('');
+ return `<div class="card tv-hero"><div><div class="tv-hero-t">🧳 ${tr('السفر','Travel')}</div><div class="hint">${tr('خطط رحلتك: الوجهة، الموعد، المسافرين، المواصلات، السكن والفعاليات','Plan your trip: destination, dates, travellers, transport, stay and events')}</div></div>
+  <button type="button" class="primary-btn" data-tv="new">＋ ${tr('رحلة جديدة','New trip')}</button></div>
+ ${list.length?`<div class="tv-trips">${cards}</div>`:`<div class="card tv-empty">✈️ ${tr('ما عندك رحلات بعد — اضغط «رحلة جديدة» وابدأ التخطيط','No trips yet — tap “New trip” to start planning')}</div>`}
+ <div class="card tv-guidecard"><h3>🌍 ${tr('دليل الدول','Country guide')}</h3><div class="hint">${tr('المواسم والمهرجانات والفعاليات والثقافة لكل دولة','Seasons, festivals, events and culture for every country')}</div>
+  <button type="button" class="tv-pick" data-tv="guide"><span>🔍 ${tr(`ابحث في ${tvNum(TV.idx.countries.length)} دولة`,`Search ${TV.idx.countries.length} countries`)}</span><span class="tv-chev">›</span></button>
+  <div class="tv-chips">${TV_POP.filter(c=>TV.cmap[c]).map(c=>`<button type="button" class="tv-chip" data-tv="gpick" data-cc="${c}">${flag(c)} ${safe(tvCName(c))}</button>`).join('')}</div></div>
+ <div class="tv-src">${tr('بيانات الأماكن: GeoNames (CC BY 4.0)','Places data: GeoNames (CC BY 4.0)')}</div>`;}
+function tvSec(n,ok,icon,title,body,sub=''){return `<div class="card tv-sec"><div class="tv-sec-h"><span class="tv-num ${ok?'ok':''}">${ok?'✓':qNum(n)}</span><h3>${icon} ${title}</h3>${sub?`<span class="tv-sec-sub">${sub}</span>`:''}</div>${body}</div>`;}
+function tvPickBtn(act,sid,main,ph,extra=''){return `<button type="button" class="tv-pick ${main?'':'empty'}" data-tv="${act}" data-sid="${sid}">${main?`<span>${main}</span>`:`<span class="tv-ph">${ph}</span>`}${extra}<span class="tv-chev">›</span></button>`;}
+function tvStepper(k,v,label,hint,min=0){return `<div class="tv-step"><div><b>${label}</b><span class="hint">${hint}</span></div><div class="tv-step-c"><button type="button" data-tv="pax" data-k="${k}" data-d="-1" ${v<=min?'disabled':''} aria-label="−">−</button><output>${qNum(v)}</output><button type="button" data-tv="pax" data-k="${k}" data-d="1" aria-label="+">＋</button></div></div>`;}
+function tvLegHTML(t,key,title,sub){const l=t.legs[key]||{},sel=new Set(l.t||[]),local=key==='local';
+ const chips=TV_TR.map(([g,items])=>`<div class="tv-trg"><span class="tv-trg-h">${tr(...TV_TRG[g])}</span><div class="tv-chips">${items.map(x=>`<button type="button" class="tv-chip ${sel.has(x[0])?'on':''}" data-tv="tr" data-leg="${key}" data-k="${x[0]}" aria-pressed="${sel.has(x[0])}">${x[1]} ${tr(x[2],x[3])}</button>`).join('')}</div></div>`).join('');
+ const det=sel.size&&!local?`<div class="tv-grid2">${sel.has('flight')||sel.has('private')?`<label class="tv-f"><span>${tr('درجة السفر','Cabin class')}</span><select data-tf="leg.${key}.cls">${TV_CLS.map(c=>`<option value="${c[0]}" ${l.cls===c[0]?'selected':''}>${tr(c[1],c[2])}</option>`).join('')}</select></label>`:''}
+   <label class="tv-f"><span>${tr('رقم الرحلة / الحجز','Flight / booking no.')}</span><input data-tf="leg.${key}.no" value="${safe(l.no||'')}" maxlength="60" dir="auto"></label>
+   <label class="tv-f"><span>${tr('وقت الانطلاق','Departure time')}</span><input type="time" data-tf="leg.${key}.time" value="${safe(l.time||'')}"></label>
+   <label class="tv-f tv-wide"><span>${tr('ملاحظات','Notes')}</span><input data-tf="leg.${key}.note" value="${safe(l.note||'')}" maxlength="200" dir="auto"></label></div>`:'';
+ return `<details class="tv-leg" ${sel.size||key==='go'?'open':''}><summary><b>${title}</b>${sub?`<span class="hint">${sub}</span>`:''}<span class="tv-leg-sel">${[...sel].map(k=>TV_TRM[k]?TV_TRM[k][1]:'').join(' ')}</span></summary>${chips}${det}</details>`;}
+function tvStayHTML(t,s,i){const st=s.stay||{},ty=TV_STM[st.type],stars=['hotel','resort','sapt'].includes(st.type);
+ const nm=tvStopName(s)||tr(`الوجهة ${qNum(i+1)}`,`Stop ${i+1}`);
+ return `<div class="tv-stay"><div class="tv-stay-h">${s.cc?flag(s.cc):'📍'} ${tvB(nm)}${ty?` <span class="tv-tag">${ty[1]} ${tr(ty[2],ty[3])}</span>`:''}</div>
+ <div class="tv-chips">${TV_ST.map(x=>`<button type="button" class="tv-chip ${st.type===x[0]?'on':''}" data-tv="st" data-sid="${s.id}" data-k="${x[0]}" aria-pressed="${st.type===x[0]}">${x[1]} ${tr(x[2],x[3])}</button>`).join('')}</div>
+ ${st.type?`${stars?`<div class="tv-stars" role="group" aria-label="${tr('التصنيف','Rating')}">${[1,2,3,4,5].map(n=>`<button type="button" class="${(st.stars||0)>=n?'on':''}" data-tv="stars" data-sid="${s.id}" data-n="${n}" aria-label="${n}">★</button>`).join('')}</div>`:''}
+ <div class="tv-grid2"><label class="tv-f tv-wide"><span>${tr('اسم السكن','Place name')}</span><input data-tf="stay.${s.id}.name" value="${safe(st.name||'')}" maxlength="120" dir="auto"></label>
+  <label class="tv-f"><span>${tr('الدخول','Check-in')}</span><input type="date" data-tf="stay.${s.id}.in" value="${safe(st.in||'')}"></label>
+  <label class="tv-f"><span>${tr('الخروج','Check-out')}</span><input type="date" data-tf="stay.${s.id}.out" value="${safe(st.out||'')}"></label>
+  <label class="tv-f"><span>${tr('الوجبات','Meals')}</span><select data-tf="stay.${s.id}.board">${TV_BOARD.map(b=>`<option value="${b[0]}" ${(st.board||'')===b[0]?'selected':''}>${tr(b[1],b[2])}</option>`).join('')}</select></label>
+  <label class="tv-f"><span>${tr('رقم الحجز','Booking no.')}</span><input data-tf="stay.${s.id}.ref" value="${safe(st.ref||'')}" maxlength="60" dir="auto"></label>
+  <label class="tv-f tv-wide"><span>${tr('ملاحظات','Notes')}</span><input data-tf="stay.${s.id}.note" value="${safe(st.note||'')}" maxlength="200" dir="auto"></label></div>
+ ${st.in&&st.out&&tvDiff(st.in,st.out)>0?`<div class="hint">🌙 ${tvNights(tvDiff(st.in,st.out))}${tvSep()}${tr(`${qNum(t.pax.rooms||1)} ${(t.pax.rooms||1)===1?'غرفة':'غرف'}`,`${t.pax.rooms||1} room${(t.pax.rooms||1)===1?'':'s'}`)}</div>`:''}`:''}</div>`;}
+function tvFacts(cc,from){const c=TV.cmap[cc];if(!c)return '';const lang=tvIsAr()?'ar':'en',rows=[];
+ const dn=type=>{try{return new Intl.DisplayNames([lang],{type});}catch{return null;}};
+ if(c.cap)rows.push(['🏛️',tr('العاصمة','Capital'),tvIsAr()&&c.capAr?c.capAr:c.cap]);
+ if(c.cur){const n=dn('currency');rows.push(['💵',tr('العملة','Currency'),`${n?n.of(c.cur):c.cur} (${c.cur})`]);}
+ if(c.lang){const n=dn('language');const ls=[...new Set(c.lang.split(',').map(x=>x.split('-')[0]).filter(x=>/^[a-z]{2,3}$/.test(x)))].slice(0,3).map(x=>{try{return n?n.of(x):x;}catch{return x;}});if(ls.length)rows.push(['🗣️',tr('اللغة','Language'),ls.join(tr('، ',', '))]);}
+ if(c.phone)rows.push(['📞',tr('رمز الاتصال','Dialling code'),`<bdi dir="ltr">+${safe(String(c.phone).replace(/^\+/,''))}</bdi>`,1]);
+ const tz=c.tz?tvTzDiff(c.tz):null;if(tz!=null)rows.push(['🕒',tr('فرق التوقيت عنك','Time difference'),tz===0?tr('نفس توقيتك','Same as yours'):tr(`${tz>0?'+':'−'}${qNum(Math.abs(tz))} ${Math.abs(tz)<=2&&Math.abs(tz)>=1&&Number.isInteger(tz)?(Math.abs(tz)===1?'ساعة':'ساعتان'):'ساعات'}`,`${tz>0?'+':'−'}${Math.abs(tz)} h`)]);
+ rows.push(['🚗',tr('القيادة','Driving'),(TV.info.left||[]).includes(cc)?tr('على اليسار','On the left'):tr('على اليمين','On the right')]);
+ if(from){const km=tvKm(from,c.lat!=null?c:null);if(km)rows.push(['📏',tr('المسافة من مدينتك','Distance from you'),tr(`حوالي ${tvNum(km)} كم`,`about ${tvNum(km)} km`)]);}
+ return `<div class="tv-facts">${rows.map(r=>`<div><span>${r[0]} ${r[1]}</span><b>${r[3]?r[2]:safe(r[2])}</b></div>`).join('')}</div>`;}
+function tvInfoHTML(cc,t){const inf=TV.info.c[cc],c=TV.cmap[cc],months=t?tvMonthsFor(t,cc):new Set();const parts=[];
+ const best=new Set(inf&&inf.best||[]);
+ if(best.size){const verdict=months.size?([...months].every(m=>best.has(m))?`<div class="tv-ok-line">✓ ${tr('رحلتك في أفضل وقت لزيارة هذه الدولة','Your trip is in the best season for this country')}</div>`:[...months].some(m=>best.has(m))?`<div class="tv-ok-line mid">◐ ${tr('جزء من رحلتك في أفضل موسم','Part of your trip is in the best season')}</div>`:`<div class="tv-ok-line no">⚠️ ${tr('رحلتك خارج أفضل موسم — راجع الطقس','Your trip is outside the best season — check the weather')}</div>`):'';
+  parts.push(`<div class="tv-sub">📆 ${tr('أفضل وقت للزيارة','Best time to visit')}</div><div class="tv-months">${Array.from({length:12},(_,i)=>i+1).map(m=>`<span class="${best.has(m)?'best':''} ${months.has(m)?'trip':''}">${tvMonthName(m,'short')}</span>`).join('')}</div>
+   <div class="tv-legend"><span><i class="best"></i>${tr('أفضل موسم','Best season')}</span>${months.size?`<span><i class="trip"></i>${tr('شهور رحلتك','Your trip')}</span>`:''}</div>${verdict}`);}
+ if(inf&&inf.clim)parts.push(`<p class="tv-clim">🌤️ ${safe(tr(inf.clim[0],inf.clim[1]))}</p>`);
+ else if(c&&c.lat!=null&&c.lat<-10)parts.push(`<p class="tv-clim">🌤️ ${tr('الفصول معكوسة في نصف الكرة الجنوبي: الصيف من ديسمبر إلى فبراير.','Seasons are reversed in the southern hemisphere: summer is December–February.')}</p>`);
+ const ev=(inf&&inf.ev||[]).map(e=>({key:`${cc}:${e[1]}`,ar:e[0],en:e[1],m:e[2],par:e[3],pen:e[4]}));
+ const inTrip=months.size?ev.filter(e=>!e.m.length||e.m.some(m=>months.has(m))):[];
+ const evRow=e=>{const on=t&&t.ev.includes(e.key);return `<div class="tv-ev ${on?'on':''}"><div><b>${safe(tr(e.ar,e.en))}</b><span class="hint">📍 ${safe(tr(e.par,e.pen))}${tvSep()}${e.m.length?e.m.map(m=>tvMonthName(m)).join(tr('، ',', ')):tr('طوال السنة','All year')}</span></div>${t?`<button type="button" class="tv-star ${on?'on':''}" data-tv="ev" data-k="${safe(e.key)}" aria-pressed="${!!on}" aria-label="${tr('أضف لخطتي','Add to my plan')}">${on?'★':'☆'}</button>`:''}</div>`;};
+ if(t&&months.size)parts.push(`<div class="tv-sub">🎉 ${tr('خلال رحلتك','During your trip')}</div>${inTrip.length?inTrip.map(evRow).join(''):`<div class="hint tv-none">${ev.length?tr('ما فيه فعاليات مسجلة في شهور رحلتك','No listed events in your travel months'):tr('لا توجد فعاليات مسجلة لهذه الدولة بعد — أضف أنشطتك تحت','No events listed for this country yet — add your own activities below')}</div>`}`);
+ if(ev.length){const rest=t&&months.size?ev.filter(e=>!inTrip.includes(e)):ev;const sorted=[...rest].sort((a,b)=>(a.m[0]||13)-(b.m[0]||13));
+  if(sorted.length)parts.push(t&&months.size?`<details class="tv-more"><summary>🎭 ${tr(`باقي الفعاليات والمواسم (${qNum(sorted.length)})`,`Other events & seasons (${sorted.length})`)}</summary>${sorted.map(evRow).join('')}</details>`:`<div class="tv-sub">🎭 ${tr('الفعاليات والمهرجانات والمواسم','Events, festivals & seasons')}</div>${sorted.map(evRow).join('')}`);}
+ else if(!(t&&months.size))parts.push(`<div class="hint tv-none">${tr('لا توجد فعاليات مسجلة لهذه الدولة بعد.','No events listed for this country yet.')}</div>`);
+ if(inf&&inf.tips&&inf.tips.length)parts.push(`<div class="tv-sub">💡 ${tr('نصائح وثقافة','Tips & culture')}</div><ul class="tv-tips">${inf.tips.map(x=>`<li>${safe(tr(x[0],x[1]))}</li>`).join('')}</ul>`);
+ if(ev.length)parts.push(`<div class="tv-note">${tr('المواعيد تقريبية وتتغير كل سنة — تأكد من الموقع الرسمي قبل الحجز.','Dates are approximate and change every year — check the official site before booking.')}</div>`);
+ return `<div class="tv-info">${parts.join('')}</div>`;}
+function tvTripHTML(t){const done=tvDone(t),nd=done.filter(Boolean).length,end=tvEnd(t),n=t.dep&&end?tvDiff(t.dep,end):null,multi=t.type==='multi';
+ const ccs=[...new Set(t.stops.map(s=>s.cc).filter(Boolean))],route=[t.from?tvN(t.from):'',...t.stops.map(tvStopName).filter(Boolean)];if(t.type==='round'&&t.from)route.push(tvN(t.from));
+ const top=`<div class="tv-top"><button type="button" class="secondary-btn" data-tv="home">${tr('‹ رحلاتي','‹ My trips')}</button><input class="tv-title" data-tf="title" value="${safe(t.title||'')}" placeholder="${safe(tvTitle({...t,title:''}))}" maxlength="80" dir="auto" aria-label="${tr('اسم الرحلة','Trip name')}"><button type="button" class="tv-icon" data-tv="deltrip" aria-label="${tr('حذف الرحلة','Delete trip')}">🗑️</button></div>`;
+ const sum=`<div class="card tv-sum"><div class="tv-sum-r">${ccs.map(flag).join(' ')||'🧳'} <b>${route.filter(Boolean).map(tvB).join(tvArr())||tr('حدد وجهتك','Choose your destination')}</b></div>
+  <div class="tv-sum-m">${t.dep?`<span>📅 ${dateLabel(t.dep)}${end&&end!==t.dep?' – '+dateLabel(end):''}</span>`:''}${n?`<span>🌙 ${tvNights(n)}</span>`:''}<span>👥 ${tvPaxText(t)}</span>${t.dep?`<span class="tv-cd">${tvCountdown(t)}</span>`:''}</div>
+  <div class="tv-prog" aria-label="${tr(`اكتمل ${nd} من 8`,`${nd} of 8 done`)}">${done.map((d,i)=>`<i class="${d?'ok':''}" title="${i+1}"></i>`).join('')}<span>${tr(`${qNum(nd)} من ${qNum(8)}`,`${nd} of 8`)}</span></div></div>`;
+ // 1-3 destination(s)
+ const stops=t.stops.map((s,i)=>{const c=s.cc,city=s.city,areaTxt=[s.a1n?tvN(s.a1n):'',s.a2n?tvN(s.a2n):'',s.vil?tvN(s.vil):''].filter(Boolean);
+  return `<div class="tv-stop">${t.stops.length>1?`<div class="tv-stop-h"><b>📍 ${tr(`الوجهة ${qNum(i+1)}`,`Stop ${i+1}`)}</b><button type="button" class="tv-icon" data-tv="delstop" data-sid="${s.id}" aria-label="${tr('حذف الوجهة','Remove stop')}">✕</button></div>`:''}
+   <div class="tv-row"><span class="tv-num ${done[0]||c?'ok':''}">${c?'✓':qNum(1)}</span><div class="tv-row-b"><span class="tv-lbl">${tr('الدولة','Country')}</span>${tvPickBtn('s-country',s.id,c?`${flag(c)} ${safe(tvCName(c))}`:'',tr('اختر الدولة','Choose a country'))}</div></div>
+   <div class="tv-row"><span class="tv-num ${city?'ok':''}">${city?'✓':qNum(2)}</span><div class="tv-row-b"><span class="tv-lbl">${tr('المدينة','City')}</span>${c?tvPickBtn('s-city',s.id,city?tvB(tvN(city)):'',tr('اختر المدينة','Choose a city')):`<div class="tv-ph tv-dis">${tr('اختر الدولة أولًا','Choose the country first')}</div>`}</div></div>
+   <div class="tv-row"><span class="tv-num ${areaTxt.length?'ok':''}">${areaTxt.length?'✓':qNum(3)}</span><div class="tv-row-b"><span class="tv-lbl">${tr('المنطقة · المحافظة · القرية','Region · district · village')}</span>${c?tvPickBtn('s-area',s.id,areaTxt.length?areaTxt.map(tvB).join(' › '):'',tr('اختياري — حدد المنطقة أو المحافظة أو القرية','Optional — pick a region, district or village')):`<div class="tv-ph tv-dis">${tr('اختر الدولة أولًا','Choose the country first')}</div>`}</div></div>
+   ${multi||t.type==='oneway'&&t.stops.length>1?`<label class="tv-f tv-nights"><span>🌙 ${tr('عدد الليالي هنا','Nights here')}</span><input type="number" inputmode="numeric" min="0" max="365" data-tf="stop.${s.id}.nights" value="${safe(s.nights||'')}"></label>`:''}</div>`;}).join('');
+ const s13=`<div class="card tv-sec"><div class="tv-sec-h"><h3>🌍 ${tr('الوجهة','Destination')}</h3><span class="tv-sec-sub">${tr('الدولة ← المدينة ← المنطقة والمحافظة والقرية','Country → city → region, district & village')}</span></div>${stops}
+  <button type="button" class="secondary-btn tv-addstop" data-tv="addstop">＋ ${tr('أضف وجهة أخرى (عدة مدن)','Add another stop (multi-city)')}</button>
+  <div class="tv-src">${tr(`${tvNum(t.stops.reduce((a,s)=>a+(TV.cmap[s.cc]?TV.cmap[s.cc].n:0),0))} مدينة وقرية متاحة بدون إنترنت`,`${tvNum(t.stops.reduce((a,s)=>a+(TV.cmap[s.cc]?TV.cmap[s.cc].n:0),0))} cities and villages available offline`)}</div></div>`;
+ // 4 dates + trip type
+ const isl=tvIslamic(t),cd=t.dep&&end&&n!=null&&n>=0?`<div class="tv-dline">📆 ${tvDays(n+1)} / ${tvNights(n)}${tvSep()}${hijriLabel(tvDate(t.dep))}${end!==t.dep?' – '+hijriLabel(tvDate(end)):''}</div>`:'';
+ const s4=tvSec(4,done[3],'🗓️',tr('الموعد وطريقة السفر','Dates & trip type'),`
+  <div class="tv-seg" role="group">${[['oneway','ذهاب فقط','One way','➡️'],['round','ذهاب وعودة','Round trip','🔁'],['multi','عدة مدن','Multi-city','🔀']].map(x=>`<button type="button" class="${t.type===x[0]?'on':''}" data-tv="type" data-k="${x[0]}" aria-pressed="${t.type===x[0]}">${x[3]} ${tr(x[1],x[2])}</button>`).join('')}</div>
+  <div class="tv-row"><div class="tv-row-b"><span class="tv-lbl">${tr('الانطلاق من','Departing from')}</span>${tvPickBtn('s-from','',t.from?`${t.from.cc?flag(t.from.cc)+' ':''}${tvB(tvN(t.from))}`:'',tr('اختر مدينة الانطلاق','Choose your departure city'))}</div></div>
+  <div class="tv-grid2"><label class="tv-f"><span>${tr('تاريخ الذهاب','Departure date')}</span><input type="date" data-tf="dep" value="${safe(t.dep||'')}"></label>
+   ${t.type!=='oneway'?`<label class="tv-f"><span>${t.type==='multi'?tr('تاريخ العودة (اختياري)','Return date (optional)'):tr('تاريخ العودة','Return date')}</span><input type="date" data-tf="ret" min="${safe(t.dep||'')}" value="${safe(t.ret||'')}"></label>`:''}</div>
+  <div class="tv-lbl">${tr('مرونة التواريخ','Date flexibility')}</div><div class="tv-chips">${[0,1,3,7].map(f=>`<button type="button" class="tv-chip ${(t.flex||0)===f?'on':''}" data-tv="flex" data-n="${f}">${f?tr(`± ${qNum(f)} ${f===1?'يوم':'أيام'}`,`± ${f} day${f===1?'':'s'}`):tr('تواريخ ثابتة','Exact dates')}</button>`).join('')}</div>
+  ${cd}${isl.length?`<div class="tv-isl">${isl.map(x=>`<div><b>${tr(x.ar,x.en)}</b> <span class="hint">${tr('في رحلتك من','during your trip, from')} ${dateLabel(x.d)}</span><div class="hint">${tr(x.nar,x.nen)}</div></div>`).join('')}</div>`:''}`,t.dep?tvCountdown(t):'');
+ // 5 travellers
+ const ages=t.pax.ch?`<div class="tv-ages"><span class="tv-lbl">${tr('أعمار الأطفال','Children\'s ages')}</span><div class="tv-chips">${Array.from({length:t.pax.ch},(_,i)=>`<label class="tv-age"><span>${tr(`طفل ${qNum(i+1)}`,`Child ${i+1}`)}</span><select data-tf="age.${i}">${Array.from({length:10},(_,k)=>k+2).map(a=>`<option value="${a}" ${(t.pax.ages[i]||'')==a?'selected':''}>${qNum(a)} ${tr('سنوات','yrs')}</option>`).join('')}<option value="" ${t.pax.ages[i]?'':'selected'}>—</option></select></label>`).join('')}</div></div>`:'';
+ const s5=tvSec(5,done[4],'👥',tr('المسافرون','Travellers'),`${tvStepper('ad',t.pax.ad,tr('بالغون','Adults'),tr('١٢ سنة فأكثر','12+ years'),1)}${tvStepper('ch',t.pax.ch,tr('أطفال','Children'),tr('من ٢ إلى ١١ سنة','2–11 years'))}
+  ${tvStepper('inf',t.pax.inf,tr('رضّع','Infants'),tr('أقل من سنتين','Under 2'))}${ages}${tvStepper('rooms',t.pax.rooms||1,tr('الغرف','Rooms'),tr('للفندق أو السكن','For the hotel or stay'),1)}
+  <div class="tv-dline">👥 ${tr(`المجموع ${qNum(tvPaxTotal(t))}`,`Total ${tvPaxTotal(t)}`)} — ${tvPaxText(t)}</div>`,tvPaxText(t));
+ // 6 transport
+ const first=t.stops[0],last=t.stops[t.stops.length-1],km=tvKm(t.from,first&&tvStopPoint(first));
+ const hint=km!=null?`<div class="tv-dline">📏 ${tr(`المسافة المباشرة حوالي ${tvNum(km)} كم`,`Straight-line distance about ${tvNum(km)} km`)} — ${km<150?tr('قريبة: سيارة أو تاكسي أو حافلة','Close: car, taxi or bus'):km<600?tr('مناسبة بالسيارة أو الحافلة أو القطار','Good by car, bus or train'):km<1000?tr('طيران أو قطار، أو سيارة لمحبي الطريق','Flight or train — or a road trip'):tr('الطيران هو الأنسب','Flying is best')}</div>`:'';
+ const destName=first?tvStopName(first):'',fromName=t.from?tvN(t.from):'';
+ const legs=[tvLegHTML(t,'go',tr('الذهاب','Getting there'),fromName&&destName?`${fromName}${tvArr()}${destName}`:'')];
+ if(t.stops.length>1)legs.push(tvLegHTML(t,'inter',tr('بين المدن','Between stops'),''));
+ legs.push(tvLegHTML(t,'local',tr('التنقل داخل الوجهة','Getting around'),''));
+ if(t.type!=='oneway')legs.push(tvLegHTML(t,'back',tr('العودة','Coming back'),fromName&&last?`${tvStopName(last)}${tvArr()}${fromName}`:''));
+ const s6=tvSec(6,done[5],'🚆',tr('المواصلات','Transport'),hint+legs.join(''));
+ // 7 stay
+ const s7=tvSec(7,done[6],'🏨',tr('السكن','Accommodation'),t.stops.map((s,i)=>tvStayHTML(t,s,i)).join(''));
+ // 8 culture & events
+ const info=ccs.length?ccs.map(cc=>`<div class="tv-cinfo">${ccs.length>1?`<div class="tv-stay-h">${flag(cc)} ${safe(tvCName(cc))}</div>`:''}${tvFacts(cc,t.from)}${tvInfoHTML(cc,t)}</div>`).join(''):`<div class="hint tv-none">${tr('اختر الدولة في الخطوة ١ وتظهر هنا المواسم والمهرجانات والفعاليات','Choose a country in step 1 to see seasons, festivals and events here')}</div>`;
+ const acts=`<div class="tv-sub">📝 ${tr('أنشطتي وخطتي','My activities & plan')}</div>
+  ${t.ev.length?t.ev.map(k=>{const [cc,en]=[k.slice(0,2),k.slice(3)];const e=((TV.info.c[cc]||{}).ev||[]).find(x=>x[1]===en);return e?`<div class="tv-act">⭐ ${safe(tr(e[0],e[1]))} <span class="hint">${flag(cc)}</span><button type="button" class="tv-icon" data-tv="ev" data-k="${safe(k)}" aria-label="${tr('إزالة','Remove')}">✕</button></div>`:'';}).join(''):''}
+  ${t.acts.map(a=>`<div class="tv-act">📌 ${safe(a.t)}${a.d?` <span class="hint">${dateLabel(a.d)}</span>`:''}<button type="button" class="tv-icon" data-tv="act-del" data-id="${a.id}" aria-label="${tr('حذف','Delete')}">✕</button></div>`).join('')}
+  <div class="tv-actadd"><input id="tvActIn" maxlength="120" dir="auto" placeholder="${tr('مثال: زيارة متحف، رحلة بحرية، مطعم…','e.g. museum visit, boat trip, restaurant…')}"><input id="tvActD" type="date" aria-label="${tr('التاريخ','Date')}"><button type="button" class="primary-btn" data-tv="act-add">＋</button></div>
+  <label class="tv-f tv-wide"><span>${tr('ملاحظات الرحلة','Trip notes')}</span><textarea data-tf="notes" rows="3" maxlength="3000" dir="auto">${safe(t.notes||'')}</textarea></label>`;
+ const s8=tvSec(8,done[7],'🎭',tr('الثقافة والفعاليات والمهرجانات والمواسم','Culture, events, festivals & seasons'),info+acts);
+ return top+sum+s13+s4+s5+s6+s7+s8;}
+function tvGuideHTML(cc){return `<div class="tv-top"><button type="button" class="secondary-btn" data-tv="gclose">${tr('‹ السفر','‹ Travel')}</button><b class="tv-gt">${flag(cc)} ${safe(tvCName(cc))}</b>
+ <button type="button" class="primary-btn" data-tv="gplan" data-cc="${cc}">＋ ${tr('خطط رحلة','Plan a trip')}</button></div><div class="card">${tvFacts(cc,null)}${tvInfoHTML(cc,null)}</div>`;}
+// ---- picker sheet ----
+function tvOpenSheet(o){tvSheet={q:'',a1:'',a2:'',rows:[],...o};let b=$('#tvSheet');
+ if(!b){b=document.createElement('div');b.id='tvSheet';b.className='tv-sheet-back';document.body.appendChild(b);}
+ b.innerHTML=`<div class="tv-sheet" role="dialog" aria-modal="true" aria-labelledby="tvSheetT"><div class="tv-sheet-h"><b id="tvSheetT"></b><button type="button" class="tv-icon" data-tv="sclose" aria-label="${tr('إغلاق','Close')}">✕</button></div>
+  <input id="tvSheetQ" type="search" dir="auto" autocomplete="off" enterkeyhint="search"><div class="tv-sheet-nav" id="tvSheetNav"></div><div class="tv-sheet-res" id="tvSheetRes"></div></div>`;
+ b.classList.remove('hidden');document.body.classList.add('modal-open');tvSheetRender();
+ try{if(!matchMedia('(pointer:coarse)').matches)setTimeout(()=>$('#tvSheetQ')?.focus(),40);}catch{}}
+function tvCloseSheet(){tvSheet=null;const b=$('#tvSheet');if(b){b.classList.add('hidden');b.innerHTML='';}document.body.classList.remove('modal-open');}
+function tvRowsHTML(rows){return rows.map((r,i)=>`<button type="button" class="tv-res ${r.cls||''}" data-tv="${r.act}" data-i="${i}"><span class="tv-res-m">${r.html}</span>${r.badge?`<span class="tv-badge">${r.badge}</span>`:''}${r.go?'<span class="tv-chev">›</span>':''}</button>`).join('');}
+function tvPlaceRow(d,r,cc,act='pick-p'){const a1=d.a1[r[2]],a2=d.a2[`${r[2]}.${r[3]}`],nm=tvN(r);const nk=x=>tvKey(x).replace(/^(محافظه|منطقه|ولايه|امارة|اماره)\s+/,'').replace(/\s/g,''),sub=[a2&&nk(tvN(a2))!==nk(nm)?tvN(a2):'',a1&&nk(tvN(a1))!==nk(nm)?tvN(a1):''].filter(Boolean);
+ const badge=r[4]===0?tr('العاصمة','Capital'):r[4]===1?tr('عاصمة المنطقة','Regional capital'):r[4]===2?tr('مقر محافظة','District seat'):r[5]>=50000?tr('مدينة','City'):r[5]>=3000?tr('بلدة','Town'):tr('قرية','Village');
+ return {act,cls:r.approx?'tv-approx':'',html:`<b>${tvB(nm)}</b>${sub.length?`<span class="hint">${sub.map(tvB).join('، ')}</span>`:''}`,badge,pl:{en:r[0],ar:r[1]||'',lat:r[6],lon:r[7],t:r[4],pop:r[5],cc,a1:r[2],a2:r[3]}};}
+function tvSearch(d,q,filter,limit=120){const k=tvKey(q),pre=[],mid=[];if(!k)return [];
+ for(let i=0;i<d.p.length&&pre.length<limit;i++){if(filter&&!filter(d.p[i]))continue;const s=d.keys[i],j=s.indexOf(k);if(j<0)continue;
+  if(s[j-1]===' ')pre.push(d.p[i]);else if(mid.length<limit)mid.push(d.p[i]);}
+ const out=pre.concat(mid).slice(0,limit);
+ // Arabic typed, but most places abroad only have a Latin name: also match by pronunciation (اوزنجول ≈ Uzungöl)
+ const sq=/[؀-ۿ]/.test(q)?tvSkel(q):'';
+ if(sq.length>=3&&out.length<25){if(!d.sk)d.sk=d.p.map(r=>tvSkel(r[0]));const seen=new Set(out),a=[],b=[];
+  for(let i=0;i<d.p.length&&a.length<60;i++){const r=d.p[i];if(seen.has(r)||(filter&&!filter(r)))continue;const j=d.sk[i].indexOf(sq);if(j<0)continue;(j===0?a:b).push(r);}
+  const L=r=>Math.abs(tvSkel(r[0]).length-sq.length);a.sort((x,y)=>L(x)-L(y));b.sort((x,y)=>L(x)-L(y));
+  a.concat(b).slice(0,60).forEach(r=>{r.approx=1;out.push(r);});}
+ return out;}
+function tvSheetRender(){if(!tvSheet)return;const S=tvSheet,t=tvTrip(),stop=t&&t.stops.find(s=>s.id===S.sid);const T=$('#tvSheetT'),Q=$('#tvSheetQ'),N=$('#tvSheetNav'),R=$('#tvSheetRes');if(!R)return;
+ const loading=`<div class="tv-empty">${tr('جارٍ التحميل…','Loading…')}</div>`;let rows=[],nav='',note='';
+ if(S.kind==='country'){T.textContent=tr('اختر الدولة','Choose a country');Q.placeholder=tr('ابحث عن دولة…','Search for a country…');
+  const k=tvKey(S.q),all=TV.idx.countries.map(c=>({c,n:tvCName(c.cc)})).filter(x=>!k||tvKey(x.n).includes(k)||tvKey(x.c.en).includes(k)||tvKey(x.c.ar).includes(k)||x.c.cc.toLowerCase()===k);
+  const col=new Intl.Collator(tvIsAr()?'ar':'en');all.sort((a,b)=>col.compare(a.n,b.n));
+  const pop=k?[]:TV_POP.filter(c=>TV.cmap[c]).map(c=>({c:TV.cmap[c],n:tvCName(c)}));
+  const mk=x=>({act:'pick-c',html:`<span class="tv-flag">${flag(x.c.cc)}</span><b>${safe(x.n)}</b>`,badge:'',cc:x.c.cc});
+  rows=[...pop.map(mk),...all.map(mk)];if(pop.length)note=`<div class="tv-sheet-sec">${tr('الأكثر زيارة ثم كل الدول','Popular, then all countries')}</div>`;}
+ else if(S.kind==='city'||S.kind==='from'){const cc=S.kind==='from'?(S.cc||profileCountry()):stop&&stop.cc;
+  T.textContent=S.kind==='from'?tr('مدينة الانطلاق','Departure city'):`${tr('اختر المدينة','Choose a city')} — ${tvCName(cc)}`;
+  if(!TV.c[cc]){R.innerHTML=loading;tvData(cc).then(()=>{if(tvSheet===S)tvSheetRender();}).catch(()=>{R.innerHTML=`<div class="tv-empty">${tr('تعذر التحميل','Could not load')}</div>`;});return;}
+  const d=TV.c[cc];Q.placeholder=tr(`ابحث في ${tvNum(d.p.length)} مدينة وقرية…`,`Search ${tvNum(d.p.length)} cities and villages…`);
+  if(S.kind==='from')nav=`<button type="button" class="tv-chip" data-tv="from-cc">${flag(cc)} ${safe(tvCName(cc))} — ${tr('تغيير الدولة','change country')}</button>`;
+  const list=S.q?tvSearch(d,S.q):d.p.filter(r=>r[4]<=2||r[5]>=30000).slice(0,200);
+  rows=list.map(r=>tvPlaceRow(d,r,cc));if(!S.q)note=`<div class="tv-sheet-sec">${tr('أكبر المدن — اكتب للبحث عن أي مدينة أو قرية','Largest cities — type to find any city or village')}</div>`;
+  if(S.q.trim())rows.push({act:'custom',html:`➕ ${tr('استخدم','Use')} «${safe(S.q.trim())}» ${tr('كاسم المكان','as the place name')}`,cls:'tv-custom'});}
+ else if(S.kind==='area'){const cc=stop&&stop.cc;T.textContent=`${tr('المنطقة · المحافظة · القرية','Region · district · village')} — ${tvCName(cc)}`;
+  if(!TV.c[cc]){R.innerHTML=loading;tvData(cc).then(()=>{if(tvSheet===S)tvSheetRender();}).catch(()=>{R.innerHTML=`<div class="tv-empty">${tr('تعذر التحميل','Could not load')}</div>`;});return;}
+  const d=TV.c[cc],in1=r=>!S.a1||r[2]===S.a1,in2=r=>in1(r)&&(!S.a2||r[3]===S.a2);
+  nav=`<button type="button" class="tv-chip ${S.a1?'':'on'}" data-tv="area-nav" data-l="0">${tr('كل المناطق','All regions')}</button>${S.a1?`<span>›</span><button type="button" class="tv-chip ${S.a2?'':'on'}" data-tv="area-nav" data-l="1">${tvB(tvN(d.a1[S.a1]||[S.a1,'']))}</button>`:''}${S.a2?`<span>›</span><button type="button" class="tv-chip on">${tvB(tvN(d.a2[`${S.a1}.${S.a2}`]||[S.a2,'']))}</button>`:''}`;
+  Q.placeholder=S.a1?tr('ابحث عن قرية أو بلدة هنا…','Search a village or town here…'):tr('ابحث عن منطقة أو قرية…','Search a region or village…');
+  const cnt=(f)=>{let n=0;for(const r of d.p)if(f(r))n++;return n;};
+  if(S.q){const k=tvKey(S.q);if(!S.a1)rows=Object.entries(d.a1).filter(([c,v])=>tvKey(v[0]).includes(k)||tvKey(v[1]).includes(k)).map(([c,v])=>({act:'pick-a1',html:`<b>🗺️ ${tvB(tvN(v))}</b>`,badge:tr('منطقة','Region'),go:1,code:c}));
+   rows=rows.concat(tvSearch(d,S.q,in1).map(r=>tvPlaceRow(d,r,cc,'pick-v')));}
+  else if(!S.a1){rows=Object.entries(d.a1).map(([c,v])=>({c,v,n:cnt(r=>r[2]===c)})).filter(x=>x.n).sort((a,b)=>b.n-a.n).map(x=>({act:'pick-a1',html:`<b>🗺️ ${tvB(tvN(x.v))}</b><span class="hint">${tvPlaces(x.n)}</span>`,go:1,code:x.c}));
+   note=`<div class="tv-sheet-sec">${tr('المناطق / الولايات','Regions / states')}</div>`;}
+  else if(!S.a2){const govs=Object.entries(d.a2).filter(([k])=>k.startsWith(S.a1+'.')).map(([k,v])=>({k:k.slice(S.a1.length+1),v,n:cnt(r=>r[2]===S.a1&&r[3]===k.slice(S.a1.length+1))})).filter(x=>x.n).sort((a,b)=>b.n-a.n);
+   rows=[{act:'pick-a1-all',html:`<b>✓ ${tr('اختر المنطقة كاملة','Choose the whole region')}</b>`,cls:'tv-all'}];
+   if(govs.length>1)rows=rows.concat(govs.map(x=>({act:'pick-a2',html:`<b>🏛️ ${tvB(tvN(x.v))}</b><span class="hint">${tvPlaces(x.n)}</span>`,go:1,code:x.k})));
+   else rows=rows.concat(d.p.filter(in1).slice(0,250).map(r=>tvPlaceRow(d,r,cc,'pick-v')));
+   note=`<div class="tv-sheet-sec">${govs.length>1?tr('المحافظات','Districts'):tr('المدن والقرى','Cities & villages')}</div>`;}
+  else{rows=[{act:'pick-a2-all',html:`<b>✓ ${tr('اختر المحافظة كاملة','Choose the whole district')}</b>`,cls:'tv-all'}].concat(d.p.filter(in2).slice(0,300).map(r=>tvPlaceRow(d,r,cc,'pick-v')));
+   note=`<div class="tv-sheet-sec">${tr('المدن والبلدات والقرى','Cities, towns & villages')}</div>`;}
+  if(S.q.trim())rows.push({act:'custom-v',html:`➕ ${tr('استخدم','Use')} «${safe(S.q.trim())}» ${tr('كاسم القرية أو المكان','as the village / place name')}`,cls:'tv-custom'});}
+ if(Q.value!==S.q)Q.value=S.q;N.innerHTML=nav;N.classList.toggle('hidden',!nav);S.rows=rows;
+ R.innerHTML=note+(rows.length?tvRowsHTML(rows):`<div class="tv-empty">${tr('لا توجد نتائج','No results')}</div>`);R.scrollTop=0;}
+function tvSetPlaceNames(stop,pl){const d=TV.c[stop.cc];stop.a1=pl.a1||'';stop.a2=pl.a2||'';stop.a1n=d&&d.a1[stop.a1]||null;stop.a2n=d&&d.a2[`${stop.a1}.${stop.a2}`]||null;}
+function tvSheetPick(act,i){const S=tvSheet,r=S.rows[i],t=tvTrip(),stop=t&&t.stops.find(s=>s.id===S.sid);
+ if(S.kind==='country'&&act==='pick-c'){if(S.guide){tvCloseSheet();tvUI.guide=r.cc;renderTravel();scrollTo(0,0);return;}
+  if(S.forFrom){S.kind='from';S.cc=r.cc;S.q='';delete S.forFrom;tvSheetRender();return;}
+  if(stop&&stop.cc!==r.cc){Object.assign(stop,{cc:r.cc,a1:'',a2:'',a1n:null,a2n:null,city:null,vil:null});tvData(r.cc).catch(()=>{});}
+  save();tvCloseSheet();renderTravel();return;}
+ if(act==='pick-p'&&S.kind==='from'&&t){t.from={en:r.pl.en,ar:r.pl.ar,lat:r.pl.lat,lon:r.pl.lon,cc:r.pl.cc};save();tvCloseSheet();renderTravel();return;}
+ if(act==='pick-p'&&stop){stop.city=r.pl;if(stop.vil&&!stop.vil.custom&&stop.vil.a1!==r.pl.a1)stop.vil=null;tvSetPlaceNames(stop,stop.vil&&!stop.vil.custom?stop.vil:r.pl);save();tvCloseSheet();renderTravel();return;}
+ if(act==='pick-v'&&stop){stop.vil=r.pl;tvSetPlaceNames(stop,r.pl);if(!stop.city){stop.city=null;}save();tvCloseSheet();renderTravel();return;}
+ if(act==='pick-a1'){S.a1=r.code;S.a2='';S.q='';tvSheetRender();return;}
+ if(act==='pick-a2'){S.a2=r.code;S.q='';tvSheetRender();return;}
+ if((act==='pick-a1-all'||act==='pick-a2-all')&&stop){const d=TV.c[stop.cc];stop.a1=S.a1;stop.a2=act==='pick-a2-all'?S.a2:'';stop.a1n=d.a1[stop.a1]||null;stop.a2n=stop.a2?d.a2[`${stop.a1}.${stop.a2}`]||null:null;stop.vil=null;
+  if(stop.city&&(stop.city.a1!==stop.a1||(stop.a2&&stop.city.a2!==stop.a2)))stop.city=null;save();tvCloseSheet();renderTravel();return;}
+ if((act==='custom'||act==='custom-v')){const name=S.q.trim().slice(0,80);if(!name)return;const pl={en:name,ar:name,lat:null,lon:null,t:3,pop:0,custom:true};
+  if(S.kind==='from'&&t){t.from={...pl,cc:S.cc||profileCountry()};}else if(stop){if(act==='custom')stop.city=pl;else{stop.vil=pl;}}
+  save();tvCloseSheet();renderTravel();}}
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='tvSheetQ'&&tvSheet){tvSheet.q=e.target.value;tvSheetRender();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&tvSheet){tvCloseSheet();}
+ if(e.key==='Enter'&&e.target&&e.target.id==='tvActIn'){e.preventDefault();$('[data-tv="act-add"]')?.click();}});
+document.addEventListener('change',e=>{const f=e.target.closest&&e.target.closest('[data-tf]');if(!f||currentView!=='travel')return;const t=tvTrip();if(!t)return;const path=f.dataset.tf.split('.'),v=String(f.value||'').trim();
+ if(path[0]==='title')t.title=v.slice(0,80);
+ else if(path[0]==='dep'){t.dep=v;if(t.ret&&v&&t.ret<v)t.ret='';}
+ else if(path[0]==='ret'){t.ret=v&&t.dep&&v<t.dep?t.dep:v;}
+ else if(path[0]==='notes')t.notes=v.slice(0,3000);
+ else if(path[0]==='leg'){t.legs[path[1]]=t.legs[path[1]]||{t:[]};t.legs[path[1]][path[2]]=v.slice(0,200);}
+ else if(path[0]==='stay'){const s=t.stops.find(x=>x.id===path[1]);if(s){s.stay[path[2]]=v.slice(0,200);if(path[2]==='in'&&s.stay.out&&v&&s.stay.out<v)s.stay.out='';}}
+ else if(path[0]==='stop'){const s=t.stops.find(x=>x.id===path[1]);if(s)s.nights=v===''?'':String(Math.max(0,Math.min(365,parseInt(v,10)||0)));}
+ else if(path[0]==='age'){t.pax.ages[+path[1]]=v?+v:'';}
+ save();if(path[0]!=='title'&&path[0]!=='notes'&&!(path[0]==='leg'&&path[2]!=='cls')&&!(path[0]==='stay'&&['name','ref','note'].includes(path[2])))renderTravel();});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tv]');
+ if(!b){if(tvSheet&&e.target&&e.target.id==='tvSheet')tvCloseSheet();return;}
+ const a=b.dataset.tv,t=tvTrip(),sid=b.dataset.sid,stop=t&&sid?t.stops.find(s=>s.id===sid):null;
+ if(a==='sclose'){tvCloseSheet();return;}
+ if(['pick-c','pick-p','pick-v','pick-a1','pick-a2','pick-a1-all','pick-a2-all','custom','custom-v'].includes(a)){tvSheetPick(a,+b.dataset.i);return;}
+ if(a==='area-nav'){if(!tvSheet)return;if(b.dataset.l==='0'){tvSheet.a1='';tvSheet.a2='';}else tvSheet.a2='';tvSheet.q='';tvSheetRender();return;}
+ if(a==='from-cc'){tvSheet.kind='country';tvSheet.forFrom=1;tvSheet.q='';tvSheetRender();return;}
+ if(a==='new'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}
+ if(a==='open'){tvUI={open:b.dataset.id,guide:null};renderTravel();scrollTo(0,0);return;}
+ if(a==='home'){tvUI={open:null,guide:null};renderTravel();scrollTo(0,0);return;}
+ if(a==='guide'){tvOpenSheet({kind:'country',guide:1});return;}
+ if(a==='gpick'){tvUI={open:null,guide:b.dataset.cc};renderTravel();scrollTo(0,0);return;}
+ if(a==='gclose'){tvUI.guide=null;renderTravel();scrollTo(0,0);return;}
+ if(a==='gplan'){const n=tvNew();n.stops[0].cc=b.dataset.cc;save();tvData(b.dataset.cc).catch(()=>{});tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}
+ if(!t)return;
+ if(a==='deltrip'){if(confirm(tr('حذف هذه الرحلة؟','Delete this trip?'))){state.trips=tvTrips().filter(x=>x.id!==t.id);save();tvUI={open:null,guide:null};renderTravel();scrollTo(0,0);}return;}
+ if(a==='s-country'){tvOpenSheet({kind:'country',sid});return;}
+ if(a==='s-city'&&stop&&stop.cc){tvOpenSheet({kind:'city',sid});return;}
+ if(a==='s-area'&&stop&&stop.cc){tvOpenSheet({kind:'area',sid,a1:stop.a1||'',a2:''});return;}
+ if(a==='s-from'){tvOpenSheet({kind:'from',cc:t.from&&t.from.cc||''});return;}
+ if(a==='addstop'){t.stops.push(tvStop());if(t.type!=='multi')t.type='multi';save();renderTravel();return;}
+ if(a==='delstop'&&t.stops.length>1){t.stops=t.stops.filter(s=>s.id!==sid);if(t.stops.length===1&&t.type==='multi')t.type='round';save();renderTravel();return;}
+ if(a==='type'){t.type=b.dataset.k;if(t.type==='oneway')t.ret='';save();renderTravel();return;}
+ if(a==='flex'){t.flex=+b.dataset.n||0;save();renderTravel();return;}
+ if(a==='pax'){const k=b.dataset.k,min=k==='ad'||k==='rooms'?1:0;t.pax[k]=Math.max(min,Math.min(20,(+t.pax[k]||0)+(+b.dataset.d)));if(k==='ch')t.pax.ages=t.pax.ages.slice(0,t.pax.ch);save();renderTravel();return;}
+ if(a==='tr'){const l=t.legs[b.dataset.leg]=t.legs[b.dataset.leg]||{t:[]};l.t=Array.isArray(l.t)?l.t:[];const k=b.dataset.k;l.t=l.t.includes(k)?l.t.filter(x=>x!==k):[...l.t,k];save();renderTravel();return;}
+ if(a==='st'&&stop){const k=b.dataset.k;stop.stay.type=stop.stay.type===k?'':k;if(stop.stay.type&&!stop.stay.in&&t.dep){const i=t.stops.indexOf(stop);if(t.stops.length===1){stop.stay.in=t.dep;stop.stay.out=tvEnd(t)&&tvEnd(t)!==t.dep?tvEnd(t):'';}}save();renderTravel();return;}
+ if(a==='stars'&&stop){const n=+b.dataset.n;stop.stay.stars=stop.stay.stars===n?0:n;save();renderTravel();return;}
+ if(a==='ev'){const k=b.dataset.k;t.ev=t.ev.includes(k)?t.ev.filter(x=>x!==k):[...t.ev,k];save();renderTravel();return;}
+ if(a==='act-add'){const i=$('#tvActIn'),d=$('#tvActD');const v=(i&&i.value||'').trim();if(!v){i&&i.focus();return;}t.acts.push({id:id(),t:v.slice(0,120),d:d&&d.value||''});save();renderTravel();return;}
+ if(a==='act-del'){t.acts=t.acts.filter(x=>x.id!==b.dataset.id);save();renderTravel();return;}
 });
 
 document.addEventListener('DOMContentLoaded',init);

@@ -1,16 +1,20 @@
 // Offline worker. Bump CACHE on every release so phones pick up the update.
 const PREFIX = 'dlos-';
-const CACHE = PREFIX + '3.2.0';
+const CACHE = PREFIX + '3.3.0';
 // Quran fonts/layout never change between releases: own cache, kept across updates.
 const QCACHE = PREFIX + 'quran-v1';
+// Travel places/events: own cache kept across updates, refreshed in the background when online.
+const TCACHE = PREFIX + 'travel-v1';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './adhan.m4a', './adhkar.json'];
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(u => new Request(u, { cache: 'reload' }))))
+    .then(() => true ? caches.open(TCACHE).then(c => c.addAll(['./travel/index.json', './travel/info.json'].map(u => new Request(u, { cache: 'reload' })))).catch(() => {}) : null)
+    .then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
   // Only our own old caches: another app on this origin keeps its files.
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE && k !== QCACHE).map(k => caches.delete(k))))
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE && k !== QCACHE && k !== TCACHE).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 // iPhone Safari loads audio in byte ranges and rejects a full 200 reply from a service worker.
@@ -38,6 +42,14 @@ self.addEventListener('fetch', e => {
   if (new URL(req.url).pathname.includes('/quran/')) {
     e.respondWith(caches.open(QCACHE).then(c => c.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req).then(res => {
       if (res.ok) c.put(req, res.clone()); return res; }))));
+    return;
+  }
+  if (new URL(req.url).pathname.includes('/travel/')) {
+    e.respondWith(caches.open(TCACHE).then(c => c.match(req, { ignoreSearch: true }).then(hit => {
+      const net = fetch(req).then(res => { if (res.ok) c.put(req, res.clone()); return res; });
+      if (hit) { e.waitUntil(net.catch(() => {})); return hit; }
+      return net;
+    })));
     return;
   }
   e.respondWith(caches.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req)));
