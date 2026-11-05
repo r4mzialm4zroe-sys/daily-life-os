@@ -1038,6 +1038,50 @@ body.dark .mp-head,body.dark .mp-foot{color:#c9b37a}
 .tv-approx .tv-res-m b::after{content:' ≈';color:var(--muted);font-weight:400}
 .tv-all{color:var(--success)}
 
+/* ---- Dates (countdowns) ---- */
+.dt-hero{display:grid;gap:6px;text-align:center;margin-bottom:14px;padding:18px 14px;background:linear-gradient(160deg,var(--primary-soft),var(--surface) 70%)}
+.dt-hero-k{font-size:13px;color:var(--muted);font-weight:700}
+.dt-hero-t{font-size:21px;font-weight:800;line-height:1.5}
+.dt-hero-d{font-size:14px;color:var(--muted)}
+.dt-hero-now{font-size:20px;font-weight:800;color:var(--primary);margin-top:6px}
+.dt-clock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.dt-clock>div{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 4px;display:grid;gap:2px}
+.dt-clock b{font-size:26px;font-weight:800;color:var(--primary);font-variant-numeric:tabular-nums;line-height:1.2}
+.dt-clock span{font-size:12px;color:var(--muted)}
+.dt-filter{display:flex;flex-wrap:wrap;gap:7px;padding:2px 0 12px}
+.dt-filter::-webkit-scrollbar{display:none}
+.dt-filter .tv-chip{flex:none}
+.dt-list{display:grid;gap:10px}
+.dt-card{display:flex;align-items:flex-start;gap:12px;padding:14px;border-radius:18px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow)}
+.dt-card.today{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,var(--surface))}
+.dt-card.past{opacity:.6}
+.dt-emo{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:var(--surface-2)}
+.dt-main{flex:1;min-width:0;display:grid;gap:3px}
+.dt-main>b{font-size:16.5px;line-height:1.45}
+.dt-date{font-size:13.5px;color:var(--text)}
+.dt-hij{font-size:12.5px;color:var(--muted)}
+.dt-live{font-size:14px;font-weight:800;color:var(--primary)}
+.dt-sub{font-size:12.5px;color:var(--muted);line-height:1.6}
+.dt-note{font-size:12px;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:8px 10px;line-height:1.6;margin-top:4px}
+.dt-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.dt-tool{border:1px solid var(--border);background:var(--surface);color:var(--muted);border-radius:999px;padding:4px 10px;font:inherit;font-size:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dt-bell.on{color:var(--primary);border-color:var(--primary);background:var(--primary-soft);font-weight:700}
+.dt-cd{flex:none;min-width:62px;text-align:center;border-radius:14px;padding:8px 6px;background:var(--surface-2);display:grid;gap:1px}
+.dt-cd b{font-size:24px;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums}
+.dt-cd span{font-size:11.5px;color:var(--muted);font-weight:700}
+.dt-cd.soon{background:var(--primary-soft)}.dt-cd.soon b{color:var(--primary)}
+.dt-cd.now{background:var(--primary);}.dt-cd.now b,.dt-cd.now span{color:#fff}
+.dt-cd.past b{color:var(--muted)}
+.dt-note,.dt-form{width:100%;box-sizing:border-box}
+.dt-form{display:grid;gap:10px;margin-top:10px;padding:12px;border-radius:14px;background:var(--surface-2)}
+.dt-form .tv-f input,.dt-form .tv-f select{background:var(--surface)}
+.dt-form-b{display:flex;gap:8px;flex-wrap:wrap}
+.dt-addbtn{width:100%;margin-top:12px}
+.dt-addcard{display:grid;gap:12px;margin-top:12px}.dt-addcard h3{margin:0}
+.dt-emos{display:flex;flex-wrap:wrap;gap:6px}
+.dt-emos button{width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-size:20px;cursor:pointer}
+.dt-emos button.on{border-color:var(--primary);background:var(--primary-soft)}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -1067,6 +1111,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item" data-view="today">📅 <span class="nav-text">Today</span></button>
         <button class="nav-item" data-view="groceries">🛒 <span class="nav-text">Groceries</span></button>
         <button class="nav-item" data-view="travel">🧳 <span class="nav-text">Travel</span></button>
+        <button class="nav-item" data-view="dates">⏳ <span class="nav-text">Dates</span></button>
         <button class="nav-item" data-view="work">💼 <span class="nav-text">Work</span></button>
         <button class="nav-item" data-view="education">📚 <span class="nav-text">Education</span></button>
         <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
@@ -1106,6 +1151,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view" id="todayView"></section>
       <section class="view" id="groceriesView"></section>
       <section class="view" id="travelView"></section>
+      <section class="view" id="datesView"></section>
       <section class="view" id="workView"></section>
       <section class="view" id="educationView"></section>
       <section class="view" id="financeView"></section>
@@ -1186,7 +1232,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],dates:['المواعيد','Key dates'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -1418,10 +1464,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.3.1 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.4.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,dates:renderDates,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1516,7 +1562,7 @@ function init(){
  $('#navShade').addEventListener('click',()=>{$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');});
  $('#themeToggle').addEventListener('click',toggleTheme);
  $('#langToggle').addEventListener('click',toggleLanguage);
- $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
+ $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='dates'){dtUI.add=true;dtUI.filter='all';renderDates();setTimeout(()=>{const n=$('#dtName');if(n){n.scrollIntoView({block:'center'});n.focus();}},30);return;}if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
  $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal();});
  $('#modalForm').addEventListener('submit',submitModal);
  $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));
@@ -1559,6 +1605,7 @@ function buildReminders(){
     body:items.length?tr(`عندك ${taskCount(items.length)} اليوم`,`You have ${taskCount(items.length)} today`)+` · ${names}${items.length>2?'…':''}`:tr('يومك فاضي — خطط لشي جميل اليوم ✨','Your day is open — plan something great ✨')});}
  }
  for(const it of prayerReminderItems(now)){const {key,...rest}=it;push(key,rest);}
+ try{for(const it of dtReminderItems(now)){const {key,...rest}=it;push(key,rest);}}catch{}
  return list.sort((a,b)=>a.at-b.at).slice(0,400);
 }
 function syncRemindersNow(){const a=androidNotify();if(!a)return;const s=notifySettings();try{reminderCount=a.syncReminders(JSON.stringify(s.enabled?buildReminders():[]));}catch{reminderCount=null;}const el=document.getElementById('notifyCount');if(el)el.textContent=reminderCountText();}
@@ -2431,6 +2478,133 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
  if(a==='ev'){const k=b.dataset.k;t.ev=t.ev.includes(k)?t.ev.filter(x=>x!==k):[...t.ev,k];save();renderTravel();return;}
  if(a==='act-add'){const i=$('#tvActIn'),d=$('#tvActD');const v=(i&&i.value||'').trim();if(!v){i&&i.focus();return;}t.acts.push({id:id(),t:v.slice(0,120),d:d&&d.value||''});save();renderTravel();return;}
  if(a==='act-del'){t.acts=t.acts.filter(x=>x.id!==b.dataset.id);save();renderTravel();return;}
+});
+
+// ---- Dates (المواعيد): countdowns to salaries and occasions ----
+let dtUI={filter:'all',add:false,annivEdit:false,priv:false},dtTimer=null;
+function dtState(){const d=state.occ&&typeof state.occ==='object'?state.occ:{};
+ state.occ={privDay:27,privShift:'before',anniv:'',annivCal:'g',custom:[],remind:{anniv:true},...d};
+ if(!Array.isArray(state.occ.custom))state.occ.custom=[];if(!state.occ.remind||typeof state.occ.remind!=='object')state.occ.remind={};return state.occ;}
+const DT_HF=(()=>{try{return new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{year:'numeric',month:'numeric',day:'numeric'});}catch{return null;}})();
+function dtH(d){if(!DT_HF)return null;try{const p=DT_HF.formatToParts(d),g=k=>+((p.find(x=>x.type===k)||{}).value);const r={y:g('year'),m:g('month'),d:g('day')};return r.m&&r.d?r:null;}catch{return null;}}
+function dtNoon(d){const x=new Date(d);x.setHours(12,0,0,0);return x;}
+function dtToday(){return dtNoon(new Date());}
+function dtDays(d){return Math.round((dtNoon(d)-dtToday())/864e5);}
+function dtParse(s){return s&&/^\d{4}-\d{2}-\d{2}$/.test(s)?new Date(`${s}T12:00:00`):null;}
+function dtNextHijri(m,day,from=dtToday()){for(const dd of day>=30?[30,29]:[day]){const x=new Date(from);for(let i=0;i<400;i++){const h=dtH(x);if(h&&h.m===m&&h.d===dd)return {date:new Date(x),hy:h.y};x.setDate(x.getDate()+1);}}return null;}
+function dtNextGreg(m,day,from=dtToday()){for(let y=from.getFullYear();y<=from.getFullYear()+1;y++){const last=new Date(y,m,0).getDate(),d=new Date(y,m-1,Math.min(day,last),12);if(d>=from)return d;}return null;}
+function dtShift(d,mode){const x=new Date(d),w=x.getDay();
+ if(mode==='before'){if(w===5)x.setDate(x.getDate()-1);else if(w===6)x.setDate(x.getDate()-2);}
+ else if(mode==='after'){if(w===5)x.setDate(x.getDate()+2);else if(w===6)x.setDate(x.getDate()+1);}return x;}
+function dtSalary(day,mode,from=dtToday()){for(let k=0;k<14;k++){const y=from.getFullYear(),m=from.getMonth()+k,last=new Date(y,m+1,0).getDate();
+ const base=new Date(y,m,Math.min(day,last),12),d=dtShift(base,mode);if(d>=from)return {date:d,base};}return null;}
+function dtWeekday(d){return new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-ca-gregory':'en-US',{weekday:'long'}).format(d);}
+function dtDateText(d){return new Intl.DateTimeFormat(state.lang==='ar'?'ar-SA-u-ca-gregory-nu-latn':'en-GB',{day:'numeric',month:'long',year:'numeric'}).format(d);}
+function dtDayWord(n){n=Math.abs(n);return tr(n===1?'يوم':n===2?'يومان':n>=3&&n<=10?'أيام':'يومًا',n===1?'day':'days');}
+function dtNumFmt(n){return qNum(new Intl.NumberFormat('en-US').format(n));}
+function dtItems(){const o=dtState(),t=dtToday(),hNow=dtH(t),items=[];
+ const add=x=>{if(x&&x.date){x.days=x.now?0:dtDays(x.date);items.push(x);}};
+ // 1) salaries
+ const g=dtSalary(27,'before');
+ if(g)add({key:'salgov',cat:'sal',emoji:'🏛️',ar:'راتب القطاع الحكومي',en:'Government salary',date:g.date,
+  sub:g.date.getDate()!==g.base.getDate()?tr(`يوم ٢٧ يوافق ${dtWeekday(g.base)}، فيُصرف ${dtWeekday(g.date)}`,`The 27th is a ${dtWeekday(g.base)}, so it is paid on ${dtWeekday(g.date)}`):tr('يوم ٢٧ من كل شهر ميلادي','The 27th of every month'),
+  note:tr('إذا وافق ٢٧ الجمعة أو السبت يُقدَّم للخميس، وقد يتغير بأمر ملكي (مثل قبل الأعياد).','If the 27th is a Friday or Saturday it moves to Thursday; a royal order can change it (e.g. before Eid).')});
+ const pd=Math.max(1,Math.min(31,+o.privDay||27)),pv=dtSalary(pd,o.privShift);
+ if(pv)add({key:'salpriv',cat:'sal',emoji:'🏢',ar:'راتب القطاع الخاص',en:'Private-sector salary',date:pv.date,settings:'priv',
+  sub:tr(`حسب جهة عملك: يوم ${qNum(pd)}${pv.date.getDate()!==pv.base.getDate()?` (يوافق ${dtWeekday(pv.base)})`:''}`,`Per your employer: day ${pd}${pv.date.getDate()!==pv.base.getDate()?` (a ${dtWeekday(pv.base)})`:''}`)});
+ // 2-3) national days
+ const fd=dtNextGreg(2,22);add({key:'found',cat:'nat',emoji:'🏰',ar:'يوم التأسيس',en:'Founding Day',date:fd,sub:tr(`ذكرى مرور ${qNum(fd.getFullYear()-1727)} عامًا على تأسيس الدولة السعودية`,`${fd.getFullYear()-1727} years since the founding of the Saudi state`)});
+ const nd=dtNextGreg(9,23);add({key:'natday',cat:'nat',emoji:'🇸🇦',ar:`اليوم الوطني الـ${qNum(nd.getFullYear()-1930)}`,en:`Saudi National Day (${nd.getFullYear()-1930}th)`,date:nd,sub:tr('٢٣ سبتمبر — ذكرى توحيد المملكة','23 September — unification of the Kingdom')});
+ // 4) new year
+ const ny=dtNextGreg(1,1);add({key:'newyear',cat:'occ',emoji:'🎆',ar:`رأس السنة الميلادية ${ny.getFullYear()}`,en:`New Year ${ny.getFullYear()}`,date:ny,sub:tr('١ يناير','1 January')});
+ const hny=dtNextHijri(1,1);if(hny)add({key:'hnewyear',cat:'isl',emoji:'🌙',ar:`رأس السنة الهجرية ${qNum(hny.hy)} هـ`,en:`Islamic New Year ${hny.hy} AH`,date:hny.date,sub:tr('١ محرم','1 Muharram')});
+ // 5-7) Ramadan and the Eids (Umm al-Qura)
+ if(hNow&&hNow.m===9){const eid=dtNextHijri(10,1);add({key:'ram',cat:'isl',emoji:'🌙',ar:'رمضان المبارك',en:'Ramadan',date:t,now:true,
+   live:tr(`نحن في رمضان — اليوم ${qNum(hNow.d)}`,`It's Ramadan — day ${hNow.d}`),sub:eid?tr(`باقي على العيد ${qNum(dtDays(eid.date))} ${dtDayWord(dtDays(eid.date))}`,`${dtDays(eid.date)} days to Eid`):''});}
+ else{const r=dtNextHijri(9,1);if(r)add({key:'ram',cat:'isl',emoji:'🌙',ar:`رمضان المبارك ${qNum(r.hy)} هـ`,en:`Ramadan ${r.hy} AH`,date:r.date,sub:tr('١ رمضان','1 Ramadan')});}
+ if(hNow&&hNow.m===10&&hNow.d<=3)add({key:'fitr',cat:'isl',emoji:'🎉',ar:'عيد الفطر المبارك',en:'Eid al-Fitr',date:t,now:true,live:tr(`عيدكم مبارك — اليوم ${qNum(hNow.d)} من العيد`,`Eid Mubarak — day ${hNow.d}`)});
+ else{const r=dtNextHijri(10,1);if(r)add({key:'fitr',cat:'isl',emoji:'🎉',ar:'عيد الفطر المبارك',en:'Eid al-Fitr',date:r.date,sub:tr('١ شوال','1 Shawwal')});}
+ const ar9=dtNextHijri(12,9);if(ar9)add({key:'arafah',cat:'isl',emoji:'🤲',ar:'يوم عرفة',en:'Day of Arafah',date:ar9.date,sub:tr('٩ ذو الحجة — يُستحب صيامه','9 Dhu al-Hijjah — a recommended fast')});
+ if(hNow&&hNow.m===12&&hNow.d>=10&&hNow.d<=13)add({key:'adha',cat:'isl',emoji:'🐑',ar:'عيد الأضحى المبارك',en:'Eid al-Adha',date:t,now:true,live:tr(`عيدكم مبارك — اليوم ${qNum(hNow.d-9)} من العيد`,`Eid Mubarak — day ${hNow.d-9}`)});
+ else{const r=dtNextHijri(12,10);if(r)add({key:'adha',cat:'isl',emoji:'🐑',ar:'عيد الأضحى المبارك',en:'Eid al-Adha',date:r.date,sub:tr('١٠ ذو الحجة','10 Dhu al-Hijjah')});}
+ // 8) Valentine's
+ const vd=dtNextGreg(2,14);add({key:'valentine',cat:'occ',emoji:'❤️',ar:'عيد الحب',en:"Valentine's Day",date:vd,sub:tr('١٤ فبراير','14 February')});
+ // 9) wedding anniversary
+ const w=dtParse(o.anniv);
+ if(w){let nx=null,n=0;if(o.annivCal==='h'){const hw=dtH(w);const r=hw&&dtNextHijri(hw.m,hw.d);if(r){nx=r.date;n=r.hy-hw.y;}}else{nx=dtNextGreg(w.getMonth()+1,w.getDate());if(nx)n=nx.getFullYear()-w.getFullYear();}
+  const since=Math.max(0,Math.round((dtToday()-dtNoon(w))/864e5));
+  if(nx)add({key:'anniv',cat:'me',emoji:'💍',ar:n>0?`ذكرى الزواج الـ${qNum(n)}`:'يوم الزواج',en:n>0?`Wedding anniversary #${n}`:'Wedding day',date:nx,anniv:true,
+   sub:since>0?tr(`مضى على زواجكم ${dtNumFmt(since)} يوم ❤️`,`${since.toLocaleString('en-US')} days together ❤️`):tr('ألف مبروك 💐','Congratulations 💐')});}
+ else items.push({key:'anniv',cat:'me',emoji:'💍',ar:'ذكرى الزواج',en:'Wedding anniversary',empty:true,days:100000});
+ // the user's own dates
+ for(const c of o.custom){const d0=dtParse(c.date);if(!d0||!c.t)continue;let nx=d0,n=0;
+  if(c.rep==='g'){nx=dtNextGreg(d0.getMonth()+1,d0.getDate());n=nx?nx.getFullYear()-d0.getFullYear():0;}
+  else if(c.rep==='h'){const hd=dtH(d0),r=hd&&dtNextHijri(hd.m,hd.d);nx=r&&r.date;n=r?r.hy-hd.y:0;}
+  if(nx)add({key:'c:'+c.id,cat:'me',emoji:c.e||'📌',ar:c.t,en:c.t,date:nx,custom:c.id,past:c.rep==='once'&&dtDays(nx)<0,
+   sub:c.rep==='once'?tr('مرة واحدة','One time'):(n>0?tr(`يتكرر كل سنة${c.rep==='h'?' (هجري)':''} — الذكرى الـ${qNum(n)}`,`Every year${c.rep==='h'?' (Hijri)':''} — #${n}`):tr(`يتكرر كل سنة${c.rep==='h'?' (هجري)':''}`,`Every year${c.rep==='h'?' (Hijri)':''}`))});}
+ return items.sort((a,b)=>(a.past?1e6-a.days:a.days)-(b.past?1e6-b.days:b.days));}
+const DT_CATS=[['all','الكل','All',''],['sal','الرواتب','Salaries','💰'],['nat','وطنية','National','🇸🇦'],['isl','إسلامية','Islamic','🌙'],['occ','مناسبات','Occasions','🎉'],['me','شخصية','Personal','💍']];
+const DT_EMO=['📌','🎂','💍','🎓','✈️','💼','🏥','🎉','❤️','🏠','🚗','⚽'];
+function dtCardHTML(x){const o=dtState(),on=x.key==='anniv'?o.remind.anniv!==false:!!o.remind[x.key];
+ if(x.empty){return `<div class="dt-card dt-${x.cat} dt-emptycard"><div class="dt-emo">${x.emoji}</div><div class="dt-main"><b>${tr(x.ar,x.en)}</b>
+  <span class="dt-sub">${tr('حدد تاريخ زواجكم ونحسب لك كم باقي على الذكرى','Set your wedding date and we will count down to the anniversary')}</span>${dtAnnivForm()}</div></div>`;}
+ const box=x.now?`<div class="dt-cd now"><b>🎉</b><span>${tr('الآن','Now')}</span></div>`:x.days===0?`<div class="dt-cd now"><b>🎉</b><span>${tr('اليوم','Today')}</span></div>`
+  :x.days<0?`<div class="dt-cd past"><b>${qNum(-x.days)}</b><span>${tr('مضى','ago')}</span></div>`:x.days===1?`<div class="dt-cd soon"><b>${qNum(1)}</b><span>${tr('بكرة','Tomorrow')}</span></div>`
+  :`<div class="dt-cd ${x.days<=7?'soon':''}"><b>${qNum(x.days)}</b><span>${dtDayWord(x.days)}</span></div>`;
+ const hj=hijriLabel(x.date);
+ const tools=`${x.settings==='priv'?`<button type="button" class="dt-tool" data-dt="priv" aria-expanded="${dtUI.priv}">⚙️ ${tr('يوم الصرف','Pay day')}</button>`:''}${x.anniv?`<button type="button" class="dt-tool" data-dt="annivedit">✏️ ${tr('تعديل','Edit')}</button>`:''}${x.custom?`<button type="button" class="dt-tool" data-dt="cdel" data-id="${x.custom}">🗑️ ${tr('حذف','Delete')}</button>`:''}`;
+ const extra=(x.settings==='priv'&&dtUI.priv?dtPrivForm():'')+(x.anniv&&dtUI.annivEdit?dtAnnivForm():'')+(x.note?`<div class="dt-note">ℹ️ ${x.note}</div>`:'');
+ return `<div class="dt-card dt-${x.cat} ${x.days===0||x.now?'today':''} ${x.past?'past':''}"><div class="dt-emo">${x.emoji}</div>
+  <div class="dt-main"><b>${safe(tr(x.ar,x.en))}</b>${x.live?`<span class="dt-live">${x.live}</span>`:`<span class="dt-date">${dtWeekday(x.date)}${tr('، ',', ')}${dtDateText(x.date)}</span>${hj?`<span class="dt-hij">${hj}</span>`:''}`}
+   ${x.sub?`<span class="dt-sub">${x.sub}</span>`:''}<div class="dt-tools"><button type="button" class="dt-tool dt-bell ${on?'on':''}" data-dt="bell" data-k="${safe(x.key)}" aria-pressed="${on}">${on?'🔔 '+tr('التذكير مفعّل','Reminder on'):'🔕 '+tr('ذكّرني','Remind me')}</button>${tools}</div>${extra}</div>${box}</div>`;}
+function dtPrivForm(){const o=dtState();return `<div class="dt-form"><label class="tv-f"><span>${tr('يوم صرف الراتب في جهة عملك','Pay day at your employer')}</span><select data-df="privDay">${Array.from({length:31},(_,i)=>i+1).map(d=>`<option value="${d}" ${+o.privDay===d?'selected':''}>${qNum(d)}</option>`).join('')}</select></label>
+ <label class="tv-f"><span>${tr('إذا وافق الجمعة أو السبت','If it falls on Friday or Saturday')}</span><select data-df="privShift">${[['before','يُقدَّم للخميس','Paid the Thursday before'],['after','يُؤخَّر للأحد','Paid the Sunday after'],['none','بدون تغيير','No change']].map(x=>`<option value="${x[0]}" ${o.privShift===x[0]?'selected':''}>${tr(x[1],x[2])}</option>`).join('')}</select></label></div>`;}
+function dtAnnivForm(){const o=dtState();return `<div class="dt-form"><label class="tv-f"><span>${tr('تاريخ الزواج (ميلادي)','Wedding date')}</span><input type="date" id="dtAnnivIn" value="${safe(o.anniv||'')}" max="${dateLocal()}"></label>
+ <label class="tv-f"><span>${tr('نحتفل بالذكرى حسب','Celebrate by the')}</span><select id="dtAnnivCal"><option value="g" ${o.annivCal!=='h'?'selected':''}>${tr('التاريخ الميلادي','Gregorian date')}</option><option value="h" ${o.annivCal==='h'?'selected':''}>${tr('التاريخ الهجري','Hijri date')}</option></select></label>
+ <div class="dt-form-b"><button type="button" class="primary-btn" data-dt="annivsave">${tr('حفظ','Save')}</button>${o.anniv?`<button type="button" class="secondary-btn" data-dt="annivclear">${tr('مسح التاريخ','Clear date')}</button>`:''}</div></div>`;}
+function dtAddHTML(){if(!dtUI.add)return `<button type="button" class="secondary-btn dt-addbtn" data-dt="addopen">＋ ${tr('أضف موعدك الخاص (عيد ميلاد، سفر، موعد…)','Add your own date (birthday, trip, appointment…)')}</button>`;
+ return `<div class="card dt-addcard"><h3>＋ ${tr('موعد خاص','Your own date')}</h3><div class="dt-emos" role="group">${DT_EMO.map((e,i)=>`<button type="button" class="${i===0?'on':''}" data-dt="emo" data-e="${e}">${e}</button>`).join('')}</div>
+ <div class="tv-grid2"><label class="tv-f tv-wide"><span>${tr('الاسم','Name')}</span><input id="dtName" maxlength="60" dir="auto" placeholder="${tr('مثال: عيد ميلاد دانة','e.g. Mum\'s birthday')}"></label>
+  <label class="tv-f"><span>${tr('التاريخ','Date')}</span><input id="dtDate" type="date"></label>
+  <label class="tv-f"><span>${tr('التكرار','Repeat')}</span><select id="dtRep"><option value="g">${tr('كل سنة (ميلادي)','Every year (Gregorian)')}</option><option value="h">${tr('كل سنة (هجري)','Every year (Hijri)')}</option><option value="once">${tr('مرة واحدة','One time')}</option></select></label></div>
+ <div class="dt-form-b"><button type="button" class="primary-btn" data-dt="addsave">${tr('إضافة','Add')}</button><button type="button" class="secondary-btn" data-dt="addcancel">${tr('إلغاء','Cancel')}</button></div></div>`;}
+function renderDates(){const el=$('#datesView');if(!el)return;const all=dtItems(),f=dtUI.filter,list=f==='all'?all:all.filter(x=>x.cat===f);
+ const next=all.find(x=>!x.empty&&!x.past&&x.days>=0);
+ const hero=next?`<div class="card dt-hero"><div class="dt-hero-k">⏳ ${next.now||next.days===0?tr('اليوم','Today'):tr('أقرب موعد','Coming up next')}</div>
+  <div class="dt-hero-t">${next.emoji} ${safe(tr(next.ar,next.en))}</div><div class="dt-hero-d">${next.live||`${dtWeekday(next.date)}${tr('، ',', ')}${dtDateText(next.date)}`}</div>
+  ${next.now||next.days===0?`<div class="dt-hero-now">🎉 ${tr('مبارك عليكم','Enjoy the day')}</div>`:`<div class="dt-clock" id="dtClock" data-at="${new Date(next.date.getFullYear(),next.date.getMonth(),next.date.getDate()).getTime()}">${['d','h','m','s'].map(u=>`<div><b data-u="${u}">–</b><span>${tr({d:'يوم',h:'ساعة',m:'دقيقة',s:'ثانية'}[u],{d:'days',h:'hours',m:'min',s:'sec'}[u])}</span></div>`).join('')}</div>`}</div>`:'';
+ el.innerHTML=`${hero}<div class="dt-filter" role="group">${DT_CATS.map(c=>`<button type="button" class="tv-chip ${f===c[0]?'on':''}" data-dt="filter" data-k="${c[0]}">${c[3]?c[3]+' ':''}${tr(c[1],c[2])}</button>`).join('')}</div>
+  <div class="dt-list">${list.map(dtCardHTML).join('')||`<div class="card tv-empty">${tr('لا توجد مواعيد هنا','Nothing here')}</div>`}</div>${f==='all'||f==='me'?dtAddHTML():''}
+  <div class="tv-src">${tr('التواريخ الهجرية حسب تقويم أم القرى، وقد تختلف يومًا حسب رؤية الهلال.','Hijri dates follow the Umm al-Qura calendar and may differ by a day with the moon sighting.')}</div>`;
+ dtTick();clearInterval(dtTimer);dtTimer=setInterval(()=>{if(currentView!=='dates'||!$('#dtClock')){clearInterval(dtTimer);return;}dtTick();},1000);}
+function dtTick(){const c=$('#dtClock');if(!c)return;let s=Math.max(0,Math.floor((+c.dataset.at-Date.now())/1000));
+ if(s<=0){renderDates();return;}const v={d:Math.floor(s/86400),h:Math.floor(s%86400/3600),m:Math.floor(s%3600/60),s:s%60};
+ c.querySelectorAll('b[data-u]').forEach(b=>{const t=qNum(String(v[b.dataset.u]).padStart(b.dataset.u==='d'?1:2,'0'));if(b.textContent!==t)b.textContent=t;});}
+/** Occasion reminders (bell on each card): the evening before and the morning of the day. */
+function dtReminderItems(now){const o=dtState(),out=[];
+ for(const x of dtItems()){if(x.empty||x.now||x.past)continue;const on=x.key==='anniv'?o.remind.anniv!==false:!!o.remind[x.key];if(!on)continue;
+  const day=ymd(x.date),prev=new Date(x.date);prev.setDate(prev.getDate()-1);const name=tr(x.ar,x.en);
+  out.push({key:`dt${x.key}${day}b`,at:localMs(ymd(prev),'20:00'),title:`${x.emoji} ${tr(`بكرة: ${name}`,`Tomorrow: ${name}`)}`,body:`${dtWeekday(x.date)}${tr('، ',', ')}${dtDateText(x.date)}`,view:'dates'});
+  out.push({key:`dt${x.key}${day}d`,at:localMs(day,'09:00'),title:`${x.emoji} ${tr(`اليوم: ${name}`,`Today: ${name}`)}`,body:x.cat==='sal'?tr('اليوم موعد صرف الراتب 💰','Pay day today 💰'):tr('لا تنسَ هذا الموعد 🎉','Don\'t forget today 🎉'),view:'dates'});}
+ return out.filter(x=>x.at>now);}
+document.addEventListener('change',e=>{const f=e.target.closest&&e.target.closest('[data-df]');if(!f)return;const o=dtState();
+ if(f.dataset.df==='privDay')o.privDay=Math.max(1,Math.min(31,+f.value||27));if(f.dataset.df==='privShift')o.privShift=['before','after','none'].includes(f.value)?f.value:'before';save();renderDates();});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-dt]');if(!b)return;const a=b.dataset.dt,o=dtState();
+ if(a==='filter'){dtUI.filter=b.dataset.k;renderDates();return;}
+ if(a==='bell'){const k=b.dataset.k,on=k==='anniv'?o.remind.anniv!==false:!!o.remind[k];o.remind[k]=!on;save();renderDates();
+  message(!on?tr('بنذكرك قبلها بيوم (٨ مساءً) وفي يومها (٩ صباحًا) 🔔','We\'ll remind you the evening before (8 pm) and on the day (9 am) 🔔'):tr('تم إيقاف التذكير','Reminder off'));return;}
+ if(a==='priv'){dtUI.priv=!dtUI.priv;renderDates();return;}
+ if(a==='annivedit'){dtUI.annivEdit=!dtUI.annivEdit;renderDates();return;}
+ if(a==='annivsave'){const v=($('#dtAnnivIn')||{}).value||'';if(!dtParse(v)){message(tr('اختر تاريخ الزواج','Choose the wedding date'),true);return;}
+  o.anniv=v;o.annivCal=($('#dtAnnivCal')||{}).value==='h'?'h':'g';dtUI.annivEdit=false;save();renderDates();message(tr('تم حفظ ذكرى الزواج 💍','Anniversary saved 💍'));return;}
+ if(a==='annivclear'){o.anniv='';dtUI.annivEdit=false;save();renderDates();return;}
+ if(a==='addopen'){dtUI.add=true;renderDates();setTimeout(()=>$('#dtName')?.focus(),30);return;}
+ if(a==='addcancel'){dtUI.add=false;renderDates();return;}
+ if(a==='emo'){b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));return;}
+ if(a==='addsave'){const n=(($('#dtName')||{}).value||'').trim(),d=($('#dtDate')||{}).value||'',rep=($('#dtRep')||{}).value||'g',em=(document.querySelector('.dt-emos .on')||{}).dataset;
+  if(!n){message(tr('اكتب اسم الموعد','Type a name'),true);$('#dtName')?.focus();return;}if(!dtParse(d)){message(tr('اختر التاريخ','Choose the date'),true);return;}
+  o.custom.push({id:id(),t:n.slice(0,60),date:d,rep:['g','h','once'].includes(rep)?rep:'g',e:em&&em.e||'📌'});dtUI.add=false;save();renderDates();message(tr('تمت إضافة الموعد ✓','Date added ✓'));return;}
+ if(a==='cdel'){if(confirm(tr('حذف هذا الموعد؟','Delete this date?'))){o.custom=o.custom.filter(c=>c.id!==b.dataset.id);delete o.remind['c:'+b.dataset.id];save();renderDates();}return;}
 });
 
 document.addEventListener('DOMContentLoaded',init);
