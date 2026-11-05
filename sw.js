@@ -1,6 +1,6 @@
 // Offline worker. Bump CACHE on every release so phones pick up the update.
 const PREFIX = 'dlos-';
-const CACHE = PREFIX + '3.5.3';
+const CACHE = PREFIX + '3.5.4';
 // Quran fonts/layout never change between releases: own cache, kept across updates.
 const QCACHE = PREFIX + 'quran-v1';
 // Travel places/events: own cache kept across updates, refreshed in the background when online.
