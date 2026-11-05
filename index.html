@@ -785,6 +785,79 @@ body.dark .mp-head,body.dark .mp-foot{color:#c9b37a}
 .quran-credit{text-align:center}
 .quran-loading{text-align:center;padding:40px}
 
+/* ---- Adhkar ---- */
+.ak-loading{text-align:center;padding:40px}
+.ak-hero{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;
+ background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 16%,var(--surface)),var(--surface))}
+.ak-hero-k{font-size:13px;color:var(--muted)}
+.ak-hero-t{font-size:20px;font-weight:800;margin-top:2px}
+.ak-hero-b{min-width:88px}
+.ak-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ak-tile{display:grid;gap:6px;text-align:start;padding:14px;border-radius:18px;border:1px solid var(--border);background:var(--surface);
+ color:var(--text);font:inherit;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s}
+.ak-tile:active{transform:scale(.97)}
+.ak-tile.done{border-color:color-mix(in srgb,var(--success) 55%,var(--border))}
+.ak-ic{font-size:28px;line-height:1}
+.ak-nm{font-weight:800;font-size:16px}
+.ak-sub{font-size:13px;color:var(--muted)}
+.ak-tile.done .ak-sub{color:var(--success);font-weight:700}
+.ak-bar{display:block;height:6px;border-radius:9px;background:var(--surface-2);overflow:hidden}
+.ak-bar i{display:block;height:100%;width:var(--p,0%);background:var(--success);border-radius:9px;transition:width .25s}
+.ak-credit{text-align:center;margin-top:14px}
+.ak-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;margin-bottom:14px;padding:12px}
+.ak-head-t{text-align:center}
+.ak-head-n{font-weight:800;font-size:18px}
+.ak-head-p{font-size:13px;color:var(--muted);margin-top:2px}
+.ak-head-bar{grid-column:1/-1}
+.dk-group{font-size:15px;font-weight:800;color:var(--primary);margin:20px 6px 10px}
+.dk-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:14px 16px 16px;margin-bottom:12px;box-shadow:var(--shadow);
+ transition:background .25s,border-color .25s}
+.dk-card.done{border-color:color-mix(in srgb,var(--success) 45%,var(--border));background:color-mix(in srgb,var(--success) 6%,var(--surface))}
+.dk-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.dk-num{min-width:28px;height:28px;padding:0 6px;box-sizing:border-box;border-radius:999px;background:var(--primary-soft);color:var(--primary);
+ display:grid;place-items:center;font-weight:800;font-size:13px}
+.dk-chip{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted);font-weight:600}
+.dk-note{color:var(--primary)}
+.dk-text{font-family:'Noto Naskh Arabic','Geeza Pro','Traditional Arabic',serif;font-size:21px;line-height:2.15;margin:4px 0 12px;
+ direction:rtl;text-align:right;color:var(--text);overflow-wrap:anywhere}
+.dk-inl{font-size:.7em;color:var(--muted);font-family:inherit;white-space:nowrap}
+.dk-tr{color:var(--muted);font-size:14px;line-height:1.6;margin:-4px 0 12px;text-align:left}
+.dk-more{margin:-2px 0 12px}
+.dk-more summary{cursor:pointer;color:var(--primary);font-size:13.5px;font-weight:700;list-style-position:inside}
+.dk-more p{font-size:14px;line-height:1.9;color:var(--muted);margin:6px 0 0}
+.dk-more .dk-src{font-size:12.5px;opacity:.85}
+.dk-count{position:relative;width:100%;min-height:54px;border-radius:14px;border:0;overflow:hidden;background:var(--surface-2);color:var(--text);
+ font:inherit;font-size:16px;font-weight:800;display:flex;justify-content:space-between;align-items:center;padding:0 18px;cursor:pointer;
+ -webkit-user-select:none;user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.dk-count::before{content:'';position:absolute;inset-block:0;inset-inline-start:0;width:var(--p,0%);
+ background:color-mix(in srgb,var(--primary) 24%,transparent);transition:width .2s}
+.dk-count>*{position:relative}
+.dk-count b{font-size:18px;font-variant-numeric:tabular-nums}
+.dk-card.done .dk-count{background:color-mix(in srgb,var(--success) 18%,var(--surface-2));color:var(--success)}
+.dk-card.done .dk-count::before{width:0}
+.dk-pop{animation:dkPop .18s ease}
+@keyframes dkPop{50%{transform:scale(.975)}}
+.ak-finish{text-align:center;display:grid;gap:12px;justify-items:center;padding:20px}
+.ak-finish-t{font-weight:800;color:var(--success);font-size:17px}
+.tb-wrap{display:grid;justify-items:center;gap:16px;padding:18px 14px}
+.tb-chips,.tb-goals{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tb-chip{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:8px 13px;font:inherit;font-size:14px;cursor:pointer}
+.tb-chip[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.tb-chips .tb-chip{font-family:'Noto Naskh Arabic','Geeza Pro',serif;font-size:15px}
+.tb-phrase{font-family:'Noto Naskh Arabic','Geeza Pro','Traditional Arabic',serif;font-size:27px;line-height:1.8;text-align:center;font-weight:700}
+.tb-tr{color:var(--muted);margin-top:-12px}
+.tb-ring{width:min(70vw,250px);aspect-ratio:1;border-radius:50%;padding:10px;box-sizing:border-box;
+ background:conic-gradient(var(--primary) var(--p,0%),var(--surface-2) 0);transition:background .2s}
+.tb-btn{width:100%;height:100%;border-radius:50%;border:0;background:var(--surface);color:var(--text);display:grid;place-content:center;gap:2px;
+ box-shadow:inset 0 0 0 1px var(--border),0 8px 24px rgba(0,0,0,.08);cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;
+ -webkit-tap-highlight-color:transparent;font:inherit}
+.tb-btn b{font-size:64px;line-height:1;font-variant-numeric:tabular-nums}
+.tb-btn small{font-size:16px;color:var(--muted)}
+.tb-stats{display:flex;gap:12px}
+.tb-stat{display:grid;gap:2px;text-align:center;padding:10px 18px;border-radius:14px;background:var(--surface-2);min-width:96px}
+.tb-stat span{font-size:12.5px;color:var(--muted)}
+.tb-stat b{font-size:20px}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -818,6 +891,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item" data-view="goals">🎯 <span class="nav-text">Goals</span></button>
         <button class="nav-item" data-view="prayer">🕌 <span class="nav-text">Prayer</span></button>
         <button class="nav-item" data-view="quran">📖 <span class="nav-text">Quran</span></button>
+        <button class="nav-item" data-view="adhkar">📿 <span class="nav-text">Adhkar</span></button>
         <button class="nav-item" data-view="notes">📝 <span class="nav-text">Notes</span></button>
         <button class="nav-item" data-view="reports">📊 <span class="nav-text">Reports</span></button>
         <button class="nav-item" data-view="settings">⚙️ <span class="nav-text">Settings</span></button>
@@ -854,6 +928,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view" id="goalsView"></section>
       <section class="view" id="prayerView"></section>
       <section class="view" id="quranView"></section>
+      <section class="view" id="adhkarView"></section>
       <section class="view" id="notesView"></section>
       <section class="view" id="reportsView"></section>
       <section class="view" id="settingsView"></section>
@@ -927,7 +1002,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -1159,10 +1234,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.0.1 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.1.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,quran:renderQuran,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1713,6 +1788,90 @@ document.addEventListener('change',e=>{const t=e.target;if(!QURAN)return;
  else if(t.id==='quranJuz'){const j=Number(t.value);const p=QURAN.pages.findIndex(pg=>pg.j===j)+1;if(p)quranGo(p);}});
 document.addEventListener('keydown',e=>{if(currentView!=='quran'||/input|select|textarea/i.test(e.target.tagName))return;
  if(e.key==='ArrowLeft')quranStep(state.lang==='ar'?1:-1);else if(e.key==='ArrowRight')quranStep(state.lang==='ar'?-1:1);});
+
+// ---- Adhkar (Hisn al-Muslim) with tap counters + tasbeeh ----
+let ADHKAR=null,adhkarLoading=null,adhkarCat=null;
+const AKK='dlos_adhkar';
+const AK_PRESETS=[['سُبْحَانَ اللَّهِ','Subhan Allah'],['الْحَمْدُ لِلَّهِ','Alhamdulillah'],['اللَّهُ أَكْبَرُ','Allahu Akbar'],['لاَ إِلَهَ إِلاَّ اللَّهُ','La ilaha illa Allah'],['أَسْتَغْفِرُ اللَّهَ','Astaghfirullah'],['لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ','La hawla wa la quwwata illa billah'],['سُبْحَانَ اللَّهِ وَبِحَمْدِهِ','Subhan Allahi wa bihamdih'],['اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ','Salawat upon the Prophet ﷺ']];
+function akToday(){const d=new Date();return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
+function akState(){let s;try{s=JSON.parse(localStorage.getItem(AKK)||'{}');}catch{s={};}
+ const t={i:0,n:0,goal:33,rounds:0,total:0,...(s.t||{})};
+ if(s.d!==akToday())return {d:akToday(),c:{},t:{...t,n:0,rounds:0,total:0}};
+ return {d:s.d,c:s.c||{},t};}
+function akSave(s){try{localStorage.setItem(AKK,JSON.stringify(s));}catch{}}
+function loadAdhkar(){if(ADHKAR)return Promise.resolve(ADHKAR);if(!adhkarLoading)adhkarLoading=fetch('adhkar.json').then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(j=>ADHKAR=j).catch(e=>{adhkarLoading=null;throw e;});return adhkarLoading;}
+function akItems(cat){const out=[];cat.groups.forEach(g=>g.items.forEach(x=>out.push(x)));return out;}
+function akProgress(cat,s){const items=akItems(cat),c=s.c[cat.id]||{};let done=0;items.forEach((x,i)=>{if((c[i]||0)>=x.n)done++;});return {done,total:items.length};}
+function akText(t){return safe(t).replace(/\{([^}]*)\}/g,'<span class="dk-inl">($1)</span>');}
+function akSuggest(){const h=new Date().getHours();return h>=4&&h<12?'morning':h>=12&&h<15?'prayer':h>=15&&h<22?'evening':'sleep';}
+function akVibe(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch{}}
+function akName(c){return tr(c.ar,c.en);}
+function renderAdhkar(){const el=$('#adhkarView');
+ if(!ADHKAR){el.innerHTML=`<div class="card ak-loading">📿 ${tr('جاري تحميل الأذكار…','Loading adhkar…')}</div>`;
+  loadAdhkar().then(()=>{if(currentView==='adhkar')renderAdhkar();}).catch(()=>{el.innerHTML=`<div class="card">${tr('تعذر تحميل الأذكار','Could not load the adhkar')}</div>`;});return;}
+ const s=akState(),cat=ADHKAR.cats.find(c=>c.id===adhkarCat);
+ if(!cat){adhkarCat=null;el.innerHTML=akHome(s);return;}
+ el.innerHTML=cat.id==='tasbih'?akTasbih(cat,s):akCategory(cat,s);}
+function akTile(c,s,extra=''){
+ if(c.id==='tasbih')return `<button type="button" class="ak-tile ${extra}" data-ak="open" data-cat="tasbih"><span class="ak-ic">${c.icon}</span><span class="ak-nm">${safe(akName(c))}</span><span class="ak-sub">${tr('اليوم','Today')}: ${qNum(s.t.total)}</span></button>`;
+ const pr=akProgress(c,s),full=pr.done>=pr.total;
+ return `<button type="button" class="ak-tile ${full?'done':''} ${extra}" data-ak="open" data-cat="${c.id}"><span class="ak-ic">${c.icon}</span><span class="ak-nm">${safe(akName(c))}</span>
+  <span class="ak-sub">${full?'✓ '+tr('مكتملة','Done'):`${qNum(pr.done)} / ${qNum(pr.total)}`}</span><span class="ak-bar"><i style="--p:${Math.round(pr.done/pr.total*100)}%"></i></span></button>`;}
+function akHome(s){const sug=ADHKAR.cats.find(c=>c.id===akSuggest());
+ return `<div class="card ak-hero"><div><div class="ak-hero-k">${tr('مقترح الآن','Suggested now')}</div><div class="ak-hero-t">${sug.icon} ${safe(akName(sug))}</div></div>
+  <button type="button" class="primary-btn ak-hero-b" data-ak="open" data-cat="${sug.id}">${tr('ابدأ','Start')}</button></div>
+  <div class="ak-grid">${ADHKAR.cats.map(c=>akTile(c,s)).join('')}</div>
+  <p class="hint ak-credit">${tr('المصدر: حصن المسلم — سعيد بن علي بن وهف القحطاني · العدّاد يبدأ من جديد كل يوم','Source: Hisn al-Muslim (Sa\'id al-Qahtani) · counters start fresh every day')}</p>`;}
+function akHead(cat,s){const pr=cat.id==='tasbih'?null:akProgress(cat,s);
+ return `<div class="ak-head card"><button type="button" class="qbtn" data-ak="home" aria-label="${tr('رجوع','Back')}">${state.lang==='ar'?'→':'←'}</button>
+  <div class="ak-head-t"><div class="ak-head-n">${cat.icon} ${safe(akName(cat))}</div>${pr?`<div class="ak-head-p" id="akHeadP">${qNum(pr.done)} / ${qNum(pr.total)}</div>`:''}</div>
+  <button type="button" class="qbtn" data-ak="reset" aria-label="${tr('إعادة العد','Reset')}" title="${tr('إعادة العد','Reset')}">↺</button>
+  ${pr?`<span class="ak-bar ak-head-bar"><i id="akHeadBar" style="--p:${Math.round(pr.done/pr.total*100)}%"></i></span>`:''}</div>`;}
+function akCard(x,i,c){const n=Math.min(c[i]||0,x.n),done=n>=x.n,ar=state.lang==='ar',f=ar?x.f:x.fe,src=ar?x.s:x.se,note=ar?x.note:(x.ne||x.note);
+ const more=(f||src)?`<details class="dk-more"><summary>${tr('الفضل والمصدر','Virtue & source')}</summary>${f?`<p>${akText(f)}</p>`:''}${src?`<p class="dk-src">${akText(src)}</p>`:''}</details>`:'';
+ return `<article class="dk-card ${done?'done':''}" id="dk${i}"><div class="dk-top"><span class="dk-num">${qNum(i+1)}</span>
+  <span class="dk-chip">${x.n>1?tr(`التكرار: ${qNum(x.n)}`,`Repeat ${x.n}×`):tr('مرة واحدة','Once')}</span>${note?`<span class="dk-chip dk-note">${safe(note)}</span>`:''}</div>
+  <p class="dk-text" lang="ar" dir="rtl">${akText(x.t)}</p>${state.lang!=='ar'&&x.tr?`<p class="dk-tr" lang="en" dir="ltr">${safe(x.tr)}</p>`:''}${more}
+  <button type="button" class="dk-count" data-ak="tap" data-i="${i}" style="--p:${Math.round(n/x.n*100)}%"><span class="dk-lbl">${done?'✓ '+tr('تم','Done'):tr('اضغط للعد','Tap to count')}</span><b>${qNum(n)} / ${qNum(x.n)}</b></button></article>`;}
+function akCategory(cat,s){const c=s.c[cat.id]||{};let i=0;
+ const body=cat.groups.map(g=>`${g.ar?`<h3 class="dk-group">${safe(tr(g.ar,g.en))}</h3>`:''}${g.items.map(x=>akCard(x,i++,c)).join('')}`).join('');
+ const pr=akProgress(cat,s);
+ return akHead(cat,s)+body+`<div class="card ak-finish ${pr.done>=pr.total?'':'hidden'}" id="akFinish"><div class="ak-finish-t">✓ ${tr('أتممت '+cat.ar+' — تقبّل الله منك','You completed '+cat.en+' — may Allah accept it')}</div>
+  <button type="button" class="secondary-btn" data-ak="reset">↺ ${tr('ابدأ من جديد','Start again')}</button></div>`;}
+function akTasbih(cat,s){const t=s.t,p=AK_PRESETS[t.i]||AK_PRESETS[0];
+ return akHead(cat,s)+`<div class="card tb-wrap">
+  <div class="tb-chips">${AK_PRESETS.map((x,i)=>`<button type="button" class="tb-chip" data-ak="preset" data-i="${i}" aria-pressed="${i===t.i}" lang="ar">${x[0]}</button>`).join('')}</div>
+  <div class="tb-phrase" lang="ar" dir="rtl">${p[0]}</div>${state.lang!=='ar'?`<div class="tb-tr">${p[1]}</div>`:''}
+  <div class="tb-ring" id="tbRing" style="--p:${t.goal?Math.round(t.n/t.goal*100):0}%"><button type="button" class="tb-btn" data-ak="tb" aria-label="${tr('سبّح','Count')}"><b id="tbN">${qNum(t.n)}</b><small>${t.goal?`/ ${qNum(t.goal)}`:'∞'}</small></button></div>
+  <div class="tb-goals">${[33,100,0].map(g=>`<button type="button" class="tb-chip" data-ak="goal" data-g="${g}" aria-pressed="${t.goal===g}">${g?qNum(g):tr('بدون حد','No limit')}</button>`).join('')}</div>
+  <div class="tb-stats"><div class="tb-stat"><span>${tr('الدورات','Rounds')}</span><b id="tbR">${qNum(t.rounds)}</b></div><div class="tb-stat"><span>${tr('مجموع اليوم','Today')}</span><b id="tbT">${qNum(t.total)}</b></div></div>
+ </div>`;}
+function akRefreshHead(cat,s){const pr=akProgress(cat,s),p=$('#akHeadP'),b=$('#akHeadBar'),f=$('#akFinish');
+ if(p)p.textContent=`${qNum(pr.done)} / ${qNum(pr.total)}`;if(b)b.style.setProperty('--p',Math.round(pr.done/pr.total*100)+'%');if(f)f.classList.toggle('hidden',pr.done<pr.total);return pr;}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ak]');if(!b||!ADHKAR)return;const a=b.dataset.ak;
+ if(a==='open'){adhkarCat=b.dataset.cat;renderAdhkar();window.scrollTo({top:0,behavior:'instant'});return;}
+ if(a==='home'){adhkarCat=null;renderAdhkar();window.scrollTo({top:0,behavior:'instant'});return;}
+ const s=akState(),cat=ADHKAR.cats.find(c=>c.id===adhkarCat);if(!cat)return;
+ if(a==='reset'){if(cat.id==='tasbih'){s.t={...s.t,n:0,rounds:0};}else delete s.c[cat.id];akSave(s);renderAdhkar();if(cat.id!=='tasbih')window.scrollTo({top:0,behavior:'smooth'});return;}
+ if(a==='tap'){const i=Number(b.dataset.i),x=akItems(cat)[i];if(!x)return;const c=s.c[cat.id]=s.c[cat.id]||{};const n=c[i]||0;if(n>=x.n)return;
+  c[i]=n+1;akSave(s);const done=c[i]>=x.n;
+  b.style.setProperty('--p',Math.round(c[i]/x.n*100)+'%');b.querySelector('b').textContent=`${qNum(c[i])} / ${qNum(x.n)}`;
+  b.classList.remove('dk-pop');void b.offsetWidth;b.classList.add('dk-pop');
+  if(!done){akVibe(12);return;}
+  akVibe([30,40,30]);const card=b.closest('.dk-card');card.classList.add('done');b.querySelector('.dk-lbl').textContent='✓ '+tr('تم','Done');
+  const pr=akRefreshHead(cat,s);
+  if(pr.done>=pr.total){setTimeout(()=>{const f=$('#akFinish');if(f)f.scrollIntoView({block:'center',behavior:'smooth'});},260);return;}
+  const items=akItems(cat);let j=i+1;while(j<items.length&&(c[j]||0)>=items[j].n)j++;
+  if(j>=items.length){j=0;while(j<items.length&&(c[j]||0)>=items[j].n)j++;}
+  const next=document.getElementById('dk'+j);if(next)setTimeout(()=>next.scrollIntoView({block:'center',behavior:'smooth'}),260);return;}
+ if(a==='preset'){s.t={...s.t,i:Number(b.dataset.i),n:0};akSave(s);renderAdhkar();return;}
+ if(a==='goal'){s.t={...s.t,goal:Number(b.dataset.g),n:0};akSave(s);renderAdhkar();return;}
+ if(a==='tb'){const t=s.t;t.n++;t.total++;let lap=false;if(t.goal&&t.n>=t.goal){t.rounds++;t.n=0;lap=true;}akSave(s);
+  $('#tbN').textContent=qNum(t.n);$('#tbT').textContent=qNum(t.total);$('#tbR').textContent=qNum(t.rounds);
+  const r=$('#tbRing');if(r)r.style.setProperty('--p',(t.goal?Math.round(t.n/t.goal*100):0)+'%');
+  b.classList.remove('dk-pop');void b.offsetWidth;b.classList.add('dk-pop');
+  if(lap){akVibe([60,50,60]);message(tr(`اكتملت ${qNum(t.goal)} ✓`,`${t.goal} completed ✓`));}else akVibe(12);}
+});
 
 document.addEventListener('DOMContentLoaded',init);
 document.addEventListener('DOMContentLoaded',initNotifications);
