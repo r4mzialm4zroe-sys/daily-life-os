@@ -741,6 +741,50 @@ body.arabic .switch input:checked+span::after{transform:translateX(-19px)}
 .prayer-adjust summary{cursor:pointer;font-weight:700}
 @media(max-width:520px){.prayer-row{grid-template-columns:26px 1fr auto 38px;gap:8px}.prayer-iq{grid-column:2/4;grid-row:2;text-align:start;min-width:0;margin-top:-6px}.prayer-hero-main h3{font-size:30px}}
 
+/* ---- Quran (Madinah Mushaf) ---- */
+@font-face{font-family:'UthmanicHafs';src:url(quran/UthmanicHafs.woff2) format('woff2');font-display:swap}
+.quran-bar{display:grid;gap:8px;margin-bottom:12px;padding:10px 12px}
+.quran-row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.quran-row select{flex:1;min-width:0;height:38px;padding:0 8px}
+.qbtn{flex-shrink:0;width:40px;height:38px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:15px;cursor:pointer;display:grid;place-items:center}
+.qbtn.qmark.on{background:color-mix(in srgb,var(--primary) 18%,var(--surface));border-color:var(--primary)}
+.qbtn.qgo{width:auto;padding:0 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.quran-pageno{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:13px;white-space:nowrap}
+.quran-pageno input{width:62px;text-align:center;height:38px;padding:0 4px}
+.quran-modes{flex:1;display:flex;border:1px solid var(--border);border-radius:11px;overflow:hidden}
+.quran-modes button{flex:1;border:0;background:var(--surface);color:var(--text);padding:9px 6px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+.quran-modes button[aria-pressed="true"]{background:var(--accent-button,var(--primary));color:#fff}
+.mushaf-stage{display:flex;justify-content:center;touch-action:pan-y;overflow:hidden}
+/* Swipe mode: the whole page fits on the phone screen (between the top bar, toolbar and bottom menu). */
+.mushaf-stage .mushaf-page{--mw:min(100%,560px,max(270px,calc((100vh - 330px) * 0.66)))}@media (max-width:780px){.mushaf-stage .mushaf-page{--mw:min(100%,560px,max(260px,calc((100vh - 420px) * 0.66)))}}
+.mushaf-page{--mw:min(100%,560px);width:var(--mw);aspect-ratio:0.66;container-type:inline-size;margin:0 auto 14px;
+ background:#fffdf6;color:#1a1a1a;border-radius:10px;padding:3.2% 4.4% 2.6%;box-sizing:border-box;display:flex;flex-direction:column;
+ box-shadow:0 0 0 1px #e2d7b5,0 0 0 5px #fffdf6,0 0 0 6px #c9b37a,0 10px 28px rgba(0,0,0,.12)}
+body.dark .mushaf-page{background:#15171c;color:#ece6d4;box-shadow:0 0 0 1px #3a3424,0 0 0 5px #15171c,0 0 0 6px #6d5d34,0 10px 28px rgba(0,0,0,.4)}
+.mp-head,.mp-foot{display:flex;justify-content:space-between;font-family:'UthmanicHafs',serif;font-size:3.6cqw;color:#6d5d34;direction:rtl}
+body.dark .mp-head,body.dark .mp-foot{color:#c9b37a}
+.mp-foot{justify-content:center;margin-top:1%}
+.mp-body{flex:1;display:grid;grid-template-rows:repeat(15,1fr);direction:rtl;font-size:6.4cqw;line-height:1}
+.mp-body.mp-opening{grid-template-rows:none;align-content:center;gap:2.4cqw}
+.mp-line{display:flex;justify-content:space-between;align-items:center;white-space:nowrap}
+.mp-opening .mp-line{justify-content:center;gap:1.2cqw}
+.mp-surah{justify-content:center;font-family:'UthmanicHafs',serif;font-size:4.4cqw;border:1px solid #c9b37a;border-radius:8px;
+ background:linear-gradient(90deg,transparent,rgba(201,179,122,.18),transparent);margin:0 6%}
+.mp-basmala{justify-content:center;font-family:'UthmanicHafs',serif;font-size:4.8cqw}
+.mushaf-page.mp-wait .mp-body{visibility:hidden}
+.mp-in-next{animation:mpNext .28s ease}.mp-in-prev{animation:mpPrev .28s ease}
+@keyframes mpNext{from{transform:translateX(-14%);opacity:.2}to{transform:none;opacity:1}}
+@keyframes mpPrev{from{transform:translateX(14%);opacity:.2}to{transform:none;opacity:1}}
+.mushaf-scroll .mp-slot{scroll-margin-top:96px}
+.quran-fab{position:fixed;z-index:55;inset-inline-start:16px;bottom:calc(24px + env(safe-area-inset-bottom));border:1px solid var(--border);background:color-mix(in srgb,var(--surface) 94%,transparent);color:var(--text);border-radius:999px;padding:9px 14px;font:inherit;font-size:14px;font-weight:600;box-shadow:var(--shadow);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
+.quran-fab.show{opacity:1;pointer-events:auto;transform:none}
+@media (max-width:780px){.quran-fab{bottom:calc(88px + env(safe-area-inset-bottom))}}
+.quran-bar.float{position:fixed;z-index:56;left:12px;right:12px;max-width:620px;margin:0 auto;box-shadow:var(--shadow);animation:qfloat .18s ease-out}
+@keyframes qfloat{from{opacity:0;transform:translateY(-8px)}}
+.quran-fab .qf-x{display:none}.quran-fab.open .qf-x{display:inline}.quran-fab.open .qf-o{display:none}
+.quran-credit{text-align:center}
+.quran-loading{text-align:center;padding:40px}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -773,6 +817,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
         <button class="nav-item" data-view="goals">🎯 <span class="nav-text">Goals</span></button>
         <button class="nav-item" data-view="prayer">🕌 <span class="nav-text">Prayer</span></button>
+        <button class="nav-item" data-view="quran">📖 <span class="nav-text">Quran</span></button>
         <button class="nav-item" data-view="notes">📝 <span class="nav-text">Notes</span></button>
         <button class="nav-item" data-view="reports">📊 <span class="nav-text">Reports</span></button>
         <button class="nav-item" data-view="settings">⚙️ <span class="nav-text">Settings</span></button>
@@ -808,6 +853,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view" id="financeView"></section>
       <section class="view" id="goalsView"></section>
       <section class="view" id="prayerView"></section>
+      <section class="view" id="quranView"></section>
       <section class="view" id="notesView"></section>
       <section class="view" id="reportsView"></section>
       <section class="view" id="settingsView"></section>
@@ -881,7 +927,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -1113,10 +1159,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v2.9.3 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.0.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,quran:renderQuran,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1584,6 +1630,88 @@ function testAdhanAlert(){const s=prayerSettings(),a=androidNotify();
  if(webPushSupported()){if(!pushState.subscribed)return enablePush();const dev=pushDevice();
   fetch(PUSH_API+'/api/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...dev,test:{title:item.title,body:item.body}})}).then(r=>r.json()).then(j=>message(j.ok?tr('تم الإرسال — على الآيفون يكون بصوت الإشعار العادي','Sent — on iPhone it uses the default notification sound'):tr('ما وصل التنبيه، فعّل الإشعارات من الإعدادات','Not delivered — enable notifications in Settings'),!j.ok)).catch(()=>message(tr('تعذر الاتصال','Could not connect'),true));return;}
  message(tr('فعّل الإشعارات من الإعدادات أولًا','Enable notifications in Settings first'),true);}
+
+// ---- Quran (Madinah Mushaf, King Fahd Complex page fonts) ----
+let QURAN=null,quranLoading=null;const quranFonts={};let quranObs=null,quranVisible=null;
+const QK='dlos_quran';
+function quranPos(){try{return {page:1,mode:'h',mark:0,...JSON.parse(localStorage.getItem(QK)||'{}')};}catch{return {page:1,mode:'h',mark:0};}}
+function quranSave(ch){const s={...quranPos(),...ch};try{localStorage.setItem(QK,JSON.stringify(s));}catch{}return s;}
+const arNum=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const qNum=n=>state.lang==='ar'?arNum(n):String(n);
+function loadQuran(){if(QURAN)return Promise.resolve(QURAN);if(!quranLoading)quranLoading=fetch('quran/layout.json').then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(j=>QURAN=j).catch(e=>{quranLoading=null;throw e;});return quranLoading;}
+function quranFont(p){const name='QCF_P'+String(p).padStart(3,'0');if(!quranFonts[p]){const f=new FontFace(name,`url(quran/fonts/${name}.woff2)`);document.fonts.add(f);quranFonts[p]=f.load().catch(()=>null);}return quranFonts[p];}
+function chapterName(id){const c=QURAN.chapters[id-1];return state.lang==='ar'?c[1]:c[2];}
+function quranPageHTML(p){const pg=QURAN.pages[p-1],font='QCF_P'+String(p).padStart(3,'0'),opening=p<=2;let lines='';
+ for(let n=1;n<=15;n++){const L=pg.lines[n];
+  if(typeof L==='string')lines+=`<div class="mp-line">${L.split('|').map(g=>`<span>${g}</span>`).join('')}</div>`;
+  else if(L&&L[0]==='H')lines+=`<div class="mp-line mp-surah"><span>سُورَةُ ${safe(QURAN.chapters[L[1]-1][1])}</span></div>`;
+  else if(L&&L[0]==='B')lines+=`<div class="mp-line mp-basmala">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>`;
+  else if(!opening)lines+='<div class="mp-line"></div>';}
+ return `<div class="mp-head"><span>${safe(chapterName(pg.s))}</span><span>${tr('الجزء','Juz')} ${qNum(pg.j)}</span></div>
+  <div class="mp-body ${opening?'mp-opening':''}" style="font-family:'${font}'">${lines}</div><div class="mp-foot">${qNum(p)}</div>`;}
+function fillPage(el,p){el.dataset.p=p;el.classList.add('mp-wait');el.innerHTML=quranPageHTML(p);quranFont(p).then(()=>{if(el.dataset.p==String(p))el.classList.remove('mp-wait');});
+ for(const n of [p-1,p+1,p+2])if(n>=1&&n<=604)quranFont(n);}
+function quranGo(p,how){p=Math.max(1,Math.min(604,Math.round(Number(p))||1));const s=quranSave({page:p});
+ const ind=$('#quranPageNo');if(ind)ind.value=p;const fno=$('#quranFabNo');if(fno)fno.textContent=qNum(p);const sel=$('#quranSurah');if(sel&&QURAN){let c=1;for(const ch of QURAN.chapters)if(ch[4]<=p)c=ch[0];sel.value=c;}
+ const jz=$('#quranJuz');if(jz&&QURAN)jz.value=QURAN.pages[p-1].j;
+ if(s.mode==='h'){const el=$('#mushafPage');if(!el)return;if(how)el.classList.remove('mp-in-next','mp-in-prev');fillPage(el,p);if(how){void el.offsetWidth;el.classList.add(how==='next'?'mp-in-next':'mp-in-prev');}}
+ else if(how!=='scroll'){const el=document.querySelector(`.mushaf-scroll [data-slot="${p}"]`);if(el)el.scrollIntoView({block:'start',behavior:'instant'});for(const n of [p-1,p,p+1,p+2]){const sl=document.querySelector(`.mushaf-scroll [data-slot="${n}"]`);if(sl&&!sl.dataset.p)fillPage(sl,n);}}
+ updateMark();}
+function updateMark(){const s=quranPos(),b=$('#quranMark'),on=s.mark===s.page;if(b){b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.title=on?tr('الصفحة محفوظة كعلامة','This page is bookmarked'):tr('حفظ علامة','Bookmark this page');}
+ const g=$('#quranGoMark');if(g){g.classList.toggle('hidden',!s.mark||on);g.textContent='↩ '+tr(`العلامة (${qNum(s.mark)})`,`Bookmark (${s.mark})`);}}
+function renderQuran(){const el=$('#quranView');
+ if(!QURAN){el.innerHTML=`<div class="card quran-loading">📖 ${tr('جاري تحميل المصحف…','Loading the Mushaf…')}</div>`;
+  loadQuran().then(()=>{if(currentView==='quran')renderQuran();}).catch(()=>{el.innerHTML=`<div class="card">${tr('تعذر تحميل المصحف','Could not load the Mushaf')}</div>`;});return;}
+ const s=quranPos();
+ const surahOpts=QURAN.chapters.map(c=>`<option value="${c[0]}">${qNum(c[0])}. ${safe(state.lang==='ar'?c[1]:c[2])}</option>`).join('');
+ const juzOpts=Array.from({length:30},(_,i)=>`<option value="${i+1}">${tr('الجزء','Juz')} ${qNum(i+1)}</option>`).join('');
+ el.innerHTML=`<div class="quran-bar card">
+  <div class="quran-row"><button type="button" class="qbtn" data-quran="prev" aria-label="${tr('الصفحة السابقة','Previous page')}" title="${tr('الصفحة السابقة','Previous page')}">${state.lang==='ar'?'▶':'◀'}</button>
+   <label class="quran-pageno"><span>${tr('صفحة','Page')}</span><input id="quranPageNo" type="number" min="1" max="604" inputmode="numeric" value="${s.page}"><span>/ ${qNum(604)}</span></label>
+   <button type="button" class="qbtn" data-quran="next" aria-label="${tr('الصفحة التالية','Next page')}" title="${tr('الصفحة التالية','Next page')}">${state.lang==='ar'?'◀':'▶'}</button>
+   <button type="button" class="qbtn qmark" id="quranMark" data-quran="mark" aria-label="${tr('حفظ علامة','Bookmark')}">🔖</button></div>
+  <div class="quran-row"><select id="quranSurah" aria-label="${tr('السورة','Surah')}">${surahOpts}</select><select id="quranJuz" aria-label="${tr('الجزء','Juz')}">${juzOpts}</select></div>
+  <div class="quran-row"><div class="quran-modes" role="group" aria-label="${tr('طريقة التصفح','Reading mode')}">
+   <button type="button" data-quran="mode-h" aria-pressed="${s.mode==='h'}">↔ ${tr('يمين ويسار','Left & right')}</button>
+   <button type="button" data-quran="mode-v" aria-pressed="${s.mode==='v'}">↕ ${tr('فوق وتحت','Up & down')}</button></div>
+   <button type="button" class="qbtn qgo hidden" id="quranGoMark" data-quran="gomark"></button></div></div>
+ ${s.mode==='h'?`<div class="mushaf-stage" id="mushafStage"><div class="mushaf-page" id="mushafPage"></div></div>`
+  :`<div class="mushaf-scroll">${Array.from({length:604},(_,i)=>`<div class="mushaf-page mp-slot" data-slot="${i+1}"></div>`).join('')}</div><button type="button" class="quran-fab" data-quran="tools" aria-label="${tr('أدوات المصحف','Mushaf controls')}"><span class="qf-o">⌃ ${tr('الأدوات','Controls')} · <span id="quranFabNo"></span></span><span class="qf-x">✕ ${tr('إغلاق','Close')}</span></button>`}
+ <p class="hint quran-credit">${tr('مصحف المدينة النبوية · خطوط مجمع الملك فهد لطباعة المصحف الشريف · تخطيط الصفحات من Quran.com','Madinah Mushaf · King Fahd Complex fonts · page layout from Quran.com')}</p>`;
+ if(quranObs){quranObs.disconnect();quranObs=null;}
+ if(s.mode==='h'){quranGo(s.page);quranSwipe($('#mushafStage'));}
+ else{quranObs=new IntersectionObserver(es=>{for(const e of es){const t=e.target,p=Number(t.dataset.slot);
+   if(e.isIntersecting){if(!t.dataset.p)fillPage(t,p);}
+   else if(t.dataset.p&&Math.abs(p-(quranVisible||p))>6){t.innerHTML='';delete t.dataset.p;}}},{rootMargin:'150% 0px'});
+  document.querySelectorAll('.mushaf-scroll .mp-slot').forEach(x=>quranObs.observe(x));
+  setTimeout(quranFabSync,60);
+  const vis=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting&&e.intersectionRatio>=0.45){quranVisible=Number(e.target.dataset.slot);quranGo(quranVisible,'scroll');}},{threshold:[0.45]});
+  document.querySelectorAll('.mushaf-scroll .mp-slot').forEach(x=>vis.observe(x));
+  quranGo(s.page);}
+ updateMark();}
+function quranSwipe(stage){if(!stage)return;let x0=0,y0=0,t0=0;
+ stage.addEventListener('touchstart',e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();},{passive:true});
+ stage.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4&&Date.now()-t0<900){
+   // Arabic mushaf: pulling the page to the right turns to the next page.
+   const next=state.lang==='ar'?dx>0:dx<0;quranStep(next?1:-1);}},{passive:true});}
+function quranStep(d){const s=quranPos();if(s.mode==='v'){quranGo(s.page+d);return;}quranGo(s.page+d,d>0?'next':'prev');}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-quran]');if(!b)return;const a=b.dataset.quran,s=quranPos();
+ if(a==='next')quranStep(1);else if(a==='prev')quranStep(-1);
+ else if(a==='mode-h'||a==='mode-v'){quranSave({mode:a==='mode-h'?'h':'v'});renderQuran();}
+ else if(a==='mark'){quranSave({mark:s.mark===s.page?0:s.page});updateMark();message(s.mark===s.page?tr('تم حذف العلامة','Bookmark removed'):tr(`تم حفظ علامة عند صفحة ${qNum(s.page)}`,`Bookmarked page ${s.page}`));}
+ else if(a==='gomark'&&s.mark)quranGo(s.mark);
+ else if(a==='tools')quranFloat();});
+function quranFabSync(){const bar=document.querySelector('.quran-bar'),fab=document.querySelector('.quran-fab');if(!bar||!fab)return;fab.classList.toggle('show',bar.classList.contains('float')||bar.getBoundingClientRect().bottom<70);}
+window.addEventListener('scroll',()=>{if(currentView==='quran')quranFabSync();},{passive:true});
+function quranFloat(on){const bar=document.querySelector('.quran-bar'),fab=document.querySelector('.quran-fab');if(!bar||!fab)return;on=on===undefined?!bar.classList.contains('float'):on;if(on===bar.classList.contains('float'))return;if(on){const ph=document.createElement('div');ph.className='quran-bar-ph';ph.style.height=(bar.offsetHeight+12)+'px';bar.before(ph);const tb=document.querySelector('.topbar');bar.style.top=((tb?tb.getBoundingClientRect().bottom:0)+8)+'px';bar.classList.add('float');fab.classList.add('show','open');}else{bar.classList.remove('float');bar.style.top='';document.querySelectorAll('.quran-bar-ph').forEach(x=>x.remove());fab.classList.remove('open');quranFabSync();}}
+document.addEventListener('change',e=>{const t=e.target;if(!QURAN)return;
+ if(/^quran(PageNo|Surah|Juz)$/.test(t.id))quranFloat(false);
+ if(t.id==='quranPageNo')quranGo(t.value);
+ else if(t.id==='quranSurah')quranGo(QURAN.chapters[Number(t.value)-1][4]);
+ else if(t.id==='quranJuz'){const j=Number(t.value);const p=QURAN.pages.findIndex(pg=>pg.j===j)+1;if(p)quranGo(p);}});
+document.addEventListener('keydown',e=>{if(currentView!=='quran'||/input|select|textarea/i.test(e.target.tagName))return;
+ if(e.key==='ArrowLeft')quranStep(state.lang==='ar'?1:-1);else if(e.key==='ArrowRight')quranStep(state.lang==='ar'?-1:1);});
 
 document.addEventListener('DOMContentLoaded',init);
 document.addEventListener('DOMContentLoaded',initNotifications);

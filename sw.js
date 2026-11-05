@@ -1,14 +1,16 @@
 // Offline worker. Bump CACHE on every release so phones pick up the update.
 const PREFIX = 'dlos-';
-const CACHE = PREFIX + '2.9.3';
+const CACHE = PREFIX + '3.0.0';
+// Quran fonts/layout never change between releases: own cache, kept across updates.
+const QCACHE = PREFIX + 'quran-v1';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './adhan.m4a'];
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
   // Only our own old caches: another app on this origin keeps its files.
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE).map(k => caches.delete(k))))
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith(PREFIX) && k !== CACHE && k !== QCACHE).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 // iPhone Safari loads audio in byte ranges and rejects a full 200 reply from a service worker.
@@ -31,6 +33,11 @@ self.addEventListener('fetch', e => {
     // Online: fresh page (and refresh the cache). Offline: cached page.
     e.respondWith(fetch(req).then(res => { const copy = res.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); return res; })
       .catch(() => caches.match('./index.html')));
+    return;
+  }
+  if (new URL(req.url).pathname.includes('/quran/')) {
+    e.respondWith(caches.open(QCACHE).then(c => c.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req).then(res => {
+      if (res.ok) c.put(req, res.clone()); return res; }))));
     return;
   }
   e.respondWith(caches.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req)));
