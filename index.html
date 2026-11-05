@@ -1140,6 +1140,45 @@ html[dir="rtl"] input[dir="auto"]:placeholder-shown,html[dir="rtl"] textarea[dir
 .tabvis-ico{font-size:20px;width:28px;text-align:center}
 .tabvis-name{flex:1;font-size:15.5px;font-weight:700}
 
+/* ---- Family tree ---- */
+.ft-hero{margin-bottom:14px}
+.ft-treecard{margin-bottom:14px;overflow:hidden}
+.ft-tree{display:grid;gap:4px}
+.ft-gen{display:grid;gap:6px;position:relative;padding:10px 0 12px}
+.ft-gen+.ft-gen::before{content:'';position:absolute;top:-6px;left:50%;width:2px;height:12px;background:var(--border)}
+.ft-gen-l{font-size:12px;font-weight:800;color:var(--muted);text-align:center}
+.ft-sides{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ft-side{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px 4px;border-radius:16px;background:var(--surface-2);min-height:64px;align-content:center}
+.ft-center{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.ft-node{display:grid;justify-items:center;gap:2px;width:82px;padding:6px 2px;border:0;border-radius:14px;background:var(--surface);color:var(--text);font:inherit;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.ft-node .ft-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--primary-soft)}
+.ft-node b{font-size:13px;line-height:1.3;max-width:78px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ft-node small{font-size:10.5px;color:var(--muted);line-height:1.3;text-align:center}
+.ft-side .ft-node{width:68px}.ft-side .ft-node .ft-av{width:34px;height:34px;font-size:19px}.ft-side .ft-node b{font-size:12.5px;max-width:66px}.ft-side .ft-node small{font-size:10px}
+.ft-node.dead{opacity:.65}.ft-node.dead .ft-av{filter:grayscale(1)}
+.ft-empty{background:transparent;box-shadow:none;border:1.5px dashed;border-color:var(--border)}
+.ft-empty .ft-av{background:var(--surface-2);color:var(--muted);font-size:18px}
+.ft-me .ft-av{background:var(--primary);color:#fff;font-weight:800;font-size:18px}
+.ft-me{outline:2px solid var(--primary);cursor:default}
+.ft-none{color:var(--muted);font-size:13px}
+.ft-chip{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.ft-chip b{color:var(--primary)}
+.ft-legend{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);padding:6px 4px 0;border-top:1px dashed var(--border);margin-top:4px}
+.ft-group{margin-bottom:12px;display:grid;gap:8px;scroll-margin-top:100px}
+.ft-group-h{display:flex;align-items:center;gap:10px}.ft-group-h h3{margin:0;font-size:16.5px;flex:1}
+.ft-count{font-size:12.5px;font-weight:800;color:var(--primary);background:var(--primary-soft);border-radius:999px;padding:2px 10px}
+.ft-row{display:flex;align-items:center;gap:10px;width:100%;text-align:start;padding:8px 4px;border:0;border-bottom:1px solid var(--border);background:none;color:var(--text);font:inherit;cursor:pointer}
+.ft-row .ft-av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--surface-2)}
+.ft-row-m{flex:1;display:grid;gap:2px;min-width:0}.ft-row-m b{font-size:15.5px}.ft-row-m span{font-size:12.5px;color:var(--muted)}
+.ft-row.dead{opacity:.7}.ft-row.dead .ft-av{filter:grayscale(1)}
+.ft-note{font-style:italic}
+.ft-emptyg{padding:2px 0}
+.ft-adds .tv-chip{font-size:13px;padding:6px 11px}
+.ft-sheet{gap:10px}
+.ft-form{display:grid;gap:12px;overflow-y:auto;padding-bottom:4px}
+.ft-dead{display:flex;align-items:center;gap:8px;font-size:15px}
+.ft-dead input{width:20px;height:20px}
+
 /* iPhone home-screen app: keep content clear of the notch / Dynamic Island and the home bar. */
 @supports (padding: env(safe-area-inset-top)) {
  .topbar { border-top: env(safe-area-inset-top) solid transparent; }
@@ -1171,6 +1210,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         <button class="nav-item" data-view="travel">🧳 <span class="nav-text">Travel</span></button>
         <button class="nav-item" data-view="dates">⏳ <span class="nav-text">Dates</span></button>
         <button class="nav-item" data-view="outing">🚗 <span class="nav-text">Outing</span></button>
+        <button class="nav-item" data-view="family">🌳 <span class="nav-text">Family</span></button>
         <button class="nav-item" data-view="work">💼 <span class="nav-text">Work</span></button>
         <button class="nav-item" data-view="education">📚 <span class="nav-text">Education</span></button>
         <button class="nav-item" data-view="finance">💰 <span class="nav-text">Finance</span></button>
@@ -1212,6 +1252,7 @@ body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
       <section class="view" id="travelView"></section>
       <section class="view" id="datesView"></section>
       <section class="view" id="outingView"></section>
+      <section class="view" id="familyView"></section>
       <section class="view" id="workView"></section>
       <section class="view" id="educationView"></section>
       <section class="view" id="financeView"></section>
@@ -1292,7 +1333,7 @@ const defs={
   ['title','اسم الهدف','Goal title','text',true],['area','المجال','Area','select',false,['Personal','Family','Work','Education','Finance','Health']],['due','التاريخ المستهدف','Target date','date'],['progress','نسبة الإنجاز','Progress (%)','number',true],['milestone','الخطوة القادمة','Next milestone','text']]},
  note:{collection:'notes',ar:'ملاحظة',en:'Note',fields:[['title','العنوان','Title','text',true],['body','المحتوى','Content','textarea',true]]}
 };
-const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],dates:['المواعيد','Key dates'],outing:['طلعة','Outing'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
+const viewNames={dashboard:['لوحة التحكم','Dashboard'],today:['يومي','Today'],groceries:['المقاضي','Groceries'],travel:['السفر','Travel'],dates:['المواعيد','Key dates'],outing:['طلعة','Outing'],family:['شجرة العائلة','Family tree'],work:['العمل','Work'],education:['التعلّم','Education'],finance:['المالية','Finance'],goals:['الأهداف','Goals'],prayer:['الصلاة','Prayer'],quran:['القرآن الكريم','Quran'],adhkar:['الأذكار','Adhkar'],notes:['الملاحظات','Notes'],reports:['التقارير','Reports'],settings:['الإعدادات','Settings']};
 const enumNames={
  Routine:['روتين','Routine'],Habit:['عادة','Habit'],Appointment:['موعد','Appointment'],Prayer:['صلاة','Prayer'],Exercise:['رياضة','Exercise'],Personal:['شخصي','Personal'],
  Low:['منخفضة','Low'],Medium:['متوسطة','Medium'],High:['عالية','High'],Open:['مفتوحة','Open'],Pending:['قيد المتابعة','Pending'],Done:['مكتملة','Done'],
@@ -1525,10 +1566,10 @@ function renderReports(){const months=biMonths(biWindow),data=biReadMonths(month
 
 const emptyReport=text=>`<div class="empty mini-empty">${text}</div>`;
 function renderSettings(){
- $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.6.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
+ $('#settingsView').innerHTML=`<div class="grid two"><div class="card"><h3>${tr('الملف الشخصي','Your profile')}</h3><p class="muted subheading">${tr('تستخدم هذه المعلومات لتخصيص تجربتك فقط.','Used to personalize your dashboard.')}</p><form id="profileForm" class="form-grid"><div class="form-row"><label for="profileName">${tr('اسم العرض','Display name')}</label><input id="profileName" name="name" maxlength="80" required value="${safe(state.profile.name)}"></div><div class="form-row"><label for="profileCurrency">${tr('العملة','Currency')}</label><select id="profileCurrency" name="country">${countryOptions()}</select></div><div class="form-row"><label for="monthlyIncome">${tr('الدخل الشهري المرجعي (اختياري)','Reference monthly income (optional)')}</label><input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" value="${Number(state.profile.monthlyIncome)||0}"><small>${tr('لا يضاف تلقائيًا للعمليات المالية.','Not automatically counted as a transaction.')}</small></div><button class="primary-btn" type="submit">${tr('حفظ المعلومات','Save profile')}</button></form></div><div class="card"><h3>${tr('المظهر واللغة','Appearance & language')}</h3><p class="muted subheading">${tr('جميع الثيمات مبنية على تدرّج الأزرق والبنفسجي الأصلي. يتغير التدرّج واللون الرئيسي فقط، وتبقى النصوص والتصميم كما هي.','All themes follow the original Blue / Purple gradient style. Only the gradient and primary accent change; text and layout remain unchanged.')}</p><div class="setting-line"><span>${tr('اللغة','Language')}</span>${btn(state.lang==='ar'?'🇺🇸 English':'🇸🇦 العربية','language','','','secondary-btn')}</div><div class="theme-controls"><section aria-label="${tr('لون النيون','Neon accent color')}"><div class="theme-control-head"><strong>${tr('لون النيون','Neon accent')}</strong><small>${tr('اختر اللون','Choose a color')}</small></div><div class="theme-colors">${Object.entries(COLOR_PRESETS).map(([key,c])=>`<button type="button" class="theme-color-option" data-action="chooseAccent" data-accent="${key}" aria-label="${safe(tr(c.ar,c.en))}" aria-pressed="${state.accent===key}"><span class="theme-color-circle" style="--swatch-a:${c.hero[0]};--swatch-b:${c.hero[1]}"></span><span>${safe(tr(c.ar,c.en))}</span></button>`).join('')}</div></section><section aria-label="${tr('لون الخلفية','Background color')}"><div class="theme-control-head"><strong>${tr('لون الخلفية','Background')}</strong><small>${tr('داكن أو فاتح','Dark or light')}</small></div><div class="theme-modes">${[['dark','أسود','Black','#0b1220','#f5f7fb'],['light','أبيض','White','#f4f7fb','#182230']].map(([mode,ar,en,bg,text])=>`<button type="button" class="theme-mode-option" data-action="chooseMode" data-mode="${mode}" aria-pressed="${state.theme===mode}"><span class="theme-mode-preview" style="--mode-bg:${bg};--mode-text:${text};--mode-start:${COLOR_PRESETS[state.accent].hero[0]};--mode-end:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr(ar,en)}</span></button>`).join('')}</div></section><div class="theme-selection-summary"><span class="theme-color-circle" style="--swatch-a:${COLOR_PRESETS[state.accent].hero[0]};--swatch-b:${COLOR_PRESETS[state.accent].hero[1]}"></span><span>${tr('المظهر المختار:','Selected appearance:')} <strong>${appearanceName()}</strong></span></div></div></div></div><div class="grid two" style="margin-top:18px"><div class="card"><h3>${tr('النسخ الاحتياطي','Backups & data')}</h3><p class="muted">${tr('بياناتك محفوظة محليًا في هذا المتصفح. لا توجد مزامنة سحابية. احفظ نسخة احتياطية خصوصًا قبل تغيير الجهاز أو المتصفح.','Your data is local to this browser. There is no cloud sync. Keep a backup before changing devices or browsers.')}</p><div class="settings-actions">${btn('↓ '+tr('تصدير نسخة','Export backup'),'export','','','secondary-btn')}${btn('↑ '+tr('استيراد نسخة','Import backup'),'import','','','secondary-btn')}</div><p class="hint">${tr('يمكنك استيراد ملف النسخة القديمة من Ramzi Life OS بعد تصديره منها.','You can import a backup exported from the original Ramzi Life OS.')}</p></div><div class="card"><h3>${tr('حذف البيانات','Reset data')}</h3><p class="muted">${tr('تحذير: يمسح جميع السجلات في هذا المتصفح. صدّر نسخة أولًا.','Warning: deletes all entries in this browser. Export first.')}</p>${btn(tr('مسح جميع البيانات','Delete all local data'),'reset','','','danger-btn')}<div class="version">Daily Life OS · v3.7.0 · ${tr('يعمل دون اتصال بعد حفظ الملف','Standalone offline HTML')}</div></div></div>${notifyCard()}`;
 }
 function renderView(){
- const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,dates:renderDates,outing:renderOuting,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();tabVisMount();
+ const renderers={dashboard:renderDashboard,today:renderToday,work:renderWork,education:renderEducation,finance:renderFinance,goals:renderGoals,prayer:renderPrayer,groceries:renderGroceries,travel:renderTravel,dates:renderDates,outing:renderOuting,family:renderFamily,quran:renderQuran,adhkar:renderAdhkar,notes:renderNotes,reports:renderReports,settings:renderSettings};renderers[currentView]();applyClientFilter();tabVisMount();
 }
 function renderAll(){updateChrome();renderView();updateStorage();}
 function applyClientFilter(){const type={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'}[currentView];if(!type)return;
@@ -1623,7 +1664,7 @@ function init(){
  $('#navShade').addEventListener('click',()=>{$('#sidebar').classList.remove('open');$('#navShade').classList.add('hidden');});
  $('#themeToggle').addEventListener('click',toggleTheme);
  $('#langToggle').addEventListener('click',toggleLanguage);
- $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='outing'){const o=otNew();otUI.open=o.id;renderOuting();scrollTo(0,0);return;}if(currentView==='dates'){dtUI.add=true;dtUI.filter='all';renderDates();setTimeout(()=>{const n=$('#dtName');if(n){n.scrollIntoView({block:'center'});n.focus();}},30);return;}if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
+ $('#quickAddBtn').addEventListener('click',()=>{if(currentView==='family'){ftOpen(null,'');setTimeout(()=>$('#ftName')?.focus(),40);return;}if(currentView==='outing'){const o=otNew();otUI.open=o.id;renderOuting();scrollTo(0,0);return;}if(currentView==='dates'){dtUI.add=true;dtUI.filter='all';renderDates();setTimeout(()=>{const n=$('#dtName');if(n){n.scrollIntoView({block:'center'});n.focus();}},30);return;}if(currentView==='travel'){const n=tvNew();tvUI={open:n.id,guide:null};renderTravel();scrollTo(0,0);return;}if(currentView==='groceries'){const t=$('#grocIn');if(t){t.scrollIntoView({block:'center'});t.focus();}return;}const map={today:'routine',work:'work',education:'education',finance:'finance',goals:'goal',notes:'note'};map[currentView]?openModal(map[currentView]):createPicker();});
  $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal();});
  $('#modalForm').addEventListener('submit',submitModal);
  $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));
@@ -2797,6 +2838,97 @@ document.addEventListener('change',e=>{const c=e.target.closest&&e.target.closes
  if(c.checked)hid.delete(v);else hid.add(v);state.hiddenTabs=[...hid];save();tabVisApply();tabVisMount();
  message(c.checked?tr(`ظهر تاب «${viewNames[v][0]}»`,`“${viewNames[v][1]}” is visible`):tr(`انخفى تاب «${viewNames[v][0]}» — ترجّعه من هنا متى ما بغيت`,`“${viewNames[v][1]}” is hidden — turn it back on here any time`));});
 document.addEventListener('click',e=>{if(!(e.target.closest&&e.target.closest('[data-tabvisall]')))return;state.hiddenTabs=[];save();tabVisApply();tabVisMount();message(tr('ظهرت كل التابات','All tabs are visible'));});
+
+// ---- Family tree (شجرة العائلة) ----
+// key, ar, en, generation (+2 grandparents … -2 grandchildren), sex, group number, parent relation(s)
+var FT_REL=[
+ ['gpa_f','الجد (أبو الأب)',"Grandfather (father's side)",2,'m',1],['gma_f','الجدة (أم الأب)',"Grandmother (father's side)",2,'f',1],
+ ['gpa_m','الجد (أبو الأم)',"Grandfather (mother's side)",2,'m',1],['gma_m','الجدة (أم الأم)',"Grandmother (mother's side)",2,'f',1],
+ ['father','الأب','Father',1,'m',2],['mother','الأم','Mother',1,'f',2],
+ ['son','الابن','Son',-1,'m',3],['daughter','الابنة','Daughter',-1,'f',3],
+ ['amm','العم','Paternal uncle',1,'m',4],['amma','العمة','Paternal aunt',1,'f',4],
+ ['khal','الخال','Maternal uncle',1,'m',5],['khala','الخالة','Maternal aunt',1,'f',5],
+ ['ibn_amm','ابن العم',"Paternal uncle's son",0,'m',6,'amm'],['ibn_amma','ابن العمة',"Paternal aunt's son",0,'m',6,'amma'],
+ ['ibn_khal','ابن الخال',"Maternal uncle's son",0,'m',7,'khal'],['ibn_khala','ابن الخالة',"Maternal aunt's son",0,'m',7,'khala'],
+ ['bint_amm','بنت العم',"Paternal uncle's daughter",0,'f',8,'amm'],['bint_amma','بنت العمة',"Paternal aunt's daughter",0,'f',8,'amma'],
+ ['bint_khal','بنت الخال',"Maternal uncle's daughter",0,'f',9,'khal'],['bint_khala','بنت الخالة',"Maternal aunt's daughter",0,'f',9,'khala'],
+ ['spouse','الزوجة','Wife',0,'f',10],
+ ['brother','الأخ','Brother',0,'m',11],['sister','الأخت','Sister',0,'f',11],
+ ['nephew','ابن الأخ / الأخت','Nephew',-1,'m',12,'brother,sister'],['niece','بنت الأخ / الأخت','Niece',-1,'f',12,'brother,sister'],
+ ['gson','الحفيد','Grandson',-2,'m',13,'son,daughter'],['gdau','الحفيدة','Granddaughter',-2,'f',13,'son,daughter'],
+ ['other_m','قريب','Relative (male)',0,'m',14],['other_f','قريبة','Relative (female)',0,'f',14]];
+var FT_GROUPS={1:['الجد والجدة','Grandparents'],2:['الأب والأم','Father & mother'],3:['الابن والابنة','Sons & daughters'],4:['العم والعمة','Paternal uncles & aunts'],
+ 5:['الخال والخالة','Maternal uncles & aunts'],6:['ابن العم وابن العمة',"Paternal cousins (sons)"],7:['ابن الخال وابن الخالة',"Maternal cousins (sons)"],
+ 8:['بنت العم وبنت العمة',"Paternal cousins (daughters)"],9:['بنت الخال وبنت الخالة',"Maternal cousins (daughters)"],10:null,
+ 11:['الإخوان والأخوات','Brothers & sisters'],12:['أبناء الإخوان والأخوات','Nephews & nieces'],13:['الأحفاد','Grandchildren'],14:['أقارب آخرون','Other relatives']};
+let ftUI={sheet:null};
+const ftRel=k=>FT_REL.find(r=>r[0]===k);
+function ftList(){if(!state.family||typeof state.family!=='object'||!Array.isArray(state.family.people))state.family={people:[]};
+ state.family.people=state.family.people.filter(x=>x&&typeof x==='object'&&typeof x.id==='string'&&ftRel(x.rel));return state.family.people;}
+function ftGroupTitle(g){if(g===10){const r=ftRel('spouse');return tr(r[1],r[2]);}return tr(...FT_GROUPS[g]);}
+function ftAvatar(x){const r=ftRel(x.rel),g=r[3],m=r[4]==='m';return g>=2?(m?'👴':'👵'):g===1?(m?'👨':'👩'):g===-1?(m?'👦':'👧'):g<=-2?'👶':(m?'🧑':'👩');}
+function ftAge(x){const d=x.birth&&dtParse(x.birth);if(!d)return '';const t=new Date();let a=t.getFullYear()-d.getFullYear();if(t.getMonth()<d.getMonth()||(t.getMonth()===d.getMonth()&&t.getDate()<d.getDate()))a--;
+ return a>=0?tr(`${qNum(a)} ${a===1?'سنة':a===2?'سنتين':a>=3&&a<=10?'سنوات':'سنة'}`,`${a} yr${a===1?'':'s'}`):'';}
+function ftRip(x){return x.dead?tr(ftRel(x.rel)[4]==='f'?'رحمها الله':'رحمه الله','RIP'):'';}
+function ftParentName(x){const p=x.parent&&ftList().find(y=>y.id===x.parent);return p?p.name:'';}
+function ftNode(x){return `<button type="button" class="ft-node ${x.dead?'dead':''}" data-ft="edit" data-id="${x.id}"><span class="ft-av">${ftAvatar(x)}</span><b>${tvB(x.name)}</b><small>${safe(tr(ftRel(x.rel)[1],ftRel(x.rel)[2]))}${x.dead?' 🤍':''}</small></button>`;}
+function ftSlot(rel){const r=ftRel(rel);return `<button type="button" class="ft-node ft-empty" data-ft="add" data-rel="${rel}"><span class="ft-av">＋</span><small>${safe(tr(r[1],r[2]))}</small></button>`;}
+function ftPick(rels,slots){const L=ftList(),out=[];for(const k of rels){const xs=L.filter(x=>x.rel===k);if(xs.length)xs.forEach(x=>out.push(ftNode(x)));else if(slots&&slots.includes(k))out.push(ftSlot(k));}return out.join('');}
+function ftTreeHTML(){const L=ftList(),me=state.profile&&state.profile.name||tr('أنا','Me');
+ const row=(label,right,left,cls='')=>`<div class="ft-gen ${cls}"><div class="ft-gen-l">${label}</div><div class="ft-sides">${right!=null?`<div class="ft-side">${right||'<span class="ft-none">—</span>'}</div>`:''}${left!=null?`<div class="ft-side">${left||'<span class="ft-none">—</span>'}</div>`:''}</div></div>`;
+ const cnt=rels=>L.filter(x=>rels.includes(x.rel)).length;
+ const cous=(rels,lbl)=>{const n=cnt(rels);return n?`<button type="button" class="ft-chip" data-ft="goto" data-g="${rels.includes('ibn_amm')||rels.includes('bint_amm')?6:7}">${lbl} <b>${qNum(n)}</b></button>`:'';};
+ const kids=ftPick(['son','daughter']),gk=ftPick(['gson','gdau']);
+ return `<div class="ft-tree">
+  ${row(tr('الأجداد','Grandparents'),ftPick(['gpa_f','gma_f'],['gpa_f','gma_f']),ftPick(['gpa_m','gma_m'],['gpa_m','gma_m']))}
+  ${row(tr('الوالدين والأعمام والأخوال','Parents, uncles & aunts'),ftPick(['father','amm','amma'],['father']),ftPick(['mother','khal','khala'],['mother']))}
+  <div class="ft-gen ft-me-row"><div class="ft-gen-l">${tr('أنا وإخواني','Me & siblings')}</div><div class="ft-center">
+   <div class="ft-node ft-me"><span class="ft-av">${safe(profileInitial())}</span><b>${tvB(me)}</b><small>${tr('أنا','Me')}</small></div>${ftPick(['spouse'],['spouse'])}${ftPick(['brother','sister'])}</div></div>
+  ${cnt(['ibn_amm','ibn_amma','bint_amm','bint_amma','ibn_khal','ibn_khala','bint_khal','bint_khala'])?row(tr('أبناء العم والخال','Cousins'),cous(['ibn_amm','ibn_amma','bint_amm','bint_amma'],tr('عيال العم والعمة','Paternal cousins')),cous(['ibn_khal','ibn_khala','bint_khal','bint_khala'],tr('عيال الخال والخالة','Maternal cousins')),'ft-cous'):''}
+  ${row(tr('الأبناء','Children'),null,null,'ft-hide').replace('<div class="ft-sides"></div>',`<div class="ft-center">${kids||ftSlot('son')+ftSlot('daughter')}</div>`)}
+  ${gk?row(tr('الأحفاد','Grandchildren'),null,null,'ft-hide').replace('<div class="ft-sides"></div>',`<div class="ft-center">${gk}</div>`):''}
+  <div class="ft-legend"><span>${tr('➡️ جهة الأب','⬅️ Father\'s side')}</span><span>${tr('جهة الأم ⬅️','Mother\'s side ➡️')}</span></div></div>`;}
+function ftGroupsHTML(){const L=ftList(),groups=[];
+ for(let g=1;g<=14;g++){const rels=FT_REL.filter(r=>r[5]===g),xs=L.filter(x=>rels.some(r=>r[0]===x.rel));if(g>9&&!xs.length)continue;
+  const rows=xs.map(x=>{const pn=ftParentName(x),age=ftAge(x),bits=[safe(tr(ftRel(x.rel)[1],ftRel(x.rel)[2]))+(pn?` — ${tvB(pn)}`:''),age?safe(age):'',x.phone?`📞 <bdi dir="ltr">${safe(x.phone)}</bdi>`:'',x.dead?safe(ftRip(x)):''].filter(Boolean);
+   return `<button type="button" class="ft-row ${x.dead?'dead':''}" data-ft="edit" data-id="${x.id}"><span class="ft-av">${ftAvatar(x)}</span><span class="ft-row-m"><b>${tvB(x.name)}</b><span>${bits.join(tr('، ',' · '))}</span>${x.note?`<span class="ft-note">${safe(x.note)}</span>`:''}</span><span class="tv-chev">›</span></button>`;}).join('');
+  groups.push(`<div class="card ft-group" id="ftG${g}"><div class="ft-group-h"><span class="tv-num ${xs.length?'ok':''}">${xs.length?'✓':qNum(g)}</span><h3>${ftGroupTitle(g)}</h3>${xs.length?`<span class="ft-count">${qNum(xs.length)}</span>`:''}</div>
+   ${rows||`<div class="hint ft-emptyg">${tr('ما أضفت أحد هنا بعد','Nobody added here yet')}</div>`}<div class="tv-chips ft-adds">${rels.map(r=>`<button type="button" class="tv-chip" data-ft="add" data-rel="${r[0]}">＋ ${safe(tr(r[1],r[2]))}</button>`).join('')}</div></div>`);}
+ return groups.join('');}
+function renderFamily(){const el=$('#familyView');if(!el)return;const n=ftList().length;
+ el.innerHTML=`<div class="card tv-hero ft-hero"><div><div class="tv-hero-t">🌳 ${tr('شجرة العائلة','Family tree')}</div><div class="hint">${n?tr(`${qNum(n)} ${n===1?'فرد':n===2?'فردان':n<=10?'أفراد':'فردًا'} في شجرتك — اضغط على أي شخص لتعديله`,`${n} ${n===1?'person':'people'} in your tree — tap anyone to edit`):tr('ابدأ بالأجداد والوالدين، وكمّل باقي العائلة','Start with your grandparents and parents, then add the rest')}</div></div>
+  <button type="button" class="primary-btn" data-ft="add">＋ ${tr('إضافة فرد','Add a person')}</button></div>
+  <div class="card ft-treecard">${ftTreeHTML()}</div>${ftGroupsHTML()}`;}
+function ftParentRels(rel){const r=ftRel(rel);return r&&r[6]?r[6].split(','):[];}
+function ftFormHTML(x,rel){const L=ftList(),cur=x?x.rel:rel||'',prs=ftParentRels(cur),opts=prs.length?L.filter(y=>prs.includes(y.rel)):[];
+ const grp=[[2,'الأجداد','Grandparents'],[1,'الوالدين والأعمام والأخوال','Parents, uncles & aunts'],[0,'جيلي','My generation'],[-1,'الأبناء','Children'],[-2,'الأحفاد','Grandchildren']];
+ return `<div class="tv-sheet ft-sheet" role="dialog" aria-modal="true"><div class="tv-sheet-h"><b>${x?tr('تعديل','Edit'):tr('إضافة فرد','Add a person')}</b><button type="button" class="tv-icon" data-ft="close" aria-label="${tr('إغلاق','Close')}">✕</button></div>
+  <div class="ft-form">
+  <label class="tv-f"><span>${tr('صلة القرابة','Relation')}</span><select id="ftRel">${grp.map(g=>`<optgroup label="${tr(g[1],g[2])}">${FT_REL.filter(r=>r[3]===g[0]).map(r=>`<option value="${r[0]}" ${r[0]===cur?'selected':''}>${safe(tr(r[1],r[2]))}</option>`).join('')}</optgroup>`).join('')}</select></label>
+  <label class="tv-f"><span>${tr('الاسم','Name')}</span><input id="ftName" maxlength="80" dir="auto" value="${safe(x&&x.name||'')}"></label>
+  ${prs.length?`<label class="tv-f"><span>${tr('ولد / بنت مين؟','Child of')}</span><select id="ftParent"><option value="">${tr('— اختياري —','— optional —')}</option>${opts.map(o=>`<option value="${o.id}" ${x&&x.parent===o.id?'selected':''}>${safe(o.name)} (${safe(tr(ftRel(o.rel)[1],ftRel(o.rel)[2]))})</option>`).join('')}</select>${opts.length?'':`<small class="hint">${tr('أضف العم/الخال أولًا عشان تربطه به','Add the uncle/aunt first to link them')}</small>`}</label>`:''}
+  <div class="tv-grid2"><label class="tv-f"><span>${tr('تاريخ الميلاد (اختياري)','Birth date (optional)')}</span><input id="ftBirth" type="date" value="${safe(x&&x.birth||'')}" max="${dateLocal()}"></label>
+   <label class="tv-f"><span>${tr('الجوال (اختياري)','Phone (optional)')}</span><input id="ftPhone" type="tel" inputmode="tel" dir="ltr" maxlength="30" value="${safe(x&&x.phone||'')}"></label></div>
+  <label class="tv-f"><span>${tr('ملاحظات','Notes')}</span><input id="ftNote" maxlength="200" dir="auto" value="${safe(x&&x.note||'')}"></label>
+  <label class="ft-dead"><input id="ftDead" type="checkbox" ${x&&x.dead?'checked':''}> <span>🤍 ${tr('متوفى — الله يرحمه','Passed away')}</span></label>
+  <div class="dt-form-b"><button type="button" class="primary-btn" data-ft="save">${tr('حفظ','Save')}</button>${x?`<button type="button" class="secondary-btn gr-danger" data-ft="del">🗑️ ${tr('حذف','Delete')}</button>`:''}</div></div></div>`;}
+function ftOpen(x,rel){ftUI.sheet={id:x?x.id:null};let b=$('#ftSheet');if(!b){b=document.createElement('div');b.id='ftSheet';b.className='tv-sheet-back';document.body.appendChild(b);}
+ b.innerHTML=ftFormHTML(x,rel);b.classList.remove('hidden');document.body.classList.add('modal-open');}
+function ftClose(){ftUI.sheet=null;const b=$('#ftSheet');if(b){b.classList.add('hidden');b.innerHTML='';}document.body.classList.remove('modal-open');}
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='ftRel'&&ftUI.sheet){const x=ftUI.sheet.id&&ftList().find(y=>y.id===ftUI.sheet.id);
+ const keep={name:$('#ftName').value,birth:$('#ftBirth').value,phone:$('#ftPhone').value,note:$('#ftNote').value,dead:$('#ftDead').checked};
+ $('#ftSheet').innerHTML=ftFormHTML(x?{...x,...keep,rel:e.target.value}:{...keep,rel:e.target.value,id:''},e.target.value);if(!x){const t=$('.ft-sheet .tv-sheet-h b');if(t)t.textContent=tr('إضافة فرد','Add a person');const d=$('[data-ft=del]');if(d)d.remove();}}});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ft]');if(!b){if(ftUI.sheet&&e.target&&e.target.id==='ftSheet')ftClose();return;}const a=b.dataset.ft,L=ftList();
+ if(a==='add'){ftOpen(null,b.dataset.rel||'');setTimeout(()=>$('#ftName')?.focus(),40);return;}
+ if(a==='edit'){const x=L.find(y=>y.id===b.dataset.id);if(x)ftOpen(x);return;}
+ if(a==='close'){ftClose();return;}
+ if(a==='goto'){const g=$('#ftG'+b.dataset.g);if(g)g.scrollIntoView({block:'start'});return;}
+ if(a==='save'){const name=($('#ftName').value||'').trim();if(!name){message(tr('اكتب الاسم','Type the name'),true);$('#ftName').focus();return;}
+  const rel=$('#ftRel').value,par=$('#ftParent')?$('#ftParent').value:'',data={rel,name:name.slice(0,80),parent:par||'',birth:$('#ftBirth').value||'',phone:($('#ftPhone').value||'').trim().slice(0,30),note:($('#ftNote').value||'').trim().slice(0,200),dead:$('#ftDead').checked};
+  const x=ftUI.sheet.id&&L.find(y=>y.id===ftUI.sheet.id);if(x)Object.assign(x,data);else L.push({id:id(),...data});save();ftClose();renderFamily();message(x?tr('تم الحفظ ✓','Saved ✓'):tr(`تمت إضافة ${name} 🌳`,`${name} added 🌳`));return;}
+ if(a==='del'){const x=ftUI.sheet.id&&L.find(y=>y.id===ftUI.sheet.id);if(x&&confirm(tr(`حذف ${x.name} من الشجرة؟`,`Remove ${x.name} from the tree?`))){state.family.people=L.filter(y=>y.id!==x.id);L.forEach(y=>{if(y.parent===x.id)y.parent='';});save();ftClose();renderFamily();}return;}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ftUI.sheet)ftClose();});
 
 document.addEventListener('DOMContentLoaded',init);
 document.addEventListener('DOMContentLoaded',initNotifications);
